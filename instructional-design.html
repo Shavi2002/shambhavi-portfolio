@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Designing for Clarity — Shambhavi Singh</title>
+  <meta name="description" content="Instructional design project: transforming complex concepts into learner-centered content using Articulate 360.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:   #F9F7F4;
+      --black:   #1F3028;
+      --mid:     #6B6860;
+      --rule:    rgba(31,48,40,0.12);
+      --accent:  #1A5276;
+      --accent-lt: #5DADE2;
+      --teal:    #0F6E56;
+      --gold:    #D4A843;
+      --warm:    #EDE6D6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'DM Mono', monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 56px;
+      border-bottom: 1px solid var(--rule);
+      background: var(--white);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-back { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color .15s; }
+    .nav-back:hover { color: var(--black); }
+    .nav-back::before { content: '←'; font-size: 12px; }
+    .nav-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; color: var(--black); }
+    .nav-index { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); }
+
+    .hero { padding: 5rem 3rem 4rem; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 0; align-items: stretch; background: linear-gradient(160deg, #EBF5FB 0%, #D6EAF8 40%, #AED6F1 70%, #85C1E9 100%); }
+    .hero-left { padding-right: 4rem; border-right: 1px solid rgba(26,82,118,0.15); display: flex; flex-direction: column; justify-content: space-between; }
+    .hero-right { padding-left: 4rem; display: flex; flex-direction: column; justify-content: flex-end; }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 2rem; display: flex; align-items: center; gap: 10px; }
+    .hero-eyebrow::before { content: '05'; color: var(--accent); }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 4.5vw, 52px); font-weight: 300; line-height: 1.05; letter-spacing: -1px; margin-bottom: 1.5rem; color: var(--black); }
+    .hero-title em { font-style: italic; color: var(--accent); }
+    .hero-desc { font-family: 'Cormorant Garamond', serif; font-size: 18px; line-height: 1.65; color: var(--mid); font-weight: 300; max-width: 420px; border-top: 1px solid rgba(26,82,118,0.15); padding-top: 1.5rem; }
+    .meta-grid { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid rgba(26,82,118,0.15); margin-bottom: 2rem; }
+    .meta-item { padding: 1.25rem 1.5rem 1.25rem 0; border-right: 1px solid rgba(26,82,118,0.15); margin-right: 1.5rem; }
+    .meta-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .meta-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .meta-value { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; color: var(--black); line-height: 1.4; }
+    .role-tags { display: flex; flex-direction: column; gap: 5px; }
+    .role-tag { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; border: 1px solid rgba(26,82,118,0.25); padding: 3px 8px; color: var(--accent); display: inline-block; width: fit-content; background: rgba(26,82,118,0.05); }
+    .hero-cta { display: flex; gap: 12px; flex-wrap: wrap; padding-top: 1.5rem; border-top: 1px solid rgba(26,82,118,0.15); }
+    .btn-solid { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; background: var(--accent); color: var(--white); border: none; padding: 10px 20px; cursor: pointer; text-decoration: none; transition: background .15s; }
+    .btn-solid:hover { background: #154360; }
+    .btn-outline { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; border: 1px solid rgba(26,82,118,0.3); padding: 10px 20px; color: var(--accent); text-decoration: none; transition: all .15s; background: transparent; }
+    .btn-outline:hover { background: rgba(26,82,118,0.06); border-color: var(--accent); }
+
+    .section { padding: 4rem 3rem; border-bottom: 1px solid var(--rule); }
+    .section-alt { background: var(--warm); }
+    .section-blue { background: linear-gradient(180deg, #EBF5FB 0%, #D6EAF8 100%); }
+    .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 3rem; }
+    .section-num { font-size: 10px; color: var(--accent); letter-spacing: 1px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; letter-spacing: -0.5px; }
+    .section-rule { flex: 1; height: 1px; background: var(--rule); }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .two-col-wide { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4rem; align-items: start; }
+
+    .body-text { font-family: 'Cormorant Garamond', serif; font-size: 18px; line-height: 1.7; font-weight: 300; color: var(--black); margin-bottom: 1.25rem; }
+    .body-mid { font-family: 'Cormorant Garamond', serif; font-size: 17px; line-height: 1.7; font-weight: 300; color: var(--mid); margin-bottom: 1rem; }
+    .label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+    .label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+    .pull-quote { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; line-height: 1.5; color: var(--black); border-left: 2px solid var(--accent); padding-left: 1.5rem; margin: 2rem 0; }
+
+    .process-steps { margin-top: 2rem; }
+    .step { display: grid; grid-template-columns: 48px 1fr; gap: 1.5rem; padding: 1.5rem 0; border-top: 1px solid var(--rule); align-items: start; }
+    .step:last-child { border-bottom: 1px solid var(--rule); }
+    .step-num { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--accent-lt); line-height: 1; }
+    .step-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+    .step-body { font-size: 13px; line-height: 1.6; color: var(--mid); }
+
+    .tools-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem; }
+    .tool-badge { font-size: 10px; letter-spacing: 1px; text-transform: uppercase; border: 1px solid var(--rule); padding: 6px 14px; color: var(--mid); background: var(--white); }
+    .tool-badge.highlight { background: var(--accent); color: var(--white); border-color: var(--accent); }
+
+    /* ── CERTIFICATES ── */
+    .cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
+    .cert-card { border: 1px solid var(--rule); overflow: hidden; background: var(--white); transition: transform .12s; }
+    .cert-card:hover { transform: translateY(-3px); }
+    .cert-card img { width: 100%; display: block; border-bottom: 1px solid var(--rule); }
+    .cert-info { padding: 14px 16px; }
+    .cert-title { font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 400; color: var(--black); margin-bottom: 4px; line-height: 1.3; }
+    .cert-meta { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--mid); }
+
+    .miro-block { border: 1px solid var(--rule); background: var(--white); overflow: hidden; }
+    .miro-preview { height: 260px; background: linear-gradient(135deg, #E8F4FD 0%, #D4E6F1 40%, #AED6F1 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center; position: relative; overflow: hidden; text-decoration: none; }
+    .miro-grid-lines { position: absolute; inset: 0; background-image: linear-gradient(rgba(26,82,118,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(26,82,118,0.06) 1px, transparent 1px); background-size: 30px 30px; }
+    .miro-nodes { position: absolute; inset: 0; pointer-events: none; }
+    .miro-node { position: absolute; border-radius: 4px; background: rgba(26,82,118,0.15); border: 1px solid rgba(26,82,118,0.25); }
+    .mn-1 { width: 80px; height: 36px; top: 30%; left: 10%; }
+    .mn-2 { width: 100px; height: 36px; top: 20%; left: 30%; }
+    .mn-3 { width: 90px; height: 36px; top: 50%; left: 20%; }
+    .mn-4 { width: 110px; height: 36px; top: 30%; left: 55%; }
+    .mn-5 { width: 80px; height: 36px; top: 60%; left: 65%; }
+    .mn-6 { width: 95px; height: 36px; top: 20%; left: 75%; }
+    .miro-label { position: relative; z-index: 2; font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: var(--accent); margin-bottom: 0.5rem; }
+    .miro-sub { position: relative; z-index: 2; font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(26,82,118,0.6); }
+    .miro-cta { position: relative; z-index: 2; margin-top: 1rem; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; background: var(--accent); color: var(--white); padding: 8px 18px; text-decoration: none; transition: background .15s; display: inline-block; }
+    .miro-cta:hover { background: #154360; }
+    .miro-caption { padding: 12px 16px; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); border-top: 1px solid var(--rule); }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0; border: 1px solid var(--rule); margin-top: 2rem; }
+    .skill-cell { padding: 1.5rem; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .skill-cell:nth-child(3n) { border-right: none; }
+    .skill-name { font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: var(--black); margin-bottom: 4px; }
+    .skill-desc { font-size: 11px; line-height: 1.5; color: var(--mid); }
+
+    .bottom-nav { padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--rule); }
+    .nav-link { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color .15s; display: flex; align-items: center; gap: 8px; }
+    .nav-link:hover { color: var(--black); }
+    .nav-link-back::before { content: '←'; }
+    .nav-link-next::after { content: '→'; }
+
+    footer { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--mid); border-top: 1px solid var(--rule); }
+    .footer-name { color: var(--black); font-weight: 400; font-family: 'Syne', sans-serif; font-size: 13px; letter-spacing: 2px; text-transform: uppercase; }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--mid); text-decoration: none; transition: color .15s; }
+    .footer-links a:hover { color: var(--black); }
+
+    @media (max-width: 860px) {
+      nav { padding: 0 1.5rem; }
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .hero-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 2rem; margin-bottom: 2rem; }
+      .hero-right { padding-left: 0; }
+      .section { padding: 2.5rem 1.5rem; }
+      .two-col, .two-col-wide { grid-template-columns: 1fr; gap: 2rem; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .bottom-nav { padding: 1.5rem; }
+      footer { flex-direction: column; gap: 8px; padding: 1.25rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-back">All work</a>
+    <a href="index.html" class="nav-name">Shambhavi Singh</a>
+    <span class="nav-index">05 / 06</span>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div>
+        <div class="hero-eyebrow">Instructional Design · Communication Systems</div>
+        <h1 class="hero-title">Designing<br>for <em>Clarity</em></h1>
+        <p class="hero-desc">Transforming complex concepts into learner-centered content — where visual design meets instructional strategy to make hard ideas accessible.</p>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="meta-label">Project</div>
+          <div class="meta-value">Designing for Clarity:<br>Learner-Centered Content</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Tools</div>
+          <div class="role-tags">
+            <span class="role-tag">Articulate 360</span>
+            <span class="role-tag">Miro</span>
+            <span class="role-tag">LinkedIn Learning</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="https://share.articulate.com/9y_ZVnICg1dd_PXAsd8CI" target="_blank" class="btn-solid">View Articulate project ↗</a>
+        <a href="https://miro.com/app/board/uXjVGwZLr78=/?share_link_id=597934382986" target="_blank" class="btn-outline">Open experience map ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">—</span>
+      <span class="section-title">The brief</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="two-col-wide">
+      <div>
+        <div class="label">Context</div>
+        <p class="body-text">Instructional design is the practice of making complex ideas learnable. It sits at the intersection of visual design, communication strategy, and cognitive science — and it asks the same fundamental question that drives all my work: what does this actually need to communicate, and to whom?</p>
+        <p class="body-mid">This project — built in Articulate 360 — took abstract, multi-layered content and restructured it into a sequence that a learner could follow, absorb, and apply. The challenge was not simplification. It was clarity without loss.</p>
+      </div>
+      <div>
+        <div class="pull-quote">"The goal was never to make it simpler. It was to make it navigable."</div>
+        <p class="body-mid">Good instructional design, like good visual design, is invisible when it works. The learner doesn't notice the structure — they just feel like they understand.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-blue">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Design process</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <p class="body-mid">The process followed a learner-first sequence — beginning with audience analysis and working outward to structure, then content, then delivery. Every decision traced back to one question: what does the learner need at this moment?</p>
+        <div class="tools-row">
+          <span class="tool-badge highlight">Articulate 360</span>
+          <span class="tool-badge">Adult learning principles</span>
+          <span class="tool-badge">Cognitive load theory</span>
+          <span class="tool-badge">Miro</span>
+          <span class="tool-badge">Visual hierarchy</span>
+        </div>
+      </div>
+      <div class="process-steps">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div>
+            <div class="step-title">Audience Analysis</div>
+            <div class="step-body">Defined the learner profile — adult learners with existing professional context, coming to the content with prior knowledge and real-world application needs. Applied principles from adult learning theory (andragogy).</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div>
+            <div class="step-title">Content Architecture</div>
+            <div class="step-body">Mapped the content using Miro — connecting professional experience to learning design patterns. Chunked complex ideas into digestible units with clear learning objectives per section.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div>
+            <div class="step-title">Visual + Interaction Design</div>
+            <div class="step-body">Built the module in Articulate 360 — designing each slide for visual clarity, progressive disclosure, and engagement. Typography, color, and layout used to reinforce hierarchy and reduce cognitive load.</div>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <div>
+            <div class="step-title">Learner-Centered Refinement</div>
+            <div class="step-body">Reviewed every interaction against the learner's perspective — asking not "is this correct?" but "does this land?" Removed anything that added complexity without adding understanding.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">Experience map</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="two-col-wide">
+      <div>
+        <div class="label">The Miro board</div>
+        <p class="body-text">The experience map connects professional background to learning design patterns — showing how different domains of expertise inform instructional decisions.</p>
+        <p class="body-mid">The board maps the relationship between lived experience, design skills, and instructional theory — demonstrating that good learning design draws from every discipline, not just education.</p>
+        <p class="body-mid">It was also a personal exercise: making the invisible logic of my own development visible, as a designed artefact.</p>
+      </div>
+      <div>
+        <div class="miro-block">
+          <a class="miro-preview" href="https://miro.com/app/board/uXjVGwZLr78=/?share_link_id=597934382986" target="_blank">
+            <div class="miro-grid-lines"></div>
+            <div class="miro-nodes">
+              <div class="miro-node mn-1"></div>
+              <div class="miro-node mn-2"></div>
+              <div class="miro-node mn-3"></div>
+              <div class="miro-node mn-4"></div>
+              <div class="miro-node mn-5"></div>
+              <div class="miro-node mn-6"></div>
+            </div>
+            <div class="miro-label">Experience Map</div>
+            <div class="miro-sub">Professional experience → learning design</div>
+            <span class="miro-cta">Open in Miro ↗</span>
+          </a>
+          <div class="miro-caption">Miro board — click to open full interactive version</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATES — fixed filenames -->
+  <section class="section section-alt">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Credentials</span>
+      <div class="section-rule"></div>
+    </div>
+    <p class="body-mid" style="max-width: 560px; margin-bottom: 0;">Two LinkedIn Learning certificates completed March 2026 — formalising the theoretical foundations behind the Articulate project.</p>
+    <div class="cert-grid">
+      <div class="cert-card">
+        <img src="Adult_learners.jpeg" alt="Instructional Design: Adult Learners — LinkedIn Learning Certificate">
+        <div class="cert-info">
+          <div class="cert-title">Instructional Design: Adult Learners</div>
+          <div class="cert-meta">LinkedIn Learning · 45 min · Mar 2026</div>
+        </div>
+      </div>
+      <div class="cert-card">
+        <img src="tips_for_using%20AI.jpeg" alt="Tips for Using AI as an Instructional Designer — LinkedIn Learning Certificate">
+        <div class="cert-info">
+          <div class="cert-title">Tips for Using AI as an Instructional Designer</div>
+          <div class="cert-meta">LinkedIn Learning · 19 min · Mar 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">—</span>
+      <span class="section-title">What this work demonstrates</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cell">
+        <div class="skill-name">Visual communication</div>
+        <div class="skill-desc">Using design principles — hierarchy, color, spacing — to structure how information is received, not just how it looks.</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-name">Cognitive load design</div>
+        <div class="skill-desc">Chunking complex content into units that match how working memory actually processes new information.</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-name">Adult learning theory</div>
+        <div class="skill-desc">Andragogy applied — designing for learners who bring experience, context, and self-direction to the content.</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-name">Articulate 360</div>
+        <div class="skill-desc">Industry-standard eLearning authoring tool — interactive modules, branching scenarios, responsive layouts.</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-name">Systems mapping</div>
+        <div class="skill-desc">Using Miro to make invisible relationships visible — connecting experience to theory to practice.</div>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-name">AI-assisted design</div>
+        <div class="skill-desc">Applying AI tools within instructional workflows — for content generation, iteration, and accessibility review.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom-nav">
+    <a href="index.html" class="nav-link nav-link-back">Back to all work</a>
+    <a href="previous-work.html" class="nav-link nav-link-next">Previous Work</a>
+  </div>
+
+  <footer>
+    <span class="footer-name">Shambhavi Singh</span>
+    <div class="footer-links">
+      <a href="index.html">Portfolio</a>
+      <a href="/cdn-cgi/l/email-protection#4635352f2821757e740627353368232233">Contact</a>
+    </div>
+    <span>© 20

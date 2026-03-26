@@ -1,0 +1,871 @@
+index.html<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>buff curl — Design Journey</title>
+  <meta name="description" content="The build log of buff curl. Every sketch, foam flop, and aha tweak — laid out in order.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky:     #2E86C1;
+      --sky-lt:  #5DADE2;
+      --sky-dk:  #1A5276;
+      --coral:   #E8552A;
+      --pink:    #E91E8C;
+      --gold:    #F5A623;
+      --teal:    #17A589;
+      --lime:    #A8D531;
+      --white:   #FFFFFF;
+      --off:     #F4F9FF;
+      --paper:   #FDFAF5;
+      --ink:     #0D1B2A;
+      --mid:     #4A6080;
+      --rule:    rgba(13,27,42,0.1);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 58px;
+      background: rgba(253,250,245,0.93);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--mid); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      transition: color .15s;
+    }
+    .nav-back:hover { color: var(--coral); }
+    .nav-back::before { content: '←'; }
+
+    .nav-logo {
+      font-family: 'Nunito', sans-serif; font-size: 22px; font-weight: 900;
+      background: linear-gradient(90deg, var(--coral) 0%, var(--gold) 50%, var(--coral) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .nav-index {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--mid);
+    }
+
+    /* ── COVER ── */
+    .cover {
+      min-height: 80vh;
+      background: linear-gradient(185deg, #0A2F4A 0%, #1A5276 30%, #2E86C1 60%, #5DADE2 80%, #A8D8F0 100%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 0;
+      position: relative; overflow: hidden;
+    }
+
+    /* SUN */
+    .cover-sun {
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      margin-left: -160px;
+      width: 320px; height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center,
+        #FFE066 0%,
+        #FFB830 30%,
+        #FF7A20 55%,
+        #E8552A 72%,
+        rgba(180,40,20,0.35) 85%,
+        transparent 100%
+      );
+      animation: sun-pulse 8s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 0;
+      transform-origin: center center;
+    }
+
+    @keyframes sun-pulse {
+      0%   { opacity: 0.85; box-shadow: 0 0 60px 20px rgba(255,180,30,0.15); }
+      50%  { opacity: 1;    box-shadow: 0 0 100px 40px rgba(255,180,30,0.28); }
+      100% { opacity: 0.85; box-shadow: 0 0 60px 20px rgba(255,180,30,0.15); }
+    }
+
+    .cover-waves {
+      position: relative;
+      width: 100%;
+      height: 160px;
+      margin-top: auto;
+      z-index: 2;
+      flex-shrink: 0;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .wave-layer {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 100%;
+    }
+
+    .wave-layer svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .wave-layer-1 {
+      animation: wave-scroll 9s linear infinite;
+      opacity: 0.55;
+    }
+    .wave-layer-2 {
+      animation: wave-scroll 13s linear infinite;
+      opacity: 0.4;
+      bottom: 10px;
+    }
+    .wave-layer-3 {
+      animation: wave-scroll 18s linear infinite;
+      opacity: 1;
+      bottom: 0;
+    }
+
+    @keyframes wave-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* cover content sits above sun */
+    .cover-content {
+      position: relative; z-index: 3;
+      padding: 0 0 2rem;
+    }
+
+    /* wave-sep no longer needed — cover handles the transition */
+    .wave-sep { display: none; }
+
+    .cover-bg-text {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(120px, 20vw, 240px);
+      font-weight: 900; letter-spacing: -8px;
+      color: rgba(255,255,255,0.06);
+      white-space: nowrap; pointer-events: none;
+      user-select: none;
+    }
+
+    .cover-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .cover-tag::before { content: ''; width: 24px; height: 1px; background: rgba(255,255,255,0.4); }
+
+    .cover-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(56px, 10vw, 120px);
+      font-weight: 900; line-height: 0.9;
+      letter-spacing: -3px; color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .cover-subtitle {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(18px, 2.5vw, 28px);
+      font-weight: 700; color: rgba(255,255,255,0.7);
+      margin-bottom: 2rem;
+    }
+
+    .cover-meta {
+      display: flex; gap: 2rem; flex-wrap: wrap;
+    }
+    .cover-meta-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+    .cover-meta-item strong {
+      display: block; color: rgba(255,255,255,0.85);
+      font-size: 13px; font-family: 'DM Sans', sans-serif;
+      font-weight: 500; letter-spacing: 0; margin-top: 2px;
+    }
+
+    /* wave */
+    .wave-sep {
+      height: 60px; overflow: hidden; background: var(--sky-lt);
+      margin-top: -2px;
+    }
+    .wave-sep svg { display: block; }
+
+    /* ── SHARED ── */
+    .chapter {
+      padding: 5rem 3rem;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+
+    .chapter-alt { background: var(--off); }
+    .chapter-dark { background: var(--sky-dk); color: var(--white); }
+    .chapter-white { background: var(--white); }
+
+    .chapter-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--coral); margin-bottom: 0.5rem;
+    }
+    .chapter-num-light { color: rgba(255,255,255,0.4); }
+
+    h2 {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 900; line-height: 1.05;
+      letter-spacing: -1px; margin-bottom: 0.75rem;
+    }
+
+    .chapter-intro {
+      font-size: 17px; line-height: 1.7;
+      color: var(--mid); max-width: 560px;
+      margin-bottom: 3rem;
+    }
+    .chapter-intro-light { color: rgba(255,255,255,0.65); }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg, var(--coral) 0%, var(--gold) 50%, var(--sky) 100%);
+    }
+
+    .tl-entry {
+      position: relative; padding: 0 0 3rem 2.5rem;
+    }
+    .tl-entry::before {
+      content: '';
+      position: absolute; left: -0.45rem; top: 6px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--white); border: 2px solid var(--coral);
+    }
+
+    .tl-date {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--coral); margin-bottom: 0.4rem;
+    }
+
+    .tl-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 20px; font-weight: 800; color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+
+    .tl-body {
+      font-size: 15px; line-height: 1.65; color: var(--mid);
+      max-width: 560px;
+    }
+
+    .tl-note {
+      display: inline-block;
+      background: rgba(232,85,42,0.08);
+      border: 1px solid rgba(232,85,42,0.2);
+      color: var(--coral);
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 1px;
+      padding: 4px 12px; border-radius: 999px;
+      margin-top: 0.75rem;
+    }
+
+    /* ── PALETTE SWATCHES ── */
+    .palette-set { margin-bottom: 3rem; }
+
+    .palette-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 0.75rem;
+    }
+
+    .swatch-row {
+      display: flex; height: 80px; border-radius: 12px;
+      overflow: hidden; border: 1px solid var(--rule);
+    }
+
+    .swatch {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: flex-end; padding: 8px 10px;
+    }
+    .swatch-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 8px; letter-spacing: 1px; text-transform: uppercase;
+      color: rgba(255,255,255,0.8); line-height: 1.3;
+    }
+    .swatch-hex {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; color: rgba(255,255,255,0.55);
+    }
+    .swatch-dark .swatch-name { color: rgba(0,0,0,0.5); }
+    .swatch-dark .swatch-hex { color: rgba(0,0,0,0.35); }
+
+    .palette-verdict {
+      font-size: 13px; color: var(--mid); margin-top: 0.6rem;
+      font-style: italic;
+    }
+    .verdict-chosen { color: var(--teal); font-style: normal; font-weight: 500; }
+
+    /* ── LABEL SECTION ── */
+    .label-stages {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+
+    .label-card {
+      border: 1px solid var(--rule); border-radius: 12px;
+      overflow: hidden; background: var(--white);
+    }
+
+    .label-preview {
+      height: 160px; display: flex; align-items: center;
+      justify-content: center; padding: 1.5rem;
+      position: relative; overflow: hidden;
+    }
+
+    .label-preview-text {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900; text-align: center; line-height: 1.1;
+      position: relative; z-index: 1;
+    }
+
+    .lp-sky { background: linear-gradient(180deg, #A8D8F0 0%, #3498DB 100%); }
+    .lp-lime-teal { background: linear-gradient(180deg, #C5E831 0%, #0D9E7A 100%); }
+    .lp-sky-purple { background: linear-gradient(180deg, #99D4E8 0%, #C48FD4 100%); }
+    .lp-final { background: linear-gradient(180deg, #E8F5E0 0%, #3498DB 100%); }
+
+    .label-info { padding: 14px 16px; }
+    .label-stage {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 4px;
+    }
+    .label-desc { font-size: 13px; color: var(--mid); line-height: 1.5; }
+
+    /* ── PRINCIPLES GRID ── */
+    .principles {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+
+    .principle {
+      padding: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.07);
+    }
+
+    .principle-name {
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px; font-weight: 800;
+      color: var(--white); margin-bottom: 0.4rem;
+    }
+
+    .principle-val {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 1px;
+      color: var(--lime); margin-bottom: 0.5rem;
+    }
+
+    .principle-body {
+      font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.55;
+    }
+
+    /* ── USP LIST ── */
+    .usp-list { list-style: none; margin-top: 2rem; }
+    .usp-item {
+      display: grid; grid-template-columns: 32px 1fr;
+      gap: 1rem; align-items: start;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .usp-item:last-child { border-bottom: none; }
+    .usp-num {
+      font-family: 'Nunito', sans-serif;
+      font-size: 22px; font-weight: 900;
+      color: var(--coral); line-height: 1;
+    }
+    .usp-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px; font-weight: 800; color: var(--ink);
+      margin-bottom: 3px;
+    }
+    .usp-body { font-size: 14px; color: var(--mid); line-height: 1.6; }
+
+    /* ── NEXT STEPS ── */
+    .next-steps {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem; margin-top: 2rem;
+    }
+
+    .next-card {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 1.5rem;
+    }
+    .next-icon {
+      font-size: 28px; margin-bottom: 0.75rem;
+      display: block;
+    }
+    .next-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px; font-weight: 800;
+      color: var(--white); margin-bottom: 0.4rem;
+    }
+    .next-body { font-size: 13px; color: rgba(255,255,255,0.55); line-height: 1.55; }
+
+    /* ── CLOSING ── */
+    .closing {
+      padding: 5rem 3rem; text-align: center;
+      background: linear-gradient(180deg, var(--off) 0%, #D6EAF8 100%);
+    }
+
+    .closing-quote {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(22px, 3.5vw, 38px);
+      font-weight: 900; line-height: 1.2;
+      letter-spacing: -0.5px; color: var(--sky-dk);
+      max-width: 700px; margin: 0 auto 2rem;
+    }
+
+    .closing-sub {
+      font-size: 16px; color: var(--mid);
+      max-width: 480px; margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    .btn-solid {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px; font-weight: 800; letter-spacing: 0.5px;
+      background: var(--sky-dk); color: var(--white);
+      border: none; padding: 13px 28px; border-radius: 999px;
+      cursor: pointer; text-decoration: none; transition: all .15s;
+    }
+    .btn-solid:hover { background: var(--sky); }
+
+    .btn-outline {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px; font-weight: 700;
+      border: 1.5px solid var(--sky-dk); color: var(--sky-dk);
+      background: transparent; padding: 13px 28px; border-radius: 999px;
+      cursor: pointer; text-decoration: none; transition: all .15s;
+    }
+    .btn-outline:hover { background: var(--sky-dk); color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.45);
+      padding: 1.5rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .footer-logo {
+      font-family: 'Nunito', sans-serif; font-size: 18px; font-weight: 900;
+      background: linear-gradient(90deg, var(--coral), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: -0.5px;
+    }
+    }
+    .footer-links { display: flex; gap: 18px; }
+    .footer-links a { color: rgba(255,255,255,0.35); text-decoration: none; transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 760px) {
+      nav { padding: 0 1.5rem; }
+      .cover { padding: 0 1.5rem 3rem; min-height: 60vh; }
+      .chapter { padding: 3rem 1.5rem; }
+      .closing { padding: 3rem 1.5rem; }
+      footer { flex-direction: column; gap: 12px; padding: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="buff-curl.html" class="nav-back">Back to buff curl</a>
+    <span class="nav-logo">buff curl</span>
+    <span class="nav-index">Design Journey</span>
+  </nav>
+
+  <!-- COVER -->
+  <section class="cover">
+    <div class="cover-sun"></div>
+    <div class="cover-bg-text">buff curl</div>
+
+    <div class="cover-content" style="padding: 4rem 3rem 1.5rem;">
+      <div class="cover-tag">Build log · Design notebook</div>
+      <h1 class="cover-title">Design<br>Journey</h1>
+      <div class="cover-subtitle">Every sketch, foam flop, and aha tweak — in order.</div>
+      <div class="cover-meta">
+        <div class="cover-meta-item">Started<strong>November 2024</strong></div>
+        <div class="cover-meta-item">Paused<strong>Dec 2024 — Mar 2025</strong></div>
+        <div class="cover-meta-item">Resumed<strong>May 2025</strong></div>
+        <div class="cover-meta-item">Status<strong>Active prototype</strong></div>
+      </div>
+    </div>
+
+        <div class="cover-waves">
+      <div class="wave-layer wave-layer-1">
+        <svg viewBox="0 0 2880 166" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,98 C160,98 200,52 360,52 C520,52 560,98 720,98 C880,98 920,52 1080,52 C1240,52 1280,98 1440,98 C1600,98 1640,52 1800,52 C1960,52 2000,98 2160,98 C2320,98 2360,52 2520,52 C2680,52 2720,98 2880,98 L2880,166 L0,166 Z" fill="#2471A3"/></svg>
+      </div>
+      <div class="wave-layer wave-layer-2">
+        <svg viewBox="0 0 2880 166" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,106 C160,106 200,64 360,64 C520,64 560,106 720,106 C880,106 920,64 1080,64 C1240,64 1280,106 1440,106 C1600,106 1640,64 1800,64 C1960,64 2000,106 2160,106 C2320,106 2360,64 2520,64 C2680,64 2720,106 2880,106 L2880,166 L0,166 Z" fill="#1A5276"/></svg>
+      </div>
+      <div class="wave-layer wave-layer-3">
+        <svg viewBox="0 0 2880 166" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M0,110 C160,110 200,38 360,38 C520,38 560,110 720,110 C880,110 920,38 1080,38 C1240,38 1280,110 1440,110 C1600,110 1640,38 1800,38 C1960,38 2000,110 2160,110 C2320,110 2360,38 2520,38 C2680,38 2720,110 2880,110 L2880,166 L0,166 Z" fill="#FDFAF5"/></svg>
+      </div>
+    </div>
+    </section>
+
+  <div class="wave-sep"></div>
+
+  <!-- CH 01 — ORIGIN -->
+  <section class="chapter chapter-white" id="origin">
+    <div class="chapter-num">01 — Origin</div>
+    <h2>The phrase that wouldn't leave.</h2>
+    <p class="chapter-intro">buff curl began not with a brief, but with a loop — two words that kept returning until they demanded a reason to exist.</p>
+
+    <div class="timeline">
+      <div class="tl-entry">
+        <div class="tl-date">The beginning</div>
+        <div class="tl-title">A name before a product.</div>
+        <div class="tl-body">The words "buff curl" started looping after I finally cracked a routine for my curls and began to enjoy them. I tried to ignore the phrase. It kept coming back. One day I asked — what are you asking of me? The answer: make something for hair exactly like mine. Fine, thin curls, a dry, touchy scalp, and a body that loves a daily workout.</div>
+      </div>
+
+      <div class="tl-entry">
+        <div class="tl-date">The daily dilemma</div>
+        <div class="tl-title">Choosing between healthy curls or a healthy scalp.</div>
+        <div class="tl-body">Workout — scalp gets sweaty, itchy. Wash — curls look great again but my scalp loses natural oils and flakes. Skip wash and reach for dry shampoo — white dust, crunchy curls, clogged follicles. It felt like choosing between the two, never having both.</div>
+      </div>
+
+      <div class="tl-entry">
+        <div class="tl-date">The $5 mousse moment</div>
+        <div class="tl-title">An accidental prototype.</div>
+        <div class="tl-body">I bought a $5 Pantene styling mousse on impulse. Magic: my Day-2 curls were soft, bouncy, zero crunch. Finally, a refresh product — yet it did nothing for sweat or scalp health. That gap was everything.</div>
+        <span class="tl-note">Aha → Product Concept</span>
+      </div>
+
+      <div class="tl-entry">
+        <div class="tl-date">The concept</div>
+        <div class="tl-title">What if that mousse also cleaned my scalp?</div>
+        <div class="tl-body">Micellar foam that lifts sweat and oil while keeping curls soft. One step. No white cast. No stiffness. buff curl was born — not from a gap in the market, but from a gap in my own morning routine.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 02 — PALETTE ITERATION -->
+  <section class="chapter chapter-alt" id="palette">
+    <div class="chapter-num">02 — Colour Exploration</div>
+    <h2>Finding the palette.</h2>
+    <p class="chapter-intro">November through December 2024 — brainstorming colour palettes, testing fonts, building and discarding brand identities. Three rounds before the right answer arrived.</p>
+
+    <div class="palette-set">
+      <div class="palette-label">Round 01 — Peach + Teal</div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#FFBB9B;">
+          <span class="swatch-name swatch-dark">Peach</span>
+          <span class="swatch-hex swatch-dark">#FFBB9B</span>
+        </div>
+        <div class="swatch" style="background:#F99070;">
+          <span class="swatch-name swatch-dark">Salmon</span>
+          <span class="swatch-hex swatch-dark">#F99070</span>
+        </div>
+        <div class="swatch" style="background:#0E8080;">
+          <span class="swatch-name">Deep Teal</span>
+          <span class="swatch-hex">#0E8080</span>
+        </div>
+        <div class="swatch" style="background:#006060;">
+          <span class="swatch-name">Forest Teal</span>
+          <span class="swatch-hex">#006060</span>
+        </div>
+      </div>
+      <div class="palette-verdict">Warm and soft — but felt too generic for an active product. Lacked energy.</div>
+    </div>
+
+    <div class="palette-set">
+      <div class="palette-label">Round 02 — Lime + Olive</div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#B5D400;">
+          <span class="swatch-name swatch-dark">Electric Lime</span>
+          <span class="swatch-hex swatch-dark">#B5D400</span>
+        </div>
+        <div class="swatch" style="background:#9AB800;">
+          <span class="swatch-name swatch-dark">Lime Mid</span>
+          <span class="swatch-hex swatch-dark">#9AB800</span>
+        </div>
+        <div class="swatch" style="background:#8A8500;">
+          <span class="swatch-name">Olive</span>
+          <span class="swatch-hex">#8A8500</span>
+        </div>
+        <div class="swatch" style="background:#6B6800;">
+          <span class="swatch-name">Dark Olive</span>
+          <span class="swatch-hex">#6B6800</span>
+        </div>
+      </div>
+      <div class="palette-verdict">High energy but wrong emotion — read as sporty supplement brand, not scalp-safe curl care.</div>
+    </div>
+
+    <div class="palette-set">
+      <div class="palette-label">Round 03 — Sky + Lavender</div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#99D4E8;">
+          <span class="swatch-name swatch-dark">Sky Blue</span>
+          <span class="swatch-hex swatch-dark">#99D4E8</span>
+        </div>
+        <div class="swatch" style="background:#70B8D4;">
+          <span class="swatch-name swatch-dark">Mid Sky</span>
+          <span class="swatch-hex swatch-dark">#70B8D4</span>
+        </div>
+        <div class="swatch" style="background:#C48FD4;">
+          <span class="swatch-name swatch-dark">Lavender</span>
+          <span class="swatch-hex swatch-dark">#C48FD4</span>
+        </div>
+        <div class="swatch" style="background:#A870C0;">
+          <span class="swatch-name">Deep Lav</span>
+          <span class="swatch-hex">#A870C0</span>
+        </div>
+      </div>
+      <div class="palette-verdict">Closer — the sky read as clean and water-adjacent. But the lavender felt cosmetic without the energy the brand needed.</div>
+    </div>
+
+    <div class="palette-set">
+      <div class="palette-label">Final — Ocean Blue · Coral · Gold gradient logotype</div>
+      <div class="swatch-row">
+        <div class="swatch" style="background:#1A5276;">
+          <span class="swatch-name">Deep Ocean</span>
+          <span class="swatch-hex">#1A5276</span>
+        </div>
+        <div class="swatch" style="background:#2E86C1;">
+          <span class="swatch-name">Sky Blue</span>
+          <span class="swatch-hex">#2E86C1</span>
+        </div>
+        <div class="swatch" style="background:#5DADE2;">
+          <span class="swatch-name">Light Sky</span>
+          <span class="swatch-hex">#5DADE2</span>
+        </div>
+        <div class="swatch" style="background:#E8552A;">
+          <span class="swatch-name">Coral</span>
+          <span class="swatch-hex">#E8552A</span>
+        </div>
+        <div class="swatch" style="background:#F5A623;">
+          <span class="swatch-name">Gold</span>
+          <span class="swatch-hex">#F5A623</span>
+        </div>
+        <div class="swatch" style="background:#E91E8C;">
+          <span class="swatch-name">Pink</span>
+          <span class="swatch-hex">#E91E8C</span>
+        </div>
+      </div>
+      <div class="palette-verdict"><span class="verdict-chosen">✓ Chosen.</span> Ocean blue carries clean water energy, scalp-safe trust, and athletic coolness. The coral-to-gold logotype gradient adds warmth and personality — the foam, the movement, the glow of a post-workout refresh.</div>
+    </div>
+  </section>
+
+  <!-- CH 03 — LABEL DEVELOPMENT -->
+  <section class="chapter chapter-white" id="label">
+    <div class="chapter-num">03 — Label Development</div>
+    <h2>Building the product label.</h2>
+    <p class="chapter-intro">May 2025 onward — solidifying brand identity, building the product label, applying it to the mockup. Four stages from rough to final.</p>
+
+    <div class="label-stages">
+      <div class="label-card">
+        <div class="label-preview lp-lime-teal">
+          <div class="label-preview-text" style="font-size: 28px; color: white;">buff curl<br><span style="font-size:14px; font-weight:400;">early concept</span></div>
+        </div>
+        <div class="label-info">
+          <div class="label-stage">Stage 01 — Lime/Teal concept</div>
+          <div class="label-desc">First iteration of the label using the lime-olive palette. Bold but tonally wrong for a scalp-care product.</div>
+        </div>
+      </div>
+
+      <div class="label-card">
+        <div class="label-preview lp-sky-purple">
+          <div class="label-preview-text" style="font-size: 28px; color: white;">buff curl<br><span style="font-size:14px; font-weight:400;">Reset Rinse</span></div>
+        </div>
+        <div class="label-info">
+          <div class="label-stage">Stage 02 — Sky/Lavender concept</div>
+          <div class="label-desc">Applied the sky-lavender palette to the label. Cleaner and more trusted — but still missing the energy of the brand voice.</div>
+        </div>
+      </div>
+
+      <div class="label-card">
+        <div class="label-preview lp-final">
+          <div class="label-preview-text" style="font-size: 24px; color: var(--sky-dk);">buff curl<br><span style="font-size:13px;">Reset Rinse<br>Daily Scalp Refresher Foam</span></div>
+        </div>
+        <div class="label-info">
+          <div class="label-stage">Stage 03 — Final label system</div>
+          <div class="label-desc">Ocean blue ground, wave motif at the base, coral-to-gold gradient logotype. The wave references both water and the movement of foam through hair.</div>
+        </div>
+      </div>
+
+      <div class="label-card">
+        <div class="label-preview" style="background: var(--sky-dk); justify-content: center;">
+          <div class="label-preview-text" style="font-size: 15px; color: rgba(255,255,255,0.9); font-weight: 500; text-align: center; line-height: 1.6;">
+            Applied to<br>product mockup<br>
+            <span style="font-size: 24px; font-weight: 900; display: block; margin-top: 4px;">8 fl oz</span>
+          </div>
+        </div>
+        <div class="label-info">
+          <div class="label-stage">Stage 04 — Applied to mockup</div>
+          <div class="label-desc">Finalized label mapped onto the pump bottle mockup. Aloe &amp; Panthenol Hydration · Light Foam Formula · No Buildup · pH-Balanced.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 04 — DESIGN PRINCIPLES -->
+  <section class="chapter chapter-dark" id="principles">
+    <div class="chapter-num chapter-num-light">04 — Design Principles</div>
+    <h2 style="color: var(--white);">Five principles<br>built into the formula.</h2>
+    <p class="chapter-intro chapter-intro-light">Every visual and formula decision traces back to one of these five commitments.</p>
+
+    <div class="principles">
+      <div class="principle">
+        <div class="principle-name">Dual-Action</div>
+        <div class="principle-val">Curl definition + scalp cleanse</div>
+        <div class="principle-body">One product that does both — never a compromise between healthy hair and healthy scalp.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-name">Sensitive-Scalp Safe</div>
+        <div class="principle-val">pH 4.5–5.5</div>
+        <div class="principle-body">Aloe, panthenol, prebiotics — formulated for psoriasis-prone and reactive scalps. No exceptions.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-name">Zero Residue</div>
+        <div class="principle-val">No white cast</div>
+        <div class="principle-body">Micellar surfactants leave nothing behind — safe for dark curls, safe for daily use, always invisible.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-name">Clean + Vegan</div>
+        <div class="principle-val">Plant-powered performance</div>
+        <div class="principle-body">No parabens, sulfates, or silicones. Cruelty-free throughout the supply chain.</div>
+      </div>
+      <div class="principle">
+        <div class="principle-name">Day-2 Charm</div>
+        <div class="principle-val">Curls evolve, not deteriorate</div>
+        <div class="principle-body">Built for the in-between days — curls should be better on Day 2 than they were on wash day.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 05 — USPs -->
+  <section class="chapter chapter-white" id="usps">
+    <div class="chapter-num">05 — Unique Selling Points</div>
+    <h2>What makes it different.</h2>
+    <p class="chapter-intro">Five things buff curl does that no existing product does in combination.</p>
+
+    <ul class="usp-list">
+      <li class="usp-item">
+        <span class="usp-num">01</span>
+        <div>
+          <div class="usp-title">Micellar Cleansing Foam</div>
+          <div class="usp-body">Traps sweat and oil without stripping moisture — the same technology used in micellar cleansing water, in foam form, for your scalp and curls simultaneously.</div>
+        </div>
+      </li>
+      <li class="usp-item">
+        <span class="usp-num">02</span>
+        <div>
+          <div class="usp-title">Workout-Proof</div>
+          <div class="usp-body">Refreshes post-gym without a shower — designed specifically for curly athletes who train daily and can't wash every day without damaging their curl pattern.</div>
+        </div>
+      </li>
+      <li class="usp-item">
+        <span class="usp-num">03</span>
+        <div>
+          <div class="usp-title">Scalp-Safe</div>
+          <div class="usp-body">Soothes psoriasis-prone skin — formulated to work for the most sensitive scalps, not just average ones.</div>
+        </div>
+      </li>
+      <li class="usp-item">
+        <span class="usp-num">04</span>
+        <div>
+          <div class="usp-title">Zero White Cast</div>
+          <div class="usp-body">No powdery residue on dark curls — the single biggest failure of existing dry shampoos when used on textured hair.</div>
+        </div>
+      </li>
+      <li class="usp-item">
+        <span class="usp-num">05</span>
+        <div>
+          <div class="usp-title">Clean &amp; Vegan</div>
+          <div class="usp-body">Plant-powered and planet-friendly — no compromise between performance and ethics.</div>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- CH 06 — WHAT'S NEXT -->
+  <section class="chapter chapter-dark" id="next">
+    <div class="chapter-num chapter-num-light">06 — What's Next</div>
+    <h2 style="color: var(--white);">The prototype is live.<br>The work continues.</h2>
+    <p class="chapter-intro chapter-intro-light">Three active tracks in development as of 2026.</p>
+
+    <div class="next-steps">
+      <div class="next-card">
+        <span class="next-icon">👥</span>
+        <div class="next-title">User Testing</div>
+        <div class="next-body">Recruiting curly athletes for beta feedback — testing the formula on fine, medium, and coarse curl types across different workout intensities.</div>
+      </div>
+      <div class="next-card">
+        <span class="next-icon">🧴</span>
+        <div class="next-title">Variant Mapping</div>
+        <div class="next-body">Fine curls, medium curls, coarse curls — each requires a different micellar concentration and hold level. Mapping the product line across curl types.</div>
+      </div>
+      <div class="next-card">
+        <span class="next-icon">🌱</span>
+        <div class="next-title">Sustainability Check</div>
+        <div class="next-body">PCR (post-consumer recycled) bottle sourcing. Low-foam rinse lab tests to minimize water usage. Packaging designed to be refillable long-term.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <div class="closing-quote">"buff curl exists because I refused to choose between the gym and good hair days."</div>
+    <p class="closing-sub">It's the product I needed and couldn't find. So I made it — and documented every step of the way.</p>
+    <div class="btn-row">
+      <a href="buff-curl.html" class="btn-solid">See the full brand site</a>
+      <a href="index.html" class="btn-outline">Back to portfolio</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">buff curl</span>
+    <div class="footer-links">
+      <a href="buff-curl.html">Brand site</a>
+      <a href="index.html">Portfolio</a>
+      <a href="/cdn-cgi/l/email-protection#2a595943444d1912186a4b595f044f4e5f">Contact</a>
+    </div>
+    <span>© 2026 buff curl · prototy

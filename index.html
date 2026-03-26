@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shambhavi Singh — Visual & Brand Designer</title>
+  <meta name="description" content="Visual and brand designer working at the intersection of concept and system. Based in Tempe, AZ.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white: #F9F7F4;
+      --black: #1F3028;
+      --mid: #6B6860;
+      --rule: rgba(31,48,40,0.12);
+      --red: #C1341A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'DM Mono', monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes panRight {
+      from { opacity: 0; transform: translateX(-16px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    .anim-rise { opacity: 0; animation: riseIn 0.75s cubic-bezier(.22,1,.36,1) forwards; }
+    .anim-pan  { opacity: 0; animation: panRight 0.75s cubic-bezier(.22,1,.36,1) forwards; }
+
+    .d-1 { animation-delay: 0.1s; }
+    .d-2 { animation-delay: 0.28s; }
+    .d-3 { animation-delay: 0.46s; }
+    .d-4 { animation-delay: 0.64s; }
+    .d-5 { animation-delay: 0.82s; }
+    .d-6 { animation-delay: 1.0s; }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 56px;
+      border-bottom: 1px solid var(--rule);
+      background: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-name {
+      font-family: 'Syne', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .nav-links { display: flex; list-style: none; }
+
+    .nav-links a {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+      padding: 0 16px;
+      height: 56px;
+      line-height: 56px;
+      display: block;
+      transition: color .15s;
+      border-left: 1px solid var(--rule);
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-links li:last-child a { border-right: 1px solid var(--rule); }
+
+    /* Resume link in nav — slightly highlighted */
+    .nav-links .nav-resume a {
+      color: var(--black);
+      font-weight: 400;
+    }
+    .nav-links .nav-resume a:hover { color: var(--red); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 5rem 3rem 4rem;
+      border-bottom: 1px solid var(--rule);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      min-height: 480px;
+      align-items: stretch;
+    }
+
+    .hero-left {
+      padding-right: 4rem;
+      border-right: 1px solid var(--rule);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+
+    .hero-right {
+      padding-left: 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .hero-index {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .hero-index::before { content: ''; width: 24px; height: 1px; background: var(--mid); }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(52px, 7vw, 80px);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -2px;
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+    h1 em { font-style: italic; color: var(--mid); line-height: inherit; vertical-align: baseline; }
+
+    .h1-wrap {
+      position: relative;
+      display: block;
+      padding: 80px 0;
+      margin: 0;
+      text-align: center;
+    }
+
+    .seal-rays {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 320px;
+      height: 320px;
+      pointer-events: none;
+      z-index: 0;
+      animation: seal-spin 28s linear infinite;
+      overflow: visible;
+    }
+
+    @keyframes seal-spin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .h1-wrap h1 { position: relative; z-index: 2; }
+
+    .hero-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      line-height: 1.65;
+      color: var(--mid);
+      font-weight: 300;
+      max-width: 380px;
+      border-top: 1px solid var(--rule);
+      padding-top: 1.5rem;
+    }
+
+    .hero-right-top {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--mid);
+      padding-top: 0.5rem;
+    }
+
+    .discipline-list { list-style: none; margin: 2rem 0; }
+
+    .discipline-list li {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      font-weight: 300;
+      border-top: 1px solid var(--rule);
+      padding: 12px 0;
+      color: var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      letter-spacing: -0.5px;
+    }
+    .discipline-list li:last-child { border-bottom: 1px solid var(--rule); }
+    .disc-arrow { font-size: 14px; color: var(--mid); }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    .btn-work {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: 1px solid var(--black);
+      padding: 10px 20px;
+      cursor: pointer;
+      background: var(--black);
+      color: var(--white);
+      transition: all .15s;
+      text-decoration: none;
+    }
+    .btn-work:hover { background: var(--red); border-color: var(--red); }
+
+    .btn-cv {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: 1px solid var(--rule);
+      padding: 10px 20px;
+      cursor: pointer;
+      background: transparent;
+      color: var(--mid);
+      transition: all .15s;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .btn-cv:hover { border-color: var(--black); color: var(--black); }
+    .btn-cv::before {
+      content: '';
+      display: inline-block;
+      width: 10px;
+      height: 12px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 12' fill='none'%3E%3Crect x='1' y='1' width='8' height='10' rx='1' stroke='%236B6860' stroke-width='1'/%3E%3Cline x1='3' y1='4' x2='7' y2='4' stroke='%236B6860' stroke-width='0.8'/%3E%3Cline x1='3' y1='6' x2='7' y2='6' stroke='%236B6860' stroke-width='0.8'/%3E%3Cline x1='3' y1='8' x2='5.5' y2='8' stroke='%236B6860' stroke-width='0.8'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: contain;
+      opacity: 0.7;
+      flex-shrink: 0;
+    }
+
+    /* ── TICKER ── */
+    .ticker {
+      border-bottom: 1px solid var(--rule);
+      height: 38px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker-inner {
+      display: flex;
+      white-space: nowrap;
+      animation: tick 24s linear infinite;
+    }
+
+    @keyframes tick {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mid);
+      padding: 0 32px;
+      border-right: 1px solid var(--rule);
+      height: 38px;
+      line-height: 38px;
+      flex-shrink: 0;
+    }
+    .ticker-item span { color: var(--red); margin-right: 8px; }
+
+    /* ── WORK ── */
+    .work { padding: 0 3rem 4rem; border-bottom: 1px solid var(--rule); }
+
+    .work-header {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 2rem 0 1.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .work-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .work-count {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--mid);
+      letter-spacing: 1px;
+    }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 160px 60px;
+      align-items: center;
+      gap: 0;
+      border-bottom: 1px solid var(--rule);
+      padding: 1.5rem 0;
+      cursor: pointer;
+      transition: background .12s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .project-row:hover { background: rgba(193,52,26,0.03); }
+    .project-row:hover .proj-num { color: var(--red); }
+    .project-row:hover .proj-arrow { opacity: 1; transform: translateX(4px); }
+
+    .proj-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      color: var(--mid);
+      letter-spacing: 1px;
+      transition: color .15s;
+    }
+
+    .proj-info { padding-right: 3rem; }
+
+    .proj-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 300;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .proj-name em { font-style: italic; }
+
+    .proj-desc {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      color: var(--mid);
+      letter-spacing: 0.5px;
+      line-height: 1.5;
+    }
+
+    .proj-tags { display: flex; flex-direction: column; gap: 4px; }
+
+    .proj-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--mid);
+      border: 1px solid var(--rule);
+      padding: 3px 8px;
+      display: inline-block;
+      width: fit-content;
+    }
+
+    .proj-arrow {
+      font-size: 16px;
+      color: var(--mid);
+      opacity: 0;
+      transition: all .15s;
+      text-align: right;
+    }
+
+    /* ── RESUME STRIP ── */
+    .resume-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.75rem 0;
+      border-bottom: 1px solid var(--rule);
+      gap: 2rem;
+    }
+
+    .resume-strip-left {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .resume-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mid);
+      white-space: nowrap;
+    }
+
+    .resume-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--black);
+      letter-spacing: -0.25px;
+    }
+
+    .resume-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--mid);
+      display: flex;
+      gap: 16px;
+    }
+
+    .resume-meta span::before {
+      content: '·';
+      margin-right: 16px;
+      color: var(--rule);
+    }
+    .resume-meta span:first-child::before { display: none; }
+
+    .btn-resume {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: 1px solid var(--black);
+      padding: 10px 22px;
+      color: var(--black);
+      text-decoration: none;
+      transition: all .15s;
+      background: transparent;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .btn-resume:hover {
+      background: var(--black);
+      color: var(--white);
+    }
+    .btn-resume::after { content: '↗'; font-size: 11px; }
+
+    /* ── ABOUT + CAPABILITIES ── */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .about-left {
+      padding: 3rem;
+      border-right: 1px solid var(--rule);
+    }
+
+    .about-right { padding: 3rem; }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+    .about-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 3.5vw, 40px);
+      font-weight: 300;
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      margin-bottom: 1.5rem;
+    }
+    .about-headline em { font-style: italic; color: var(--mid); }
+
+    .about-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      line-height: 1.7;
+      color: var(--mid);
+      font-weight: 300;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-top: 1rem;
+    }
+
+    .skill-group {
+      padding: 1.5rem;
+      border: 1px solid var(--rule);
+      margin: -1px 0 0 -1px;
+    }
+
+    .skill-group-title {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 12px;
+    }
+
+    .skill-item {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--black);
+      line-height: 1.8;
+    }
+
+    /* ── BIO ── */
+    .bio-section {
+      border-bottom: 1px solid var(--rule);
+      padding: 4rem 3rem;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 0;
+    }
+
+    .bio-left {
+      padding-right: 3rem;
+      border-right: 1px solid var(--rule);
+    }
+
+    .bio-right { padding-left: 3rem; }
+
+    .bio-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -1px;
+      margin-bottom: 0.5rem;
+    }
+    .bio-name em { font-style: italic; color: var(--mid); }
+
+    .bio-role {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .bio-facts { list-style: none; margin-top: 2rem; }
+
+    .bio-facts li {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--mid);
+      border-top: 1px solid var(--rule);
+      padding: 10px 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .bio-facts li:last-child { border-bottom: 1px solid var(--rule); }
+    .bio-facts li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      background: var(--red);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .bio-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      line-height: 1.7;
+      font-weight: 300;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+
+    .bio-text-secondary {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      line-height: 1.7;
+      font-weight: 300;
+      color: var(--mid);
+      margin-top: 1.25rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact {
+      padding: 4rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .contact-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 300;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .contact-headline em { font-style: italic; color: var(--mid); }
+
+    .contact-sub {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-top: 1rem;
+    }
+
+    .contact-links { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+    .contact-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      border: 1px solid var(--rule);
+      padding: 10px 20px;
+      color: var(--mid);
+      text-decoration: none;
+      transition: all .15s;
+    }
+    .contact-link:hover { border-color: var(--black); color: var(--black); }
+    .contact-link.primary {
+      background: var(--black);
+      color: var(--white);
+      border-color: var(--black);
+    }
+    .contact-link.primary:hover { background: var(--red); border-color: var(--red); }
+
+    /* Resume link in contact — sits alongside other links */
+    .contact-link.resume {
+      border-color: var(--black);
+      color: var(--black);
+    }
+    .contact-link.resume:hover { background: var(--black); color: var(--white); }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 3rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--mid);
+      border-top: 1px solid var(--rule);
+    }
+    .footer-name { color: var(--black); font-weight: 400; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .hero-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 2rem; margin-bottom: 2rem; }
+      .hero-right { padding-left: 0; }
+      .work { padding: 0 1.5rem 3rem; }
+      .project-row { grid-template-columns: 50px 1fr; }
+      .proj-tags { display: none; }
+      .proj-arrow { display: none; }
+      .resume-strip { flex-direction: column; align-items: flex-start; gap: 1rem; }
+      .about { grid-template-columns: 1fr; }
+      .about-left { border-right: none; border-bottom: 1px solid var(--rule); }
+      .bio-section { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; }
+      .bio-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 2rem; margin-bottom: 2rem; }
+      .bio-right { padding-left: 0; }
+      .contact { flex-direction: column; gap: 2rem; padding: 2.5rem 1.5rem; }
+      footer { padding: 1.25rem 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-name">Shambhavi Singh</div>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#writing">Writing</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li class="nav-resume"><a href="https://drive.google.com/file/d/1gNK5vK2E2sjEoDpvKmqlTjVjOHPTUKQt/view?usp=sharing" target="_blank">Résumé ↗</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-index">Visual &amp; Brand Designer</div>
+      <div class="h1-wrap">
+        <svg class="seal-rays" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
+          <g transform="translate(160,160)">
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(15)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(30)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(45)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(60)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(75)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(90)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(105)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(120)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(135)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(150)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(165)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(180)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(195)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(210)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(225)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(240)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(255)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(270)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(285)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(300)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(315)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(330)"/>
+            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(345)"/>
+          </g>
+        </svg>
+        <h1>Concept<br>before<br><em><span style="display:inline-block;transform:translateY(-0.12em);">canvas.</span></em></h1>
+      </div>
+      <p class="hero-desc">I design at the intersection of concept and system — turning complex ideas into brands that communicate with clarity and intention.</p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-right-top">Disciplines</div>
+      <ul class="discipline-list">
+        <li class="anim-pan d-1">Brand Identity <span class="disc-arrow">↗</span></li>
+        <li class="anim-pan d-2">Visual Systems <span class="disc-arrow">↗</span></li>
+        <li class="anim-pan d-3">Product Design <span class="disc-arrow">↗</span></li>
+        <li class="anim-pan d-4">Content Strategy <span class="disc-arrow">↗</span></li>
+      </ul>
+      <div class="hero-cta">
+        <a href="#work" class="btn-work">View work</a>
+        <a href="https://drive.google.com/file/d/1gNK5vK2E2sjEoDpvKmqlTjVjOHPTUKQt/view?usp=sharing" target="_blank" class="btn-cv">View résumé</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker">
+    <div class="ticker-inner">
+      <div class="ticker-item"><span>—</span>Brand Identity</div>
+      <div class="ticker-item"><span>—</span>Visual Systems</div>
+      <div class="ticker-item"><span>—</span>Product Design</div>
+      <div class="ticker-item"><span>—</span>Content Strategy</div>
+      <div class="ticker-item"><span>—</span>Packaging Design</div>
+      <div class="ticker-item"><span>—</span>Editorial Design</div>
+      <div class="ticker-item"><span>—</span>Design Philosophy</div>
+      <div class="ticker-item"><span>—</span>Instructional Design</div>
+      <div class="ticker-item"><span>—</span>Technical Communication</div>
+      <div class="ticker-item"><span>—</span>Brand Identity</div>
+      <div class="ticker-item"><span>—</span>Visual Systems</div>
+      <div class="ticker-item"><span>—</span>Product Design</div>
+      <div class="ticker-item"><span>—</span>Content Strategy</div>
+      <div class="ticker-item"><span>—</span>Packaging Design</div>
+      <div class="ticker-item"><span>—</span>Editorial Design</div>
+      <div class="ticker-item"><span>—</span>Design Philosophy</div>
+      <div class="ticker-item"><span>—</span>Instructional Design</div>
+      <div class="ticker-item"><span>—</span>Technical Communication</div>
+    </div>
+  </div>
+
+  <!-- WORK -->
+  <section class="work" id="work">
+    <div class="work-header">
+      <span class="work-title">Selected Work</span>
+      <span class="work-count">06 Projects</span>
+    </div>
+
+    <a class="project-row anim-rise d-1" href="cic-case-study.html">
+      <div class="proj-num">01</div>
+      <div class="proj-info">
+        <div class="proj-name">AWS Cloud Innovation Center</div>
+        <div class="proj-desc">Marketing strategy · Visual systems · Technical communication · Innovation Island</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag">Real client</span>
+        <span class="proj-tag">Brand + Strategy</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="project-row anim-rise d-2" href="buff-curl.html">
+      <div class="proj-num">02</div>
+      <div class="proj-info">
+        <div class="proj-name">Buff Curl</div>
+        <div class="proj-desc">Self-initiated · Brand identity · Packaging · Product web design · Content</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag">Self-initiated</span>
+        <span class="proj-tag">Identity + Product</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="project-row anim-rise d-3" href="unstructure.html">
+      <div class="proj-num">03</div>
+      <div class="proj-info">
+        <div class="proj-name"><em>(un)structure</em></div>
+        <div class="proj-desc">Design philosophy · Content system · Instagram · Substack essays</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag">Self-initiated</span>
+        <span class="proj-tag">Editorial + Concept</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="project-row anim-rise d-4" href="https://stapled.netlify.app/" target="_blank">
+      <div class="proj-num">04</div>
+      <div class="proj-info">
+        <div class="proj-name">Stapled</div>
+        <div class="proj-desc">Digital product design · Zine discovery platform · UI system · Coded + deployed</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag">Self-initiated</span>
+        <span class="proj-tag">Digital Product</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="project-row anim-rise d-5" href="instructional-design.html">
+      <div class="proj-num">05</div>
+      <div class="proj-info">
+        <div class="proj-name">Designing for Clarity</div>
+        <div class="proj-desc">Instructional design · Complex concept translation · Learner-centered content</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag">Instructional</span>
+        <span class="proj-tag">Communication</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <a class="project-row anim-rise d-6" href="previous-work.html">
+      <div class="proj-num">06</div>
+      <div class="proj-info">
+        <div class="proj-name">Previous Work</div>
+        <div class="proj-desc">Herberger Institute · Lint Away · Full Plates · De Novo Bakes · Rattle</div>
+      </div>
+      <div class="proj-tags">
+        <span class="proj-tag">Various</span>
+        <span class="proj-tag">Identity + Packaging</span>
+      </div>
+      <div class="proj-arrow">→</div>
+    </a>
+
+    <!-- ── RÉSUMÉ STRIP ── -->
+    <div class="resume-strip">
+      <div class="resume-strip-left">
+        <div style="display:flex; flex-direction:column; gap: 4px;">
+          <div class="resume-eyebrow">Résumé</div>
+          <div class="resume-label">Shambhavi Singh — Visual &amp; Brand Designer</div>
+          <div class="resume-meta">
+            <span>B.A. Design, Arizona State University</span>
+            <span>AWS Cloud Innovation Center</span>
+            <span>Open to full-time roles</span>
+          </div>
+        </div>
+      </div>
+      <a href="https://drive.google.com/file/d/1gNK5vK2E2sjEoDpvKmqlTjVjOHPTUKQt/view?usp=sharing" target="_blank" class="btn-resume">View résumé</a>
+    </div>
+
+  </section>
+
+  <!-- ABOUT + CAPABILITIES -->
+  <section class="about" id="about">
+    <div class="about-left">
+      <div class="section-label">About</div>
+      <div class="about-headline">Complexity is not<br>the enemy.<br><em>Unclear thinking is.</em></div>
+      <p class="about-body">I'm Shambhavi — a visual and brand designer with a design degree and a habit of starting with "why" before touching a typeface. My work spans brand identity, product design, packaging, content systems, and strategic communication.<br><br>I'm drawn to projects where the concept is as important as the craft — where a brand's visual logic needs to carry real meaning, not just aesthetics.</p>
+    </div>
+    <div class="about-right">
+      <div class="section-label">Capabilities</div>
+      <div class="skills-grid">
+        <div class="skill-group">
+          <div class="skill-group-title">Brand</div>
+          <div class="skill-item">Identity systems</div>
+          <div class="skill-item">Logo design</div>
+          <div class="skill-item">Color + type</div>
+          <div class="skill-item">Brand guidelines</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Digital</div>
+          <div class="skill-item">Web design</div>
+          <div class="skill-item">UI systems</div>
+          <div class="skill-item">Product design</div>
+          <div class="skill-item">HTML / CSS</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Print + Packaging</div>
+          <div class="skill-item">Label design</div>
+          <div class="skill-item">Editorial layout</div>
+          <div class="skill-item">Collateral</div>
+          <div class="skill-item">Postcards + print</div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-group-title">Strategy</div>
+          <div class="skill-item">Content systems</div>
+          <div class="skill-item">Marketing design</div>
+          <div class="skill-item">Technical comms</div>
+          <div class="skill-item">Instructional design</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIO -->
+  <section class="bio-section" id="writing">
+    <div class="bio-left">
+      <div class="section-label">Designer</div>
+      <div class="bio-name">Shambhavi<br><em>Singh</em></div>
+      <div class="bio-role">Visual &amp; Brand Designer<br>Arizona State University, B.A.</div>
+      <ul class="bio-facts">
+        <li>Based in Tempe, AZ</li>
+        <li>AWS Cloud Innovation Center</li>
+        <li>Hackathon Mentor — Principled Innovation Academy</li>
+        <li>Open to full-time roles</li>
+      </ul>
+    </div>
+    <div class="bio-right">
+      <div class="section-label">Bio</div>
+      <p class="bio-text">I'm a visual and brand designer who starts every project with a question: what does this actually need to communicate, and to whom?</p>
+      <p class="bio-text-secondary">My work spans brand identity, packaging, digital product design, editorial systems, and strategic communication. At the AWS AI Cloud Innovation Center at Arizona State University, I translated complex technical architecture into accessible visual narratives for public-sector audiences — work that required equal parts design thinking and strategic clarity.</p>
+      <p class="bio-text-secondary">Outside of client work, I build things from my own curiosity: Buff Curl began as a personal product gap, (un)structure began as a philosophical framework, and Stapled began as a question about why finding zines is so hard when finding books is so easy.</p>
+      <p class="bio-text-secondary">I have mentored at the Principled Innovation Academy hackathon at ASU — the teams I worked with went on to win. A second mentorship is upcoming. I write about design, systems, and technology on LinkedIn and Substack. Currently open to full-time roles in brand and visual design.</p>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div>
+      <div class="contact-headline">Let's make<br><em>something real.</em></div>
+      <div class="contact-sub">Open to full-time roles · Freelance · Collaboration</div>
+    </div>
+    <div class="contact-links">
+      <a href="mailto:ssing382@asu.edu" class="contact-link primary">Say hello</a>
+      <a href="https://www.linkedin.com/in/shambhavi-singh2002/" target="_blank" class="contact-link">LinkedIn</a>
+      <a href="https://behance.net" target="_blank" class="contact-link">Behance</a>
+      <a href="https://drive.google.com/file/d/1gNK5vK2E2sjEoDpvKmqlTjVjOHPTUKQt/view?usp=sharing" target="_blank" class="contact-link resume">Résumé ↗</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Shambhavi Singh</span>
+    <span>shambhavi.design</span>
+    <span>© 2026</span>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hair Texture Archetypes — buff blog</title>
+  <meta name="description" content="What straightening my hair taught me about power. Hair is not superficial — it's identity, psychology, and intentional expression.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky:    #2E86C1;
+      --sky-lt: #5DADE2;
+      --sky-dk: #1A5276;
+      --coral:  #E8552A;
+      --gold:   #F5A623;
+      --lime:   #A8D531;
+      --purple: #6C3483;
+      --white:  #FFFFFF;
+      --off:    #F4F9FF;
+      --ink:    #0D1B2A;
+      --mid:    #4A6080;
+      --rule:   rgba(46,134,193,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--off);
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 60px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo {
+      font-family: 'Nunito', sans-serif;
+      font-size: 22px; font-weight: 900;
+      background: linear-gradient(90deg, var(--coral) 0%, var(--gold) 50%, var(--coral) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--mid); text-decoration: none;
+      display: flex; align-items: center; gap: 8px; transition: color .15s;
+    }
+    .nav-back:hover { color: var(--sky); }
+    .nav-back::before { content: '←'; font-size: 14px; }
+    .nav-tag {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--purple); font-weight: 700;
+      background: rgba(108,52,131,0.08);
+      border: 1px solid rgba(108,52,131,0.2);
+      padding: 4px 12px; border-radius: 999px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, #2C0A4A 0%, var(--purple) 35%, #2980B9 70%, var(--sky-lt) 100%);
+      padding: 5rem 3rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--off));
+      pointer-events: none;
+    }
+    .hero-deco {
+      position: absolute; top: 0; right: 0;
+      width: 55%; height: 100%;
+      pointer-events: none; opacity: 0.06;
+    }
+    .hero-inner {
+      max-width: 760px; position: relative; z-index: 2;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.65); margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: rgba(255,255,255,0.35); }
+
+    .hero-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(44px, 7vw, 80px);
+      font-weight: 900; line-height: 0.92;
+      letter-spacing: -2.5px; color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title span {
+      display: block;
+      background: linear-gradient(90deg, #E8B4FF, var(--sky-lt));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-byline {
+      font-size: 14px; color: rgba(255,255,255,0.6); letter-spacing: 0.5px; margin-bottom: 1rem;
+    }
+    .hero-byline strong { color: rgba(255,255,255,0.9); }
+    .hero-lede {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 20px; font-weight: 400; line-height: 1.6;
+      color: rgba(255,255,255,0.85); max-width: 580px;
+      font-style: italic;
+      border-left: 3px solid rgba(255,255,255,0.25);
+      padding-left: 1.25rem; margin-top: 2rem;
+    }
+
+    /* ── ARTICLE BODY ── */
+    .article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 3rem 5rem;
+    }
+
+    .section-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--sky); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(46,134,193,0.2); }
+    .section-label.purple { color: var(--purple); }
+    .section-label.purple::after { background: rgba(108,52,131,0.2); }
+
+    h2 {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 900; line-height: 1.1;
+      letter-spacing: -1px; color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+
+    .body-text {
+      font-size: 17px; line-height: 1.8; color: var(--mid); margin-bottom: 1.5rem;
+    }
+    .body-text strong { color: var(--ink); font-weight: 500; }
+    .body-text em { font-style: italic; color: var(--sky-dk); }
+
+    /* ── IDENTITY OPENER ── */
+    .identity-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 4px 24px rgba(26,82,118,0.07);
+      position: relative; overflow: hidden;
+    }
+    .identity-card::before {
+      content: 'Identity.';
+      position: absolute; bottom: -20px; right: -10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 100px; font-weight: 900;
+      color: rgba(108,52,131,0.05);
+      line-height: 1; pointer-events: none; white-space: nowrap;
+    }
+    .identity-card p {
+      font-size: 18px; line-height: 1.75; color: var(--mid);
+      margin-bottom: 1rem; position: relative; z-index: 1;
+    }
+    .identity-card p:last-child { margin-bottom: 0; }
+    .identity-card strong { color: var(--ink); }
+
+    /* ── DUALITY SPLIT ── */
+    .duality-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--rule);
+      border-radius: 20px; overflow: hidden;
+      margin: 2.5rem 0;
+      box-shadow: 0 4px 24px rgba(26,82,118,0.08);
+    }
+    .duality-panel {
+      padding: 2.5rem;
+      display: flex; flex-direction: column; gap: 0;
+    }
+    .panel-curls {
+      background: linear-gradient(160deg, #EBF5FB, #D6EAF8);
+    }
+    .panel-straight {
+      background: linear-gradient(160deg, #F5EEF8, #EAD9F0);
+    }
+    .panel-icon {
+      font-size: 32px; margin-bottom: 1rem;
+    }
+    .panel-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 20px; font-weight: 900; letter-spacing: -0.5px;
+      margin-bottom: 0.75rem;
+    }
+    .panel-title.curls { color: var(--sky-dk); }
+    .panel-title.straight { color: var(--purple); }
+    .panel-desc {
+      font-size: 15px; line-height: 1.7; color: var(--mid);
+      margin-bottom: 1.25rem;
+    }
+    .panel-traits {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 6px;
+    }
+    .panel-traits li {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 700;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .panel-traits li::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0;
+    }
+    .panel-traits.curls-traits li { color: var(--sky-dk); }
+    .panel-traits.curls-traits li::before { background: var(--sky); }
+    .panel-traits.straight-traits li { color: var(--purple); }
+    .panel-traits.straight-traits li::before { background: var(--purple); }
+    .panel-extra {
+      margin-top: 1.25rem; padding-top: 1.25rem;
+      border-top: 1px solid rgba(46,134,193,0.15);
+      font-size: 14px; line-height: 1.65; color: var(--mid);
+      font-style: italic;
+    }
+    .panel-extra.straight-extra { border-top-color: rgba(108,52,131,0.15); }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      margin: 2.5rem 0;
+      padding: 0 0 0 1.5rem;
+      border-left: 4px solid var(--purple);
+    }
+    .pull-quote p {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 800; line-height: 1.3;
+      color: var(--ink); letter-spacing: -0.5px; margin-bottom: 0.5rem;
+    }
+    .pull-quote cite {
+      font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--mid); font-style: normal;
+    }
+
+    /* ── MYTH SECTION ── */
+    .myth-card {
+      background: linear-gradient(135deg, #1A0D2E 0%, var(--purple) 60%, #2980B9 100%);
+      border-radius: 20px; padding: 2.5rem;
+      margin: 2.5rem 0; position: relative; overflow: hidden;
+    }
+    .myth-card::before {
+      content: '?';
+      position: absolute; top: -30px; right: 10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 220px; font-weight: 900;
+      color: rgba(255,255,255,0.04);
+      line-height: 1; pointer-events: none;
+    }
+    .myth-label {
+      font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); margin-bottom: 1.25rem;
+      font-family: 'Nunito', sans-serif; font-weight: 700;
+    }
+    .myth-text {
+      font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.85);
+      margin-bottom: 1.25rem; position: relative; z-index: 1;
+    }
+    .myth-text:last-of-type { margin-bottom: 0; }
+    .myth-text em { color: #E8B4FF; font-style: italic; }
+    .myth-text strong { color: var(--white); }
+
+    /* ── BUFF CURL STANCE ── */
+    .stance-grid {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 1rem; margin: 2rem 0;
+    }
+    .stance-item {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .stance-item.crossed {
+      background: rgba(232,85,42,0.04);
+      border-color: rgba(232,85,42,0.15);
+    }
+    .stance-item.crossed .stance-icon { color: var(--coral); }
+    .stance-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px; font-weight: 800;
+      color: var(--mid); line-height: 1.3;
+    }
+    .stance-item.crossed .stance-label { color: var(--coral); text-decoration: line-through; }
+    .stance-icon { font-size: 20px; margin-bottom: 8px; display: block; }
+
+    /* ── REAL QUESTION ── */
+    .question-section {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 4px 20px rgba(26,82,118,0.06);
+    }
+    .question-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10px; font-weight: 800; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--purple);
+      margin-bottom: 1rem;
+    }
+    .question-intro {
+      font-size: 17px; line-height: 1.75; color: var(--mid);
+      margin-bottom: 1.25rem;
+    }
+    .question-intro strong { color: var(--ink); }
+    .archetype-list {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 8px; list-style: none;
+    }
+    .archetype-list li {
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px; font-weight: 700;
+      color: var(--sky-dk);
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px;
+      background: rgba(46,134,193,0.06);
+      border-radius: 8px;
+      border: 1px solid rgba(46,134,193,0.1);
+    }
+    .archetype-list li::before {
+      content: '↗'; font-size: 12px; color: var(--sky); flex-shrink: 0;
+    }
+
+    /* ── CLOSING ── */
+    .closing {
+      text-align: center;
+      padding: 3rem 0 0;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .closing-headline {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 900; letter-spacing: -0.75px;
+      color: var(--ink); margin-bottom: 1rem; line-height: 1.2;
+    }
+    .closing-sub {
+      font-size: 16px; color: var(--mid); line-height: 1.7;
+      max-width: 480px; margin: 0 auto 2rem;
+    }
+    .closing-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px; font-weight: 800; letter-spacing: 0.5px;
+      background: var(--sky-dk); color: var(--white);
+      padding: 12px 28px; border-radius: 999px;
+      text-decoration: none; transition: all .15s;
+    }
+    .closing-link:hover { background: var(--sky); transform: translateY(-1px); }
+
+    /* ── MORE POSTS ── */
+    .more-posts {
+      background: var(--white);
+      border-top: 1px solid var(--rule);
+      padding: 3rem;
+    }
+    .more-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--mid);
+      margin-bottom: 1.5rem; text-align: center;
+    }
+    .more-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; max-width: 720px; margin: 0 auto;
+    }
+    .more-card {
+      border: 1px solid var(--rule); border-radius: 12px;
+      overflow: hidden; text-decoration: none; color: inherit;
+      transition: transform .15s, box-shadow .15s;
+      display: flex; flex-direction: column;
+    }
+    .more-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,82,118,0.1); }
+    .more-thumb {
+      height: 80px; display: flex; align-items: center; justify-content: center;
+      font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 900;
+      color: var(--white); padding: 1rem; text-align: center; line-height: 1.2;
+    }
+    .thumb-orange { background: linear-gradient(135deg, #F39C12, #E74C3C); }
+    .thumb-teal   { background: linear-gradient(135deg, #17A589, #1ABC9C); }
+    .more-info { padding: 0.85rem 1rem; }
+    .more-tag {
+      font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--sky); font-weight: 700; margin-bottom: 3px;
+    }
+    .more-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800; color: var(--ink); line-height: 1.3;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.5);
+      padding: 2rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .footer-logo {
+      font-family: 'Nunito', sans-serif; font-size: 18px; font-weight: 900;
+      background: linear-gradient(90deg, var(--coral), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: -0.5px;
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      nav { padding: 0 1.5rem; }
+      .hero { padding: 3.5rem 1.5rem 3rem; }
+      .article { padding: 2.5rem 1.5rem 4rem; }
+      .duality-split { grid-template-columns: 1fr; }
+      .stance-grid { grid-template-columns: 1fr; }
+      .archetype-list { grid-template-columns: 1fr; }
+      .more-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 12px; padding: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="buff-curl.html" class="nav-logo">buff curl</a>
+    <a href="buff-curl.html#blog" class="nav-back">buff blog</a>
+    <span class="nav-tag">Education · Hair Science</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="hero-deco" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <circle cx="300" cy="250" r="200" fill="none" stroke="white" stroke-width="1.5"/>
+      <circle cx="300" cy="250" r="160" fill="none" stroke="white" stroke-width="1.5"/>
+      <circle cx="300" cy="250" r="120" fill="none" stroke="white" stroke-width="1.5"/>
+      <circle cx="300" cy="250" r="80" fill="none" stroke="white" stroke-width="1.5"/>
+      <circle cx="300" cy="250" r="40" fill="none" stroke="white" stroke-width="1.5"/>
+      <line x1="0" y1="250" x2="600" y2="250" stroke="white" stroke-width="1"/>
+      <line x1="300" y1="0" x2="300" y2="500" stroke="white" stroke-width="1"/>
+    </svg>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">buff blog · Issue 02</div>
+      <h1 class="hero-title">
+        Hair Texture
+        <span>Archetypes</span>
+      </h1>
+      <div class="hero-byline">by <strong>Shambhavi Singh</strong></div>
+      <p class="hero-lede">What straightening my hair taught me about power.</p>
+    </div>
+  </section>
+
+  <!-- ARTICLE -->
+  <article class="article">
+
+    <!-- OPENER -->
+    <div class="section-label">Beyond texture</div>
+    <h2>There's something no one talks about when it comes to hair.</h2>
+
+    <div class="identity-card">
+      <p>There's something no one talks about when it comes to hair, which is beyond texture. It is <strong>identity.</strong></p>
+      <p>Recently, I straightened my hair after a long period of wearing it naturally curly. It wasn't external pressure but an inner desire trying to tell me something I am about to unpack here.</p>
+    </div>
+
+    <!-- DUALITY -->
+    <div class="section-label">The two states</div>
+    <h2>Curls as meaning. Straight hair as structure.</h2>
+
+    <div class="duality-split">
+      <div class="duality-panel panel-curls">
+        <span class="panel-icon">🌊</span>
+        <div class="panel-title curls">Curls as Meaning</div>
+        <p class="panel-desc">When I wear my curls, I feel deeply connected to something organic. Curls carry symbolism I realised recently. Wearing my natural curls feels like embracing the embedded truth in my DNA. It's expressive and alive — textured in every sense of the word, wrapped up in vulnerability.</p>
+        <ul class="panel-traits curls-traits">
+          <li>Softness</li>
+          <li>Romance</li>
+          <li>Divine femininity</li>
+          <li>Emotional openness</li>
+          <li>Freedom</li>
+        </ul>
+        <div class="panel-extra">They represent movement and respond to environmental factors such as humidity and friction. Most importantly, they take up space. They are intuitive, and I love that.</div>
+      </div>
+      <div class="duality-panel panel-straight">
+        <span class="panel-icon">✦</span>
+        <div class="panel-title straight">Straight Hair as Structure</div>
+        <p class="panel-desc">When I straightened my hair, something else surfaced — a different dimension of femininity that isn't outwardly harder or colder. It signifies a controlled structure that feels like a protective layer in a composed manner.</p>
+        <ul class="panel-traits straight-traits">
+          <li>Clarity</li>
+          <li>Sharpness</li>
+          <li>Presence</li>
+          <li>Intentionality</li>
+        </ul>
+        <div class="panel-extra straight-extra">I felt more aware of how I was perceived. More aware of posture and tone. More aware of how my presence lands in a room. It wasn't about looking different but thinking differently. Silent. Contained. Measured.</div>
+      </div>
+    </div>
+
+    <!-- MYTH -->
+    <div class="section-label purple">The myth of authenticity</div>
+
+    <div class="myth-card">
+      <div class="myth-label">Reframing the narrative</div>
+      <p class="myth-text">We're often told that embracing natural texture is the ultimate authenticity — but <em>what if authenticity isn't about choosing one state but knowing when to shift?</em></p>
+      <p class="myth-text">My curls are my truth. But straightening them didn't erase that truth. It created contrast, which creates awareness.</p>
+      <p class="myth-text">With straight hair, I didn't feel less feminine but <strong>more guarded</strong> — in a way that was intentional. It allowed me to be vulnerable without being exposed, which is the contrasting difference.</p>
+    </div>
+
+    <div class="pull-quote">
+      <p>"Hair is not superficial. It alters how we perceive ourselves and regulate — and it is so powerful to take that power into our own hands."</p>
+      <cite>— Shambhavi Singh</cite>
+    </div>
+
+    <!-- BUFF CURL STANCE -->
+    <div class="section-label">What buff curl is about</div>
+    <h2>Not about choosing a side.</h2>
+
+    <p class="body-text">Buff Curl isn't about "curls are better" or "straight hair is better" or "natural vs styled." It's about understanding the psychological and energetic shifts that hair creates.</p>
+
+    <div class="stance-grid">
+      <div class="stance-item crossed">
+        <span class="stance-icon">✕</span>
+        <div class="stance-label">"Curls are better."</div>
+      </div>
+      <div class="stance-item crossed">
+        <span class="stance-icon">✕</span>
+        <div class="stance-label">"Straight hair is better."</div>
+      </div>
+      <div class="stance-item crossed">
+        <span class="stance-icon">✕</span>
+        <div class="stance-label">"Natural vs styled."</div>
+      </div>
+    </div>
+
+    <p class="body-text"><em>Texture is language, and it communicates something before we speak.</em> When we understand that, we stop styling reactively and start styling intentionally.</p>
+
+    <p class="body-text">My natural curls are embedded in my DNA. That softness is permanent. But the ability to create structure over softness? <strong>That's power and awareness.</strong> The goal is not to remain one thing but to know what you are amplifying, and why.</p>
+
+    <!-- THE REAL QUESTION -->
+    <div class="section-label purple">The real question</div>
+    <div class="question-section">
+      <div class="question-label">Ask yourself</div>
+      <p class="question-intro"><strong>What version of yourself are you stepping into when you style your hair?</strong> Is it one of these?</p>
+      <ul class="archetype-list">
+        <li>Vulnerability</li>
+        <li>Romance</li>
+        <li>Structure</li>
+        <li>Control</li>
+        <li>Mystery</li>
+        <li>Protection</li>
+      </ul>
+    </div>
+
+    <p class="body-text">Hair tools are not just tools. They are <em>instruments of psychological modulation</em> — and that's what Buff Curl explores.</p>
+
+    <!-- CLOSING -->
+    <div class="closing">
+      <div class="closing-headline">Style intentionally.<br>Not reactively.</div>
+      <p class="closing-sub">Buff curl is built for people who understand that hair care is self-knowledge. The product for every version of you — whatever you're amplifying today.</p>
+      <a href="buff-curl.html" class="closing-link">Meet the product →</a>
+    </div>
+
+  </article>
+
+  <!-- MORE POSTS -->
+  <section class="more-posts">
+    <div class="more-label">More from buff blog</div>
+    <div class="more-grid">
+      <a class="more-card" href="blog-frizz-fear.html">
+        <div class="more-thumb thumb-orange">Frizz-Fear Marketing</div>
+        <div class="more-info">
+          <div class="more-tag">Culture · Marketing</div>
+          <div class="more-title">Dissecting the hair industry's favourite scare tactic</div>
+        </div>
+      </a>
+      <a class="more-card" href="blog-day2-curls.html">
+        <div class="more-thumb thumb-teal">Day-2 Curls</div>
+        <div class="more-info">
+          <div class="more-tag">Routine · Tips</div>
+          <div class="more-title">Why second-day curls can be better than wash day</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">buff curl</span>
+    <div class="footer-links">
+      <a href="buff-curl.html">Home</a>
+      <a href="buff-curl.html#blog">Blog</a>
+      <a href="buff-curl.html#product">Product</a>
+      <a href="index.html">Portfolio</a>
+    </div>
+    <span>© 2026 buff curl · prototype</span>
+  </footer>
+
+</body>
+</html>

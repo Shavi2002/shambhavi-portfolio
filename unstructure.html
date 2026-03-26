@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>(un)structure — Shambhavi Singh</title>
+  <meta name="description" content="A design philosophy and content system built to map frameworks for navigating complexity.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;400;700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:     #0A0A0F;
+      --paper:   #F9F7F4;
+      --mid:     #888898;
+      --rule:    rgba(255,255,255,0.08);
+      --rule-lt: rgba(255,255,255,0.15);
+      --pink:    #E91E8C;
+      --purple:  #7B2FBE;
+      --teal:    #00C9A7;
+      --gold:    #FFD166;
+      --orange:  #FF6B35;
+      --white:   #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--ink);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 58px;
+      background: rgba(10,10,15,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .nav-back {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--mid); text-decoration: none;
+      display: flex; align-items: center; gap: 8px; transition: color .15s;
+    }
+    .nav-back:hover { color: var(--white); }
+    .nav-back::before { content: '←'; }
+
+    .nav-logo {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 13px; font-weight: 700; letter-spacing: -0.5px;
+      background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 60%, #5B8DEF 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-index {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 1.5px;
+      text-transform: uppercase; color: var(--mid);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 5rem;
+      position: relative; overflow: hidden;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 80% 30%, rgba(123,47,190,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 20% 70%, rgba(233,30,140,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 60% 80%, rgba(0,201,167,0.1) 0%, transparent 60%),
+        var(--ink);
+      z-index: 0;
+    }
+
+    .hero-grid-overlay {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.5) 40%, rgba(0,0,0,0.8) 100%);
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-kicker {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 1.5rem;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .hero-kicker::before { content: ''; width: 32px; height: 1px; background: var(--teal); }
+
+    .hero-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(52px, 9vw, 110px);
+      font-weight: 900; line-height: 0.92;
+      letter-spacing: -3px;
+      margin-bottom: 2rem;
+    }
+
+    .title-un {
+      display: block;
+      background: linear-gradient(90deg, var(--pink) 0%, var(--purple) 50%, #5B8DEF 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .title-structure {
+      display: block;
+      color: var(--white);
+      position: relative;
+    }
+
+    .hero-desc {
+      font-size: 18px; line-height: 1.65;
+      color: rgba(255,255,255,0.6);
+      max-width: 520px; margin-bottom: 3rem;
+    }
+
+    .hero-meta {
+      display: flex; gap: 3rem; flex-wrap: wrap;
+      border-top: 1px solid var(--rule);
+      padding-top: 2rem;
+    }
+
+    .hero-meta-item {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--mid);
+    }
+    .hero-meta-item strong {
+      display: block; font-family: 'DM Sans', sans-serif;
+      font-size: 14px; font-weight: 500;
+      color: var(--white); letter-spacing: 0; margin-top: 3px;
+    }
+
+    /* ── LAWS ── */
+    .laws-section {
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .section-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 4rem;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+    .laws-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--rule);
+    }
+
+    .law-card {
+      background: var(--ink);
+      padding: 3rem 2rem;
+      position: relative; overflow: hidden;
+      transition: background .2s;
+    }
+    .law-card:hover { background: rgba(255,255,255,0.03); }
+
+    .law-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+    }
+    .law-card:nth-child(1)::before { background: linear-gradient(90deg, var(--pink), var(--purple)); }
+    .law-card:nth-child(2)::before { background: linear-gradient(90deg, var(--purple), var(--teal)); }
+    .law-card:nth-child(3)::before { background: linear-gradient(90deg, var(--teal), var(--gold)); }
+
+    .law-num {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 11px; font-weight: 400; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--mid);
+      margin-bottom: 1.5rem;
+    }
+
+    .law-statement {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 700; line-height: 1.25;
+      letter-spacing: -0.5px; margin-bottom: 1.5rem;
+    }
+
+    .law-card:nth-child(1) .law-statement { color: var(--pink); }
+    .law-card:nth-child(2) .law-statement { color: var(--teal); }
+    .law-card:nth-child(3) .law-statement { color: var(--gold); }
+
+    .law-body {
+      font-size: 14px; line-height: 1.7;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── FRAMEWORK MAP ── */
+    .framework {
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--rule);
+      background: rgba(255,255,255,0.015);
+    }
+
+    .framework-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 4rem; margin-bottom: 4rem; align-items: end;
+    }
+
+    h2 {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(24px, 3.5vw, 42px);
+      font-weight: 700; line-height: 1.1;
+      letter-spacing: -1px;
+    }
+
+    .framework-intro {
+      font-size: 16px; line-height: 1.7;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* Visual diagram */
+    .diagram {
+      position: relative;
+      border: 1px solid var(--rule);
+      border-radius: 12px;
+      padding: 3rem;
+      margin-top: 2rem;
+      min-height: 340px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+
+    .diagram-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 50% 50%,
+        rgba(123,47,190,0.12) 0%, transparent 70%);
+    }
+
+    .axis-label {
+      position: absolute;
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--mid);
+    }
+    .axis-x { bottom: 1.5rem; right: 2rem; }
+    .axis-y { top: 2rem; left: 2rem; }
+
+    .axis-line-h {
+      position: absolute;
+      top: 50%; left: 5%; right: 5%;
+      height: 1px; background: var(--rule-lt);
+    }
+    .axis-line-v {
+      position: absolute;
+      left: 50%; top: 5%; bottom: 5%;
+      width: 1px; background: var(--rule-lt);
+    }
+
+    .quadrant-label {
+      position: absolute;
+      font-family: 'Unbounded', sans-serif;
+      font-size: 10px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .q-tl { top: 18%; left: 8%; color: rgba(233,30,140,0.7); }
+    .q-tr { top: 18%; right: 8%; color: rgba(0,201,167,0.7); text-align: right; }
+    .q-bl { bottom: 18%; left: 8%; color: rgba(91,141,239,0.7); }
+    .q-br { bottom: 18%; right: 8%; color: rgba(255,209,102,0.7); text-align: right; }
+
+    .center-node {
+      position: relative; z-index: 2;
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(123,47,190,0.6);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center;
+      background: rgba(123,47,190,0.1);
+    }
+    .center-node span {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── IG POSTS ── */
+    .visual-notebook {
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .posts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem; margin-top: 3rem;
+    }
+
+    .post-card {
+      border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--rule);
+      transition: transform .15s, border-color .15s;
+      text-decoration: none; color: inherit;
+      display: flex; flex-direction: column;
+    }
+    .post-card:hover { transform: translateY(-4px); border-color: var(--rule-lt); }
+
+    .post-thumb {
+      height: 180px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem; text-align: center;
+      position: relative;
+    }
+
+    .pt-1 { background: linear-gradient(135deg, #1a0533, #4a0f7e, #e91e8c); }
+    .pt-2 { background: linear-gradient(135deg, #0d1b3e, #1a3a5c, #0097a7); }
+    .pt-3 { background: linear-gradient(135deg, #1a0a00, #5d2a00, #ff6b00); }
+    .pt-4 { background: linear-gradient(135deg, #0a1a0a, #1a3a1a, #2e7d32); }
+    .pt-5 { background: linear-gradient(135deg, #2d1b4e, #6a1b9a, #ad1457); }
+    .pt-6 { background: linear-gradient(135deg, #1a1a0a, #3d3400, #f57f17); }
+
+    .post-thumb-text {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 14px; font-weight: 700;
+      line-height: 1.3; color: rgba(255,255,255,0.9);
+      position: relative; z-index: 1;
+    }
+
+    .post-meta { padding: 1.25rem; background: rgba(255,255,255,0.03); flex: 1; }
+    .post-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 0.5rem;
+    }
+    .post-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 13px; font-weight: 700; line-height: 1.35;
+      color: rgba(255,255,255,0.85); margin-bottom: 0.5rem;
+    }
+    .post-desc {
+      font-size: 12px; line-height: 1.6;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── ESSAYS ── */
+    .essays {
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--rule);
+      background: rgba(255,255,255,0.015);
+    }
+
+    .essay-list { margin-top: 3rem; }
+
+    .essay-row {
+      display: grid; grid-template-columns: 60px 1fr 160px;
+      align-items: center; gap: 0;
+      padding: 2rem 0; border-bottom: 1px solid var(--rule);
+      text-decoration: none; color: inherit;
+      transition: background .12s;
+    }
+    .essay-row:hover { background: rgba(255,255,255,0.02); }
+    .essay-row:hover .essay-arrow { opacity: 1; transform: translateX(4px); }
+
+    .essay-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px; color: var(--mid); letter-spacing: 1px;
+    }
+
+    .essay-info {}
+    .essay-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(16px, 2vw, 22px);
+      font-weight: 700; letter-spacing: -0.5px;
+      margin-bottom: 0.4rem; color: var(--white);
+      line-height: 1.2;
+    }
+    .essay-desc {
+      font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.5;
+    }
+    .essay-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--mid); text-align: right;
+    }
+    .essay-arrow {
+      font-size: 16px; color: var(--mid);
+      opacity: 0; transition: all .15s; text-align: right;
+    }
+
+    /* ── WHAT'S NEXT ── */
+    .whats-next {
+      padding: 6rem 3rem;
+      border-bottom: 1px solid var(--rule);
+    }
+
+    .next-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1.5rem; margin-top: 3rem;
+    }
+
+    .next-card {
+      border: 1px solid var(--rule);
+      border-radius: 12px; padding: 2.5rem;
+      position: relative; overflow: hidden;
+      transition: border-color .15s;
+    }
+    .next-card:hover { border-color: var(--rule-lt); }
+
+    .next-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+    }
+    .next-card:nth-child(1)::after { background: linear-gradient(90deg, var(--pink), var(--purple)); }
+    .next-card:nth-child(2)::after { background: linear-gradient(90deg, var(--teal), var(--gold)); }
+
+    .next-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .nt-pink { color: var(--pink); }
+    .nt-teal { color: var(--teal); }
+
+    .next-title {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 20px; font-weight: 700;
+      letter-spacing: -0.5px; margin-bottom: 1rem;
+    }
+    .next-body {
+      font-size: 14px; line-height: 1.7;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── CLOSING ── */
+    .closing {
+      padding: 6rem 3rem;
+      display: flex; flex-direction: column;
+      align-items: center; text-align: center;
+      position: relative; overflow: hidden;
+    }
+
+    .closing-bg {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 100%,
+        rgba(123,47,190,0.2) 0%, transparent 60%);
+    }
+
+    .closing-quote {
+      font-family: 'Unbounded', sans-serif;
+      font-size: clamp(20px, 3.5vw, 36px);
+      font-weight: 700; line-height: 1.2;
+      letter-spacing: -1px; max-width: 740px;
+      position: relative; z-index: 1;
+      margin-bottom: 1.5rem;
+    }
+    .closing-quote em { font-style: normal; color: var(--teal); }
+
+    .closing-sub {
+      font-size: 15px; color: rgba(255,255,255,0.45);
+      max-width: 460px; line-height: 1.7;
+      position: relative; z-index: 1; margin-bottom: 3rem;
+    }
+
+    .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+
+    .btn-gradient {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      color: var(--white); border: none;
+      padding: 13px 28px; border-radius: 999px;
+      cursor: pointer; text-decoration: none; transition: opacity .15s;
+    }
+    .btn-gradient:hover { opacity: 0.85; }
+
+    .btn-ghost-dark {
+      font-family: 'Unbounded', sans-serif;
+      font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      background: transparent; color: rgba(255,255,255,0.6);
+      border: 1px solid var(--rule-lt);
+      padding: 13px 28px; border-radius: 999px;
+      cursor: pointer; text-decoration: none; transition: all .15s;
+    }
+    .btn-ghost-dark:hover { color: var(--white); border-color: rgba(255,255,255,0.3); }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.5rem 3rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--mid);
+      border-top: 1px solid var(--rule);
+    }
+    .footer-logo {
+      font-family: 'Unbounded', sans-serif; font-size: 12px; font-weight: 700;
+      background: linear-gradient(90deg, var(--pink), var(--purple));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--mid); text-decoration: none; transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      nav { padding: 0 1.5rem; }
+      .hero { padding: 0 1.5rem 4rem; }
+      .laws-section, .framework, .visual-notebook, .essays, .whats-next, .closing { padding: 4rem 1.5rem; }
+      .laws-grid { grid-template-columns: 1fr; }
+      .framework-header { grid-template-columns: 1fr; }
+      .posts-grid { grid-template-columns: 1fr 1fr; }
+      .essay-row { grid-template-columns: 40px 1fr; }
+      .essay-tag { display: none; }
+      .next-grid { grid-template-columns: 1fr; }
+      footer { padding: 1.25rem 1.5rem; flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">All work</a>
+    <span class="nav-logo">(un)structure</span>
+    <span class="nav-index">03 / 06</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-kicker">Design philosophy · Content system · Visual framework</div>
+      <h1 class="hero-title">
+        <span class="title-un">(un)</span>
+        <span class="title-structure">structure</span>
+      </h1>
+      <p class="hero-desc">A model for navigating complexity — built on the idea that every structure holds hidden unstructure, and that creation lives exactly where the two meet.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item">Format<strong>Instagram · Substack · Framework</strong></div>
+        <div class="hero-meta-item">Type<strong>Self-initiated · Design Philosophy</strong></div>
+        <div class="hero-meta-item">Status<strong>Active · In development</strong></div>
+        <div class="hero-meta-item">Surfaces<strong>Visual Notebook · Long-form Essays</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE THREE LAWS -->
+  <section class="laws-section" id="laws">
+    <div class="section-label">The core laws</div>
+    <div class="laws-grid">
+
+      <div class="law-card">
+        <div class="law-num">Law № 1</div>
+        <div class="law-statement">Every structure holds hidden (un)structure.</div>
+        <div class="law-body">No system is as fixed as it appears. Beneath every rule, institution, or habit is a layer of contingency — a history of decisions that could have gone differently. The structure you see is the surface. Underneath, it breathes.</div>
+      </div>
+
+      <div class="law-card">
+        <div class="law-num">Law № 2</div>
+        <div class="law-statement">The deeper you dissect a structure, the closer you get to essence.</div>
+        <div class="law-body">Complexity is not the enemy of clarity — it is the path to it. When you keep going past the surface layer, past the obvious explanation, you stop seeing categories and start seeing forces. That is where understanding lives.</div>
+      </div>
+
+      <div class="law-card">
+        <div class="law-num">Law № 3</div>
+        <div class="law-statement">Creation happens where structure meets unstructure.</div>
+        <div class="law-body">The most generative space is neither pure order nor pure chaos — it is the threshold between them. Great design, art, writing, and thinking all emerge from standing in that tension without resolving it too quickly.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FRAMEWORK MAP -->
+  <section class="framework" id="framework">
+    <div class="framework-header">
+      <div>
+        <div class="section-label">The framework</div>
+        <h2>Mapping complexity<br>as a design problem.</h2>
+      </div>
+      <div class="framework-intro">
+        (un)structure is a self-schooling model — part personal philosophy, part practical lens. It applies across entrepreneurship, design thinking, education, consulting, and any context where the right response to complexity is not more structure, but better navigation of it.
+      </div>
+    </div>
+
+    <div class="diagram">
+      <div class="diagram-bg"></div>
+      <div class="axis-line-h"></div>
+      <div class="axis-line-v"></div>
+      <span class="axis-label axis-x">More structure →</span>
+      <span class="axis-label axis-y">↑ More unstructure</span>
+      <span class="quadrant-label q-tl">Creative<br>Chaos</span>
+      <span class="quadrant-label q-tr">Generative<br>Tension</span>
+      <span class="quadrant-label q-bl">Rigid<br>Systems</span>
+      <span class="quadrant-label q-br">Strategic<br>Emergence</span>
+      <div class="center-node"><span>(un)<br>structure</span></div>
+    </div>
+  </section>
+
+  <!-- VISUAL NOTEBOOK -->
+  <section class="visual-notebook" id="notebook">
+    <div class="section-label">The visual notebook</div>
+    <h2 style="margin-bottom: 0.75rem;">IG posts that map<br>frameworks for navigating complexity.</h2>
+    <p style="font-size: 15px; color: rgba(255,255,255,0.45); max-width: 520px; line-height: 1.65;">Each post applies the (un)structure lens to a different domain — software, identity, culture, music, masculinity. Short-form thinking, visual-first.</p>
+
+    <div class="posts-grid">
+      <a class="post-card" href="https://www.instagram.com/what.holdsme" target="_blank">
+        <div class="post-thumb pt-1">
+          <div class="post-thumb-text">Software is a tool for infinity</div>
+        </div>
+        <div class="post-meta">
+          <div class="post-tag">Technology</div>
+          <div class="post-title">Software is a tool for infinity — but only if you control it</div>
+          <div class="post-desc">On how the tools we build to extend human capability can equally constrain it.</div>
+        </div>
+      </a>
+
+      <a class="post-card" href="https://www.instagram.com/what.holdsme" target="_blank">
+        <div class="post-thumb pt-2">
+          <div class="post-thumb-text">Some layers are locked. Someone just hiding.</div>
+        </div>
+        <div class="post-meta">
+          <div class="post-tag">Systems</div>
+          <div class="post-title">Hidden layers and visible permission</div>
+          <div class="post-desc">Not every locked system is locked by design. Some are locked by default.</div>
+        </div>
+      </a>
+
+      <a class="post-card" href="https://www.instagram.com/what.holdsme" target="_blank">
+        <div class="post-thumb pt-3">
+          <div class="post-thumb-text">Blocks contain (un)structure</div>
+        </div>
+        <div class="post-meta">
+          <div class="post-tag">Philosophy</div>
+          <div class="post-title">Blocks contain (un)structure and are surrounded by it</div>
+          <div class="post-desc">The first law made visual — how every unit of structure is itself an ocean of contingency.</div>
+        </div>
+      </a>
+
+      <a class="post-card" href="https://www.instagram.com/what.holdsme" target="_blank">
+        <div class="post-thumb pt-4">
+          <div class="post-thumb-text">The Unstructured Flow of Selfhood</div>
+        </div>
+        <div class="post-meta">
+          <div class="post-tag">Identity</div>
+          <div class="post-title">The Unstructured Flow of Selfhood and Inner Dialogue</div>
+          <div class="post-desc">Applying the framework inward — on identity as something built, not found.</div>
+        </div>
+      </a>
+
+      <a class="post-card" href="https://www.instagram.com/what.holdsme" target="_blank">
+        <div class="post-thumb pt-5">
+          <div class="post-thumb-text">Feminine, Masculine, and the Struggle Between</div>
+        </div>
+        <div class="post-meta">
+          <div class="post-tag">Culture</div>
+          <div class="post-title">Feminine, Masculine, and the Struggle Between Structure and Unstructure</div>
+          <div class="post-desc">Gender as a structural system — and the unstructured forces that destabilise it.</div>
+        </div>
+      </a>
+
+      <a class="post-card" href="https://www.instagram.com/what.holdsme" target="_blank">
+        <div class="post-thumb pt-6">
+          <div class="post-thumb-text">From Music to Mentality</div>
+        </div>
+        <div class="post-meta">
+          <div class="post-tag">Perspective</div>
+          <div class="post-title">From Music to Mentality: A Subjective Perspective</div>
+          <div class="post-desc">How musical structure trains the mind to hear the spaces between notes as much as the notes themselves.</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- ESSAYS -->
+  <section class="essays" id="essays">
+    <div class="section-label">Long-form explorations</div>
+    <h2 style="margin-bottom: 0.75rem;">Deeper-dive essays<br>on Substack.</h2>
+    <p style="font-size: 15px; color: rgba(255,255,255,0.45); max-width: 520px; line-height: 1.65; margin-bottom: 0;">Ideas that need more space and richer visuals than an IG caption can hold.</p>
+
+    <div class="essay-list">
+      <a class="essay-row" href="https://substack.com/@shavwrites" target="_blank">
+        <div class="essay-num">01</div>
+        <div class="essay-info">
+          <div class="essay-title">Software is a tool for infinity</div>
+          <div class="essay-desc">On building systems that extend rather than constrain human agency — and the designer's responsibility in that choice.</div>
+        </div>
+        <div class="essay-tag">Technology<br>Systems</div>
+        <div class="essay-arrow">→</div>
+      </a>
+      <a class="essay-row" href="https://substack.com/@shavwrites" target="_blank">
+        <div class="essay-num">02</div>
+        <div class="essay-info">
+          <div class="essay-title">Worldbuilding and Fiction Dreams</div>
+          <div class="essay-desc">What fiction's capacity for worldbuilding reveals about how we design real systems — and the stories we tell about why they exist.</div>
+        </div>
+        <div class="essay-tag">Narrative<br>Design</div>
+        <div class="essay-arrow">→</div>
+      </a>
+      <a class="essay-row" href="https://substack.com/@shavwrites" target="_blank">
+        <div class="essay-num">03</div>
+        <div class="essay-info">
+          <div class="essay-title">Syllabus to Nowhere (But Closer to the Core)</div>
+          <div class="essay-desc">A self-schooling essay — on building a curriculum without an institution, and what that reveals about how structure shapes learning.</div>
+        </div>
+        <div class="essay-tag">Education<br>Self</div>
+        <div class="essay-arrow">→</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- WHAT'S NEXT -->
+  <section class="whats-next" id="next">
+    <div class="section-label">What's next</div>
+    <h2 style="margin-bottom: 3rem;">Two active<br>directions.</h2>
+
+    <div class="next-grid">
+      <div class="next-card">
+        <div class="next-tag nt-pink">Theoretical application</div>
+        <div class="next-title">Rooted strategy across disciplines.</div>
+        <div class="next-body">Building a working application of (un)structure across entrepreneurship, design thinking, hackathon mentorship, corporate consulting, and education. The framework is not domain-specific — it applies wherever complexity needs to be navigated rather than solved.</div>
+      </div>
+      <div class="next-card">
+        <div class="next-tag nt-teal">Community</div>
+        <div class="next-title">A course or a grad-school studio.</div>
+        <div class="next-body">Building a space — either a course or a studio format — where others can practice (un)structure and co-create new branches. The goal is a model that can be taught, iterated on, and grown beyond its original form.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing">
+    <div class="closing-bg"></div>
+    <p class="closing-quote">"I'm building a model called (un)structure, but I'm getting there by designing <em>my own structure</em> to walk through it."</p>
+    <p class="closing-sub">A self-schooling space — part journal, part curriculum. Thinking out loud and inviting others into the discussion.</p>
+    <div class="btn-row">
+      <a href="https://substack.com/@shavwrites" target="_blank" class="btn-gradient">Read on Substack</a>
+      <a href="https://www.instagram.com/what.holdsme" target="_blank" class="btn-ghost-dark">Follow on Instagram</a>
+      <a href="index.html" class="btn-ghost-dark">Back to portfolio</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">(un)structure</span>
+    <div class="footer-links">
+      <a href="https://substack.com/@shavwrites" target="_blank">Substack</a>
+      <a href="https://www.instagram.com/what.holdsme" target="_blank">Instagram</a>
+      <a href="index.html">Portfolio</a>
+    </div>
+    <span>© 2026 Shambhavi Singh</span>
+  </footer>
+
+</body>
+</html>

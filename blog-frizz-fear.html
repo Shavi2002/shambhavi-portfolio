@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frizz-Fear Marketing — buff blog</title>
+  <meta name="description" content="Ever notice how every 'frizz-free' ad looks like a keratin commercial? Dissecting the hair industry's favourite scare tactic.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky:    #2E86C1;
+      --sky-lt: #5DADE2;
+      --sky-dk: #1A5276;
+      --coral:  #E8552A;
+      --gold:   #F5A623;
+      --lime:   #A8D531;
+      --white:  #FFFFFF;
+      --off:    #F4F9FF;
+      --ink:    #0D1B2A;
+      --mid:    #4A6080;
+      --rule:   rgba(46,134,193,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--off);
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 60px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo {
+      font-family: 'Nunito', sans-serif;
+      font-size: 22px; font-weight: 900;
+      background: linear-gradient(90deg, var(--coral) 0%, var(--gold) 50%, var(--coral) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--mid); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      transition: color .15s;
+    }
+    .nav-back:hover { color: var(--sky); }
+    .nav-back::before { content: '←'; font-size: 14px; }
+    .nav-tag {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--sky); font-weight: 700;
+      background: rgba(46,134,193,0.08);
+      border: 1px solid rgba(46,134,193,0.2);
+      padding: 4px 12px; border-radius: 999px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, var(--sky-dk) 0%, var(--sky) 50%, #3BA8D8 75%, #A8D8F0 100%);
+      padding: 5rem 3rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--off));
+      pointer-events: none;
+    }
+
+    /* decorative wave lines */
+    .hero-deco {
+      position: absolute; top: 0; right: 0;
+      width: 50%; height: 100%;
+      pointer-events: none; opacity: 0.08;
+    }
+
+    .hero-inner {
+      max-width: 760px; position: relative; z-index: 2;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      width: 20px; height: 1px; background: rgba(255,255,255,0.4);
+    }
+
+    .hero-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(44px, 7vw, 80px);
+      font-weight: 900; line-height: 0.92;
+      letter-spacing: -2.5px;
+      color: var(--white);
+      margin-bottom: 1.5rem;
+    }
+    .hero-title span {
+      display: block;
+      background: linear-gradient(90deg, var(--gold), var(--coral));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-byline {
+      font-size: 14px; color: rgba(255,255,255,0.6);
+      letter-spacing: 0.5px; margin-bottom: 1rem;
+    }
+    .hero-byline strong { color: rgba(255,255,255,0.9); }
+
+    .hero-lede {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 20px; font-weight: 400; line-height: 1.6;
+      color: rgba(255,255,255,0.85);
+      max-width: 580px; font-style: italic;
+      border-left: 3px solid rgba(255,255,255,0.3);
+      padding-left: 1.25rem; margin-top: 2rem;
+    }
+
+    /* ── ARTICLE BODY ── */
+    .article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 3rem 5rem;
+    }
+
+    /* section label */
+    .section-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--sky); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(46,134,193,0.2);
+    }
+
+    h2 {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 900; line-height: 1.1;
+      letter-spacing: -1px; color: var(--ink);
+      margin-bottom: 1.25rem;
+    }
+
+    .body-text {
+      font-size: 17px; line-height: 1.8;
+      color: var(--mid); margin-bottom: 1.5rem;
+    }
+    .body-text strong { color: var(--ink); font-weight: 500; }
+    .body-text em { font-style: italic; color: var(--sky-dk); }
+
+    /* ── AD DISSECTION CARD ── */
+    .dissect-card {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      overflow: hidden;
+      margin: 2.5rem 0;
+      box-shadow: 0 4px 24px rgba(26,82,118,0.08);
+    }
+
+    .dissect-header {
+      background: linear-gradient(135deg, var(--sky-dk), var(--sky));
+      padding: 1.25rem 1.75rem;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .dissect-header-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .dissect-header-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800; letter-spacing: 1px;
+      text-transform: uppercase; color: rgba(255,255,255,0.9);
+    }
+
+    /* Before / After comparison */
+    .before-after {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .ba-panel {
+      padding: 1.5rem 1.75rem;
+      border-right: 1px solid var(--rule);
+    }
+    .ba-panel:last-child { border-right: none; }
+    .ba-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 0.75rem;
+    }
+    .ba-label.before { color: var(--coral); }
+    .ba-label.after  { color: var(--sky); }
+
+    .ba-screen {
+      background: #0D1B2A;
+      border-radius: 8px;
+      padding: 1rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      margin-bottom: 0.75rem;
+    }
+    .ba-screen-brand {
+      font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+      color: rgba(255,255,255,0.35); margin-bottom: 0.5rem;
+    }
+    .ba-screen-headline {
+      font-family: 'Nunito', sans-serif;
+      font-size: 22px; font-weight: 900;
+      color: var(--white); line-height: 1;
+      margin-bottom: 2px;
+    }
+    .ba-screen-sub {
+      font-size: 28px; font-weight: 900;
+      color: var(--gold); font-family: 'Nunito', sans-serif;
+      line-height: 1;
+    }
+    .ba-screen-fine {
+      font-size: 9px; color: rgba(255,255,255,0.3);
+      margin-top: 0.5rem; line-height: 1.4;
+    }
+    .ba-note {
+      font-size: 13px; line-height: 1.6; color: var(--mid);
+      font-style: italic;
+    }
+
+    .dissect-body {
+      padding: 1.5rem 1.75rem;
+      border-top: 1px solid var(--rule);
+      background: rgba(46,134,193,0.03);
+    }
+    .dissect-body p {
+      font-size: 15px; line-height: 1.75; color: var(--mid);
+      margin-bottom: 1rem;
+    }
+    .dissect-body p:last-child { margin-bottom: 0; }
+    .dissect-body strong { color: var(--ink); }
+    .dissect-body em { color: var(--sky-dk); }
+
+    .verdict {
+      background: linear-gradient(135deg, #FEF5EC, #FDE8D8);
+      border: 1px solid rgba(232,85,42,0.2);
+      border-radius: 10px;
+      padding: 1.25rem 1.5rem;
+      margin-top: 1.25rem;
+    }
+    .verdict-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10px; font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--coral); margin-bottom: 0.5rem;
+    }
+    .verdict p {
+      font-size: 14px; line-height: 1.65; color: #7A2A10; margin: 0 !important;
+    }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      margin: 2.5rem 0;
+      padding: 0 0 0 1.5rem;
+      border-left: 4px solid var(--coral);
+    }
+    .pull-quote p {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 800; line-height: 1.3;
+      color: var(--ink); letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+    .pull-quote cite {
+      font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--mid); font-style: normal;
+    }
+
+    /* ── PERSONAL STORY ── */
+    .story-section {
+      background: linear-gradient(135deg, var(--sky-dk) 0%, #1E6FA0 100%);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin: 2.5rem 0;
+      position: relative; overflow: hidden;
+    }
+    .story-section::before {
+      content: '"';
+      position: absolute; top: -20px; right: 20px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 200px; font-weight: 900;
+      color: rgba(255,255,255,0.04);
+      line-height: 1; pointer-events: none;
+    }
+    .story-label {
+      font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); margin-bottom: 1.25rem;
+      font-family: 'Nunito', sans-serif; font-weight: 700;
+    }
+    .story-text {
+      font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.85);
+      margin-bottom: 1.25rem; position: relative; z-index: 1;
+    }
+    .story-text:last-of-type { margin-bottom: 0; }
+    .story-text em { color: var(--gold); font-style: italic; }
+    .story-text strong { color: var(--white); }
+
+    /* ── TAKEAWAY CARD ── */
+    .takeaway {
+      background: var(--white);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      padding: 2rem 2.5rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 4px 20px rgba(26,82,118,0.06);
+    }
+    .takeaway-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10px; font-weight: 800; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--sky);
+      margin-bottom: 1rem;
+    }
+    .takeaway p {
+      font-size: 16px; line-height: 1.75; color: var(--mid);
+      margin-bottom: 1rem;
+    }
+    .takeaway p:last-child { margin-bottom: 0; }
+    .takeaway strong { color: var(--ink); }
+
+    /* ── CLOSING ── */
+    .closing {
+      text-align: center;
+      padding: 3rem 0 0;
+      border-top: 1px solid var(--rule);
+      margin-top: 3rem;
+    }
+    .closing-headline {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 900; letter-spacing: -1px;
+      color: var(--ink); margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+    .closing-sub {
+      font-size: 16px; color: var(--mid); line-height: 1.7;
+      max-width: 480px; margin: 0 auto 2rem;
+    }
+    .closing-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px; font-weight: 800; letter-spacing: 0.5px;
+      background: var(--sky-dk); color: var(--white);
+      padding: 12px 28px; border-radius: 999px;
+      text-decoration: none; transition: all .15s;
+    }
+    .closing-link:hover { background: var(--sky); transform: translateY(-1px); }
+
+    /* ── MORE POSTS ── */
+    .more-posts {
+      background: var(--white);
+      border-top: 1px solid var(--rule);
+      padding: 3rem;
+    }
+    .more-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--mid);
+      margin-bottom: 1.5rem; text-align: center;
+    }
+    .more-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; max-width: 720px; margin: 0 auto;
+    }
+    .more-card {
+      border: 1px solid var(--rule); border-radius: 12px;
+      overflow: hidden; text-decoration: none; color: inherit;
+      transition: transform .15s, box-shadow .15s;
+      display: flex; flex-direction: column;
+    }
+    .more-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,82,118,0.1); }
+    .more-thumb {
+      height: 80px; display: flex; align-items: center; justify-content: center;
+      font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 900;
+      color: var(--white); padding: 1rem; text-align: center; line-height: 1.2;
+    }
+    .thumb-blue   { background: linear-gradient(135deg, #2980B9, #6C3483); }
+    .thumb-teal   { background: linear-gradient(135deg, #17A589, #1ABC9C); }
+    .more-info { padding: 0.85rem 1rem; }
+    .more-tag {
+      font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--sky); font-weight: 700; margin-bottom: 3px;
+    }
+    .more-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800; color: var(--ink); line-height: 1.3;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.5);
+      padding: 2rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .footer-logo {
+      font-family: 'Nunito', sans-serif; font-size: 18px; font-weight: 900;
+      background: linear-gradient(90deg, var(--coral), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: -0.5px;
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      nav { padding: 0 1.5rem; }
+      .hero { padding: 3.5rem 1.5rem 3rem; }
+      .article { padding: 2.5rem 1.5rem 4rem; }
+      .before-after { grid-template-columns: 1fr; }
+      .ba-panel { border-right: none; border-bottom: 1px solid var(--rule); }
+      .ba-panel:last-child { border-bottom: none; }
+      .more-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 12px; padding: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="buff-curl.html" class="nav-logo">buff curl</a>
+    <a href="buff-curl.html#blog" class="nav-back">buff blog</a>
+    <span class="nav-tag">Culture · Marketing</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <!-- decorative SVG wave lines -->
+    <svg class="hero-deco" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <path d="M0,100 Q150,60 300,100 T600,100" fill="none" stroke="white" stroke-width="2"/>
+      <path d="M0,160 Q150,120 300,160 T600,160" fill="none" stroke="white" stroke-width="2"/>
+      <path d="M0,220 Q150,180 300,220 T600,220" fill="none" stroke="white" stroke-width="2"/>
+      <path d="M0,280 Q150,240 300,280 T600,280" fill="none" stroke="white" stroke-width="2"/>
+      <path d="M0,340 Q150,300 300,340 T600,340" fill="none" stroke="white" stroke-width="2"/>
+      <path d="M0,400 Q150,360 300,400 T600,400" fill="none" stroke="white" stroke-width="2"/>
+    </svg>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">buff blog · Issue 01</div>
+      <h1 class="hero-title">
+        Frizz-Fear
+        <span>Marketing</span>
+      </h1>
+      <div class="hero-byline">by <strong>Shambhavi Singh</strong></div>
+      <p class="hero-lede">Ever notice how every "frizz-free" ad looks like a keratin commercial?</p>
+    </div>
+  </section>
+
+  <!-- ARTICLE -->
+  <article class="article">
+
+    <!-- DISSECTING THE AD -->
+    <div class="section-label">Dissecting the Ad</div>
+    <h2>The 72-hour promise.</h2>
+
+    <p class="body-text">TRESemmé promises '72 hrs Frizz Control' — but note the fine print: <em>"lab tests vs non-conditioning shampoo, not vs salon-flat hair."</em></p>
+
+    <div class="dissect-card">
+      <div class="dissect-header">
+        <div class="dissect-header-icon">🔬</div>
+        <div class="dissect-header-title">Ad Breakdown — TRESemmé Frizz Control</div>
+      </div>
+      <div class="before-after">
+        <div class="ba-panel">
+          <div class="ba-label before">"Before" — what you see</div>
+          <div class="ba-screen">
+            <div class="ba-screen-brand">TRESemmé Salon Smooth</div>
+            <div class="ba-screen-headline">FRIZZ CONTROL</div>
+            <div class="ba-screen-headline" style="font-size:12px; color:rgba(255,255,255,0.5); font-weight:400; font-family:'DM Sans',sans-serif;">UP TO</div>
+            <div class="ba-screen-sub">72<span style="font-size:16px; color:rgba(255,255,255,0.6);">hrs</span></div>
+            <div class="ba-screen-fine">Based on lab test with TRESemmé shampoo + conditioner vs non-conditioning shampoo</div>
+          </div>
+          <div class="ba-note">Sleek, mirror-smooth hair. Implied: "this bottle = salon results."</div>
+        </div>
+        <div class="ba-panel">
+          <div class="ba-label after">"After" — what it means</div>
+          <div class="ba-screen">
+            <div class="ba-screen-brand">What the test actually measured</div>
+            <div class="ba-screen-headline" style="font-size:14px; color:rgba(255,255,255,0.9); font-weight:700; font-family:'DM Sans',sans-serif; line-height:1.5;">TRESemmé duo vs. a shampoo with <em style="color:var(--gold);">zero conditioner</em></div>
+            <div class="ba-screen-fine" style="font-size:11px; color:rgba(255,255,255,0.5); margin-top:0.75rem;">Not vs salon-straightened hair. Not vs the model's untreated hair. Just vs soap with no conditioner.</div>
+          </div>
+          <div class="ba-note">Any moisturising product would likely beat that control.</div>
+        </div>
+      </div>
+      <div class="dissect-body">
+        <p>The 72-hour claim is based only on a lab comparison between the brand's own duo and a control shampoo that contains <strong>no conditioner at all</strong> — not a comparison to salon-straightened hair, which implies that "Frizz control up to 72 hrs" isn't a promise of pin-straight hair in real life.</p>
+        <p>It's just saying the brand's shampoo + conditioner performed better than a plain, non-conditioning shampoo under lab conditions. The sleek, mirror-smooth hair shown on-screen almost certainly received a professional blow-dry or keratin treatment. That look is not what the lab test measured.</p>
+        <p>By juxtaposing the 72-hour claim with a salon-level visual, the ad nudges viewers to assume <em>"this bottle = that result"</em> — even though the evidence only proves <em>"this bottle is a bit less frizzy than plain soap."</em></p>
+        <div class="verdict">
+          <div class="verdict-label">Bottom line</div>
+          <p>The disclaimer reveals the claim is a controlled-lab comparison against a weak baseline — not proof you'll get keratin-treatment hair from a single wash at home. Moreover, the control shampoo contains no conditioning agents at all, so of course the TRESemmé duo looks superior because it has silicones and softeners that immediately weigh the cuticle down and disguise flyaways.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- FRIZZ IN GENERAL -->
+    <div class="section-label" style="margin-top: 3rem;">Now that we know this</div>
+    <h2>Let's talk about frizz in general.</h2>
+
+    <div class="pull-quote">
+      <p>"I brushed my hair every school morning because that was 'neat' — thanks, Euro-centric beauty norms."</p>
+      <cite>— Shambhavi Singh</cite>
+    </div>
+
+    <div class="story-section">
+      <div class="story-label">The personal part</div>
+      <p class="story-text">By lunch, I had a static halo — so I flat-ironed, fried my ends, and even did a DIY smoothing treatment at fourteen. Mom ordered the chemicals, and the whole family joined in.</p>
+      <p class="story-text">Some years later, I was in college and I broke up with my straight-hair dreams sometime between my freshman and sophomore year when I saw other women with curly hair that looked so good, I was in awe. But really, it was a forced breakup because <em>College = no time (or cash) for constant keratin touch-ups.</em></p>
+      <p class="story-text">I finally whispered the truth: <strong>"Girl, you have curly hair."</strong> I ditched the brush and dove into a messy, TikTok-powered quest: low-poo cleansers, plopping fails, protein-moisture charts. Slowly, the halo softened into waves that belonged on my head.</p>
+      <p class="story-text">I learned that curls need moisture + protein, not punishment. I discovered diffusing on low, microfibre towels, and ingredient lists I can pronounce. The result: the so-called "frizz" was just my curls begging for proper care. <em>They were with me all this time — they just needed love and attention.</em></p>
+    </div>
+
+    <!-- TAKEAWAY -->
+    <div class="takeaway">
+      <div class="takeaway-label">What I've learnt</div>
+      <p>After being on both poles of hair care — one being suffering your hair health for temporary looks, and the other being long-term care, even if it looks terrible initially — <strong>no shampoo bottle can duplicate salon keratin, because it's the flat iron + chemicals doing the work.</strong></p>
+      <p>I'm done buying the shame narrative. Done buying generalised shampoo and conditioners. They aren't thinking about me, and I won't think about them either.</p>
+    </div>
+
+    <!-- CLOSING -->
+    <div class="closing">
+      <div class="closing-headline">Here's to retiring the<br>straight-hair fantasy.</div>
+      <p class="closing-sub">Buff curl is my give-back: light-foam cleansers, scalp-friendly pH, no harsh silicones. The product I needed at 14, 3, and even now. My mission is simple: help the next wave-curious kid skip the self-loathing detour.</p>
+      <p class="closing-sub" style="font-family:'Nunito',sans-serif; font-weight:800; font-size:18px; color:var(--coral); margin-top:1rem;">And giving our curls the love they've been asking for all along.</p>
+      <a href="buff-curl.html" class="closing-link">Meet the product →</a>
+    </div>
+
+  </article>
+
+  <!-- MORE POSTS -->
+  <section class="more-posts">
+    <div class="more-label">More from buff blog</div>
+    <div class="more-grid">
+      <a class="more-card" href="blog-hair-archetypes.html">
+        <div class="more-thumb thumb-blue">Hair Texture Archetypes</div>
+        <div class="more-info">
+          <div class="more-tag">Education · Hair Science</div>
+          <div class="more-title">The curl typing system — what it gets right, what it gets wrong</div>
+        </div>
+      </a>
+      <a class="more-card" href="blog-day2-curls.html">
+        <div class="more-thumb thumb-teal">Day-2 Curls</div>
+        <div class="more-info">
+          <div class="more-tag">Routine · Tips</div>
+          <div class="more-title">Why second-day curls can be better than wash day</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">buff curl</span>
+    <div class="footer-links">
+      <a href="buff-curl.html">Home</a>
+      <a href="buff-curl.html#blog">Blog</a>
+      <a href="buff-curl.html#product">Product</a>
+      <a href="index.html">Portfolio</a>
+    </div>
+    <span>© 2026 buff curl · prototype</span>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Art of the Day-2 Curl — buff blog</title>
+  <meta name="description" content="Why second-day curls can be better than wash day — and how to build a routine that makes them predictably good.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;0,800;0,900;1,400;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --sky:    #2E86C1;
+      --sky-lt: #5DADE2;
+      --sky-dk: #1A5276;
+      --coral:  #E8552A;
+      --gold:   #F5A623;
+      --lime:   #A8D531;
+      --teal:   #17A589;
+      --teal-dk:#0E6655;
+      --white:  #FFFFFF;
+      --off:    #F4F9FF;
+      --ink:    #0D1B2A;
+      --mid:    #4A6080;
+      --rule:   rgba(46,134,193,0.15);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--off);
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 60px;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--rule);
+    }
+    .nav-logo {
+      font-family: 'Nunito', sans-serif;
+      font-size: 22px; font-weight: 900;
+      background: linear-gradient(90deg, var(--coral) 0%, var(--gold) 50%, var(--coral) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: -0.5px;
+      text-decoration: none;
+    }
+    .nav-back {
+      font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--mid); text-decoration: none;
+      display: flex; align-items: center; gap: 8px; transition: color .15s;
+    }
+    .nav-back:hover { color: var(--teal); }
+    .nav-back::before { content: '←'; font-size: 14px; }
+    .nav-tag {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--teal-dk); font-weight: 700;
+      background: rgba(23,165,137,0.08);
+      border: 1px solid rgba(23,165,137,0.22);
+      padding: 4px 12px; border-radius: 999px;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, #0A2E2A 0%, var(--teal-dk) 30%, var(--teal) 60%, #48D1A8 85%, #A8EDD8 100%);
+      padding: 5rem 3rem 4rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 80px;
+      background: linear-gradient(to bottom, transparent, var(--off));
+      pointer-events: none;
+    }
+    .hero-deco {
+      position: absolute; top: 0; right: -5%;
+      width: 55%; height: 100%;
+      pointer-events: none; opacity: 0.07;
+    }
+    .hero-inner { max-width: 760px; position: relative; z-index: 2; }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.65); margin-bottom: 1.5rem;
+    }
+    .hero-eyebrow::before { content: ''; width: 20px; height: 1px; background: rgba(255,255,255,0.35); }
+    .hero-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(44px, 7vw, 80px);
+      font-weight: 900; line-height: 0.92;
+      letter-spacing: -2.5px; color: var(--white); margin-bottom: 1.5rem;
+    }
+    .hero-title span {
+      display: block;
+      background: linear-gradient(90deg, #A8EDD8, var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-byline { font-size: 14px; color: rgba(255,255,255,0.6); letter-spacing: 0.5px; margin-bottom: 1rem; }
+    .hero-byline strong { color: rgba(255,255,255,0.9); }
+    .hero-lede {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 20px; font-weight: 400; line-height: 1.6;
+      color: rgba(255,255,255,0.85); max-width: 580px;
+      font-style: italic;
+      border-left: 3px solid rgba(255,255,255,0.25);
+      padding-left: 1.25rem; margin-top: 2rem;
+    }
+
+    /* ── ARTICLE ── */
+    .article {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 4rem 3rem 5rem;
+    }
+
+    .section-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800;
+      letter-spacing: 3px; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::after { content: ''; flex: 1; height: 1px; background: rgba(23,165,137,0.2); }
+    .section-label.sky { color: var(--sky); }
+    .section-label.sky::after { background: rgba(46,134,193,0.2); }
+    .section-label.coral { color: var(--coral); }
+    .section-label.coral::after { background: rgba(232,85,42,0.2); }
+
+    h2 {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(26px, 3.5vw, 36px);
+      font-weight: 900; line-height: 1.1;
+      letter-spacing: -1px; color: var(--ink); margin-bottom: 1.25rem;
+    }
+
+    .body-text {
+      font-size: 17px; line-height: 1.8; color: var(--mid); margin-bottom: 1.5rem;
+    }
+    .body-text strong { color: var(--ink); font-weight: 500; }
+    .body-text em { font-style: italic; color: var(--teal-dk); }
+
+    /* ── OPENER CARD ── */
+    .opener-card {
+      background: var(--white);
+      border: 1px solid rgba(23,165,137,0.15);
+      border-radius: 16px; padding: 2.5rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 4px 24px rgba(14,102,85,0.07);
+      position: relative; overflow: hidden;
+    }
+    .opener-card::before {
+      content: '2';
+      position: absolute; bottom: -40px; right: -10px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 220px; font-weight: 900;
+      color: rgba(23,165,137,0.05);
+      line-height: 1; pointer-events: none;
+    }
+    .opener-card p {
+      font-size: 18px; line-height: 1.75; color: var(--mid);
+      margin-bottom: 1rem; position: relative; z-index: 1;
+    }
+    .opener-card p:last-child { margin-bottom: 0; }
+    .opener-card strong { color: var(--ink); }
+
+    /* ── THE WASH DAY MYTH ── */
+    .myth-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin: 2rem 0;
+    }
+    .myth-item {
+      padding: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid;
+    }
+    .myth-item.wrong {
+      background: rgba(232,85,42,0.04);
+      border-color: rgba(232,85,42,0.15);
+    }
+    .myth-item.right {
+      background: rgba(23,165,137,0.06);
+      border-color: rgba(23,165,137,0.2);
+    }
+    .myth-item-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10px; font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 6px;
+    }
+    .myth-item.wrong .myth-item-label { color: var(--coral); }
+    .myth-item.right .myth-item-label { color: var(--teal); }
+    .myth-item p {
+      font-size: 15px; line-height: 1.65; color: var(--mid);
+    }
+    .myth-item p strong { color: var(--ink); }
+
+    /* ── SCIENCE CARD ── */
+    .science-card {
+      background: linear-gradient(135deg, #0A2E2A 0%, var(--teal-dk) 60%, #1A8A72 100%);
+      border-radius: 20px; padding: 2.5rem;
+      margin: 2.5rem 0; position: relative; overflow: hidden;
+    }
+    .science-card::before {
+      content: '🧬';
+      position: absolute; top: -10px; right: 20px;
+      font-size: 140px; opacity: 0.08; pointer-events: none;
+    }
+    .science-label {
+      font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); margin-bottom: 1.25rem;
+      font-family: 'Nunito', sans-serif; font-weight: 700;
+    }
+    .science-text {
+      font-size: 16px; line-height: 1.8; color: rgba(255,255,255,0.85);
+      margin-bottom: 1.25rem; position: relative; z-index: 1;
+    }
+    .science-text:last-of-type { margin-bottom: 0; }
+    .science-text em { color: #A8EDD8; font-style: italic; }
+    .science-text strong { color: var(--white); }
+
+    /* ── PULL QUOTE ── */
+    .pull-quote {
+      margin: 2.5rem 0; padding: 0 0 0 1.5rem;
+      border-left: 4px solid var(--teal);
+    }
+    .pull-quote p {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(20px, 2.5vw, 26px);
+      font-weight: 800; line-height: 1.3;
+      color: var(--ink); letter-spacing: -0.5px; margin-bottom: 0.5rem;
+    }
+    .pull-quote cite {
+      font-size: 12px; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--mid); font-style: normal;
+    }
+
+    /* ── DAY-BY-DAY TIMELINE ── */
+    .timeline { margin: 2.5rem 0; display: flex; flex-direction: column; gap: 0; }
+    .timeline-item {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 1.5rem; align-items: start;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+      position: relative;
+    }
+    .timeline-item:last-child { border-bottom: none; }
+    .timeline-day {
+      font-family: 'Nunito', sans-serif;
+      font-size: 28px; font-weight: 900;
+      line-height: 1; letter-spacing: -1px;
+      color: var(--teal);
+    }
+    .timeline-day span {
+      display: block; font-size: 10px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--mid); margin-top: 2px;
+    }
+    .timeline-content-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 17px; font-weight: 800; color: var(--ink);
+      margin-bottom: 0.5rem;
+    }
+    .timeline-content-body {
+      font-size: 15px; line-height: 1.7; color: var(--mid);
+    }
+    .timeline-content-body em { color: var(--teal-dk); font-style: italic; }
+    .timeline-content-body strong { color: var(--ink); }
+    .timeline-tag {
+      display: inline-block; margin-top: 0.6rem;
+      font-size: 10px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 999px;
+    }
+    .tag-green { background: rgba(23,165,137,0.1); color: var(--teal-dk); }
+    .tag-gold  { background: rgba(245,166,35,0.12); color: #8A5A00; }
+    .tag-blue  { background: rgba(46,134,193,0.1); color: var(--sky-dk); }
+
+    /* ── PROTOCOL CARD ── */
+    .protocol-card {
+      background: var(--white);
+      border: 1px solid rgba(23,165,137,0.15);
+      border-radius: 16px; overflow: hidden;
+      margin: 2.5rem 0;
+      box-shadow: 0 4px 20px rgba(14,102,85,0.07);
+    }
+    .protocol-header {
+      background: linear-gradient(135deg, var(--teal-dk), var(--teal));
+      padding: 1.25rem 1.75rem;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .protocol-header-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: rgba(255,255,255,0.15);
+      display: flex; align-items: center; justify-content: center; font-size: 16px;
+    }
+    .protocol-header-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 14px; font-weight: 800; letter-spacing: 1px;
+      text-transform: uppercase; color: rgba(255,255,255,0.9);
+    }
+    .protocol-steps { padding: 0; list-style: none; }
+    .protocol-step {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.25rem 1.75rem;
+      border-bottom: 1px solid rgba(23,165,137,0.1);
+    }
+    .protocol-step:last-child { border-bottom: none; }
+    .step-num {
+      font-family: 'Nunito', sans-serif;
+      font-size: 20px; font-weight: 900;
+      color: rgba(23,165,137,0.3); line-height: 1;
+      min-width: 28px; padding-top: 2px;
+    }
+    .step-body { flex: 1; }
+    .step-title {
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 3px;
+    }
+    .step-desc { font-size: 14px; line-height: 1.6; color: var(--mid); }
+    .step-desc em { color: var(--teal-dk); font-style: italic; }
+
+    /* ── THE BUFF CURL CONNECTION ── */
+    .connection-card {
+      background: linear-gradient(135deg, #EBF5FB, #D6F5ED);
+      border: 1px solid rgba(23,165,137,0.2);
+      border-radius: 16px; padding: 2rem 2.5rem;
+      margin: 2.5rem 0;
+    }
+    .connection-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 10px; font-weight: 800; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--teal-dk);
+      margin-bottom: 1rem;
+    }
+    .connection-card p {
+      font-size: 16px; line-height: 1.75; color: var(--mid);
+      margin-bottom: 1rem;
+    }
+    .connection-card p:last-child { margin-bottom: 0; }
+    .connection-card strong { color: var(--ink); }
+    .connection-card em { color: var(--teal-dk); font-style: italic; }
+
+    /* ── CLOSING ── */
+    .closing {
+      text-align: center; padding: 3rem 0 0;
+      border-top: 1px solid var(--rule); margin-top: 3rem;
+    }
+    .closing-headline {
+      font-family: 'Nunito', sans-serif;
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 900; letter-spacing: -0.75px;
+      color: var(--ink); margin-bottom: 1rem; line-height: 1.2;
+    }
+    .closing-sub {
+      font-size: 16px; color: var(--mid); line-height: 1.7;
+      max-width: 480px; margin: 0 auto 2rem;
+    }
+    .closing-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 13px; font-weight: 800; letter-spacing: 0.5px;
+      background: var(--teal-dk); color: var(--white);
+      padding: 12px 28px; border-radius: 999px;
+      text-decoration: none; transition: all .15s;
+    }
+    .closing-link:hover { background: var(--teal); transform: translateY(-1px); }
+
+    /* ── MORE POSTS ── */
+    .more-posts {
+      background: var(--white); border-top: 1px solid var(--rule); padding: 3rem;
+    }
+    .more-label {
+      font-family: 'Nunito', sans-serif;
+      font-size: 11px; font-weight: 800; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--mid);
+      margin-bottom: 1.5rem; text-align: center;
+    }
+    .more-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; max-width: 720px; margin: 0 auto;
+    }
+    .more-card {
+      border: 1px solid var(--rule); border-radius: 12px;
+      overflow: hidden; text-decoration: none; color: inherit;
+      transition: transform .15s, box-shadow .15s; display: flex; flex-direction: column;
+    }
+    .more-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(26,82,118,0.1); }
+    .more-thumb {
+      height: 80px; display: flex; align-items: center; justify-content: center;
+      font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 900;
+      color: var(--white); padding: 1rem; text-align: center; line-height: 1.2;
+    }
+    .thumb-orange { background: linear-gradient(135deg, #F39C12, #E74C3C); }
+    .thumb-blue   { background: linear-gradient(135deg, #2980B9, #6C3483); }
+    .more-info { padding: 0.85rem 1rem; }
+    .more-tag { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--sky); font-weight: 700; margin-bottom: 3px; }
+    .more-title { font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800; color: var(--ink); line-height: 1.3; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink); color: rgba(255,255,255,0.5);
+      padding: 2rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 11px; letter-spacing: 1px; text-transform: uppercase;
+    }
+    .footer-logo {
+      font-family: 'Nunito', sans-serif; font-size: 18px; font-weight: 900;
+      background: linear-gradient(90deg, var(--coral), var(--gold));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; letter-spacing: -0.5px;
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color .15s; }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 720px) {
+      nav { padding: 0 1.5rem; }
+      .hero { padding: 3.5rem 1.5rem 3rem; }
+      .article { padding: 2.5rem 1.5rem 4rem; }
+      .myth-row { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 60px 1fr; gap: 1rem; }
+      .more-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 12px; padding: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="buff-curl.html" class="nav-logo">buff curl</a>
+    <a href="buff-curl.html#blog" class="nav-back">buff blog</a>
+    <span class="nav-tag">Routine · Tips</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <svg class="hero-deco" viewBox="0 0 600 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <path d="M0,80 Q100,40 200,80 T400,80 T600,80" fill="none" stroke="white" stroke-width="1.5"/>
+      <path d="M0,140 Q100,100 200,140 T400,140 T600,140" fill="none" stroke="white" stroke-width="1.5"/>
+      <path d="M0,200 Q100,160 200,200 T400,200 T600,200" fill="none" stroke="white" stroke-width="1.5"/>
+      <path d="M0,260 Q100,220 200,260 T400,260 T600,260" fill="none" stroke="white" stroke-width="1.5"/>
+      <path d="M0,320 Q100,280 200,320 T400,320 T600,320" fill="none" stroke="white" stroke-width="1.5"/>
+      <path d="M0,380 Q100,340 200,380 T400,380 T600,380" fill="none" stroke="white" stroke-width="1.5"/>
+      <path d="M0,440 Q100,400 200,440 T400,440 T600,440" fill="none" stroke="white" stroke-width="1.5"/>
+    </svg>
+    <div class="hero-inner">
+      <div class="hero-eyebrow">buff blog · Issue 03</div>
+      <h1 class="hero-title">
+        The Art of the
+        <span>Day-2 Curl</span>
+      </h1>
+      <div class="hero-byline">by <strong>Shambhavi Singh</strong></div>
+      <p class="hero-lede">Why second-day curls can be better than wash day — and how to build a routine that makes them predictably good.</p>
+    </div>
+  </section>
+
+  <!-- ARTICLE -->
+  <article class="article">
+
+    <!-- OPENER -->
+    <div class="section-label">The unpopular truth</div>
+    <h2>Wash day is overrated.</h2>
+
+    <div class="opener-card">
+      <p>There. I said it. The hair community has built an entire ritual around wash day — the products lined up, the playlist ready, the hours blocked out — and somewhere in all of that, we forgot to talk about what happens <strong>after</strong>.</p>
+      <p>Day 2. Day 3. The days when your hair has actually settled into itself. When the curl pattern has relaxed from its freshly-washed tension and found its natural shape. <strong>Those are often the best hair days of the week.</strong> We just haven't learned to protect them.</p>
+    </div>
+
+    <!-- WASH DAY MYTH -->
+    <div class="section-label sky">The myth vs the reality</div>
+    <h2>Why we got this wrong.</h2>
+
+    <p class="body-text">The hair industry sold us a very clean story: wash more, condition more, buy more. Every product launch implies that the problem is what's on your hair, not what you're doing to it. The real issue is that <em>most curly people are washing away the exact environment their curls need to thrive.</em></p>
+
+    <div class="myth-row">
+      <div class="myth-item wrong">
+        <div class="myth-item-label">✕ The myth</div>
+        <p>Fresh wash = best curls. Day 2 is about managing decline. Keep washing to reset.</p>
+      </div>
+      <div class="myth-item right">
+        <div class="myth-item-label">✓ The reality</div>
+        <p>Day 2 curls have had time to <strong>breathe, settle, and find their shape.</strong> The problem isn't the day — it's the refresh method.</p>
+      </div>
+    </div>
+
+    <p class="body-text">Think about it. On wash day, your curl pattern is at maximum tension — freshly cleaned, fully hydrated, slightly puffed. By Day 2, the hair shaft has relaxed. The natural oils from your scalp have started to coat each strand. <em>The chemistry is actually working in your favour.</em> You just need to know how to work with it.</p>
+
+    <!-- SCIENCE -->
+    <div class="section-label">The science part</div>
+    <h2>What's actually happening to your hair.</h2>
+
+    <div class="science-card">
+      <div class="science-label">Hair biology, simply put</div>
+      <p class="science-text">Your scalp produces sebum — a natural oil — that travels down each hair shaft at roughly the same rate for everyone. For straight hair, that journey takes hours. For curly hair, the coils create friction and slow the process. Which means <em>by Day 2, your curls are receiving the exact moisture and coating they were designed to have.</em></p>
+      <p class="science-text">On wash day, you've stripped that coating and replaced it with product. The product is doing the work. By Day 2, <strong>your hair is doing the work</strong> — the product just needs to support it, not restart it.</p>
+      <p class="science-text">This is why the refresh approach matters more than the wash frequency. You're not fighting Day 2. <em>You're finishing it.</em></p>
+    </div>
+
+    <!-- DAY BY DAY -->
+    <div class="section-label">The arc of a curl week</div>
+    <h2>What each day actually looks like.</h2>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-day">1<span>Wash Day</span></div>
+        <div>
+          <div class="timeline-content-title">Maximum hydration, maximum effort.</div>
+          <p class="timeline-content-body">Your curls are cleanest and most defined, but also at peak product dependency. This is the foundation day — where you set the pattern you'll be maintaining all week. <strong>Technique here determines everything that follows.</strong> Diffuse fully. Don't rush the drying.</p>
+          <span class="timeline-tag tag-blue">Foundation day</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-day">2<span>The Sweet Spot</span></div>
+        <div>
+          <div class="timeline-content-title">Often the best hair day of the week.</div>
+          <p class="timeline-content-body">Scalp oils have begun their journey. The gel cast has broken. The curl pattern has relaxed from rigid definition into something softer and more natural. <em>This is the day most people wake up and think "why can't my hair always look like this?"</em> It can. Protect it — don't touch it before it's needed.</p>
+          <span class="timeline-tag tag-green">The goal</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-day">3<span>Refresh Day</span></div>
+        <div>
+          <div class="timeline-content-title">Revive, don't restart.</div>
+          <p class="timeline-content-body">This is where most people go wrong — they reach for water and drown the curl pattern. <strong>The trick is targeted moisture, not saturation.</strong> A light foam or mist on frizzy sections only. Work with the shape that's already there. Scrunch up, never comb through.</p>
+          <span class="timeline-tag tag-gold">Technique matters</span>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-day">4+<span>Protective Phase</span></div>
+        <div>
+          <div class="timeline-content-title">Braid it, bun it, own it.</div>
+          <p class="timeline-content-body">By Day 4, your hair has earned rest. Loose protective styles — a low bun, two braids, a silk-wrapped updo — let the scalp continue its work without exposure to friction and humidity. <em>This is maintenance, not defeat.</em> The curls come back stronger on the next wash day for it.</p>
+          <span class="timeline-tag tag-blue">Protective styling</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PROTOCOL -->
+    <div class="section-label">The actual protocol</div>
+    <h2>How to refresh without resetting.</h2>
+
+    <div class="protocol-card">
+      <div class="protocol-header">
+        <div class="protocol-header-icon">✦</div>
+        <div class="protocol-header-title">The Day-2 Refresh Routine</div>
+      </div>
+      <ul class="protocol-steps">
+        <li class="protocol-step">
+          <div class="step-num">01</div>
+          <div class="step-body">
+            <div class="step-title">Don't wet the whole head.</div>
+            <p class="step-desc">Target only the sections with frizz or lost definition. Wet hands, not a full rinse. <em>Saturation breaks the curl pattern you spent hours building.</em></p>
+          </div>
+        </li>
+        <li class="protocol-step">
+          <div class="step-num">02</div>
+          <div class="step-body">
+            <div class="step-title">Apply product to damp, not dry.</div>
+            <p class="step-desc">A light foam or leave-in on slightly damp sections reactivates the curl without fighting it. <strong>Dry application causes crunch. Damp application causes definition.</strong></p>
+          </div>
+        </li>
+        <li class="protocol-step">
+          <div class="step-num">03</div>
+          <div class="step-body">
+            <div class="step-title">Scrunch upward, always.</div>
+            <p class="step-desc">Work from ends toward roots. You're encouraging the curl to remember itself, not imposing a new shape. <em>Downward motion = frizz. Upward motion = curl revival.</em></p>
+          </div>
+        </li>
+        <li class="protocol-step">
+          <div class="step-num">04</div>
+          <div class="step-body">
+            <div class="step-title">Leave it alone while it dries.</div>
+            <p class="step-desc">Touching wet curls mid-dry breaks the hydrogen bonds that create curl shape. The single most damaging thing curly people do is check if it's working. <strong>It's working. Leave it.</strong></p>
+          </div>
+        </li>
+        <li class="protocol-step">
+          <div class="step-num">05</div>
+          <div class="step-body">
+            <div class="step-title">Diffuse if you need speed.</div>
+            <p class="step-desc">Low heat, low speed. Cup sections into the diffuser bowl and hold for 30–45 seconds before moving. <em>High heat on Day-2 hair causes frizz from moisture being forced out too fast.</em></p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="pull-quote">
+      <p>"The best curl routine isn't the most elaborate one. It's the one that knows when to do less."</p>
+      <cite>— Shambhavi Singh</cite>
+    </div>
+
+    <!-- BUFF CURL CONNECTION -->
+    <div class="section-label coral">Why this is what buff curl is for</div>
+
+    <div class="connection-card">
+      <div class="connection-label">The product logic</div>
+      <p>Buff curl's Reset Rinse exists precisely for Days 2 and 3. Not to restart your hair, but to <strong>support the chemistry that's already happening</strong> — lift the sweat and scalp buildup without stripping the oils your curls are relying on.</p>
+      <p>Most refresh products either add too much (heavy creams that weigh down a pattern that's already set) or not enough (water sprays that cause frizz without adding definition). <em>Reset Rinse is the in-between: micellar foam that cleanses the scalp environment while leaving the curl pattern exactly where it wants to be.</em></p>
+      <p>Because Day 2 doesn't need saving. It needs respecting.</p>
+    </div>
+
+    <!-- CLOSING -->
+    <div class="closing">
+      <div class="closing-headline">Stop washing away<br>your best hair days.</div>
+      <p class="closing-sub">Your curls are telling you something on Day 2. The question is whether you're listening — or reaching for the shampoo out of habit.</p>
+      <a href="buff-curl.html#product" class="closing-link">Meet Reset Rinse →</a>
+    </div>
+
+  </article>
+
+  <!-- MORE POSTS -->
+  <section class="more-posts">
+    <div class="more-label">More from buff blog</div>
+    <div class="more-grid">
+      <a class="more-card" href="blog-frizz-fear.html">
+        <div class="more-thumb thumb-orange">Frizz-Fear Marketing</div>
+        <div class="more-info">
+          <div class="more-tag">Culture · Marketing</div>
+          <div class="more-title">Dissecting the hair industry's favourite scare tactic</div>
+        </div>
+      </a>
+      <a class="more-card" href="blog-hair-archetypes.html">
+        <div class="more-thumb thumb-blue">Hair Texture Archetypes</div>
+        <div class="more-info">
+          <div class="more-tag">Education · Hair Science</div>
+          <div class="more-title">What straightening my hair taught me about power</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-logo">buff curl</span>
+    <div class="footer-links">
+      <a href="buff-curl.html">Home</a>
+      <a href="buff-curl.html#blog">Blog</a>
+      <a href="buff-curl.html#product">Product</a>
+      <a href="index.html">Portfolio</a>
+    </div>
+    <span>© 2026 buff curl · prototype</span>
+  </footer>
+
+</body>
+</html>

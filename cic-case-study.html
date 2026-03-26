@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AWS Cloud Innovation Center — Shambhavi Singh</title>
+  <meta name="description" content="Marketing strategy, visual systems, and technical communication for the AWS AI Cloud Innovation Center at Arizona State University.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold-0:   #FDF8EE;
+      --gold-1:   #F9EDCC;
+      --gold-2:   #F2D98A;
+      --gold-3:   #D4A843;
+      --maroon-0: #8C1C2A;
+      --maroon-1: #6B0F1A;
+      --black:    #2A1008;
+      --mid:      #7A5C40;
+      --rule:     rgba(140,28,42,0.15);
+      --accent:   #8C1C2A;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: linear-gradient(170deg, #FDF8EE 0%, #F9EDCC 20%, #F2D98A 40%, #E8A86A 58%, #C8583A 74%, #8C1C2A 90%, #3D0008 100%);
+      background-attachment: fixed;
+      color: var(--black);
+      font-family: 'DM Mono', monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 0 3rem; height: 56px; border-bottom: 1px solid var(--rule); background: rgba(253,248,238,0.88); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 100; }
+    .nav-back { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color .15s; }
+    .nav-back:hover { color: var(--black); }
+    .nav-back::before { content: '←'; font-size: 12px; }
+    .nav-name { font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; color: var(--black); }
+    .nav-index { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); }
+
+    .hero { padding: 5rem 3rem 4rem; border-bottom: 1px solid var(--rule); display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 0; align-items: stretch; background: transparent; }
+    .hero-left { padding-right: 4rem; border-right: 1px solid rgba(140,28,42,0.2); display: flex; flex-direction: column; justify-content: space-between; }
+    .hero-right { padding-left: 4rem; display: flex; flex-direction: column; justify-content: flex-end; }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); margin-bottom: 2rem; display: flex; align-items: center; gap: 10px; }
+    .hero-eyebrow::before { content: '01'; color: var(--accent); }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 5vw, 60px); font-weight: 300; line-height: 1; letter-spacing: -1.5px; margin-bottom: 1.5rem; }
+    .hero-title em { font-style: italic; color: var(--mid); }
+    .hero-desc { font-family: 'Cormorant Garamond', serif; font-size: 18px; line-height: 1.7; color: var(--mid); font-weight: 300; max-width: 420px; border-top: 1px solid var(--rule); padding-top: 1.5rem; }
+    .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--rule); margin-bottom: 2rem; }
+    .meta-item { padding: 1.25rem 1.5rem 1.25rem 0; border-right: 1px solid var(--rule); margin-right: 1.5rem; }
+    .meta-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .meta-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); margin-bottom: 6px; }
+    .meta-value { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 300; color: var(--black); line-height: 1.5; }
+    .role-tags { display: flex; flex-direction: column; gap: 5px; }
+    .role-tag { font-size: 9px; letter-spacing: 1px; text-transform: uppercase; border: 1px solid var(--rule); padding: 3px 8px; color: var(--mid); display: inline-block; width: fit-content; background: rgba(253,248,238,0.4); }
+
+    .section { padding: 4rem 3rem; border-bottom: 1px solid var(--rule); background: transparent; }
+    .section-alt { background: transparent; }
+    .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 3rem; }
+    .section-num { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--accent); letter-spacing: 1px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; letter-spacing: -0.5px; color: var(--black); }
+    .section-rule { flex: 1; height: 1px; background: var(--rule); }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .two-col-wide { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 4rem; align-items: start; }
+
+    .body-text { font-family: 'Cormorant Garamond', serif; font-size: 18px; line-height: 1.7; font-weight: 300; color: var(--black); margin-bottom: 1.25rem; }
+    .body-text-mid { font-family: 'Cormorant Garamond', serif; font-size: 18px; line-height: 1.7; font-weight: 300; color: var(--black); margin-bottom: 1.25rem; }
+    .label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--mid); margin-bottom: 1rem; display: flex; align-items: center; gap: 8px; }
+    .label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+
+    .img-frame { border: 1px solid var(--rule); overflow: hidden; background: rgba(255,255,255,0.7); }
+    .img-frame img { width: 100%; display: block; }
+    .img-caption { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); padding: 10px 14px; border-top: 1px solid var(--rule); background: rgba(253,248,238,0.6); }
+
+    /* before/after label styling */
+    .before-after-label {
+      font-family: 'DM Mono', monospace; font-size: 9px;
+      letter-spacing: 2px; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 0.75rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .before-after-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+    .before-after-label.after-label { color: var(--accent); }
+    .before-after-label.after-label::after { background: rgba(140,28,42,0.2); }
+
+    .pull-quote { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; line-height: 1.5; color: var(--black); border-left: 2px solid var(--accent); padding-left: 1.5rem; margin: 2rem 0; }
+
+    .outcomes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid var(--rule); margin-top: 2rem; background: rgba(253,248,238,0.3); }
+    .outcome-item { padding: 1.5rem; border-right: 1px solid var(--rule); }
+    .outcome-item:last-child { border-right: none; }
+    .outcome-num { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 300; color: var(--accent); letter-spacing: -1px; line-height: 1; margin-bottom: 6px; }
+    .outcome-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); line-height: 1.5; }
+
+    .postcard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+
+    .bottom-nav { padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--rule); background: transparent; }
+    .back-link { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color .15s; display: flex; align-items: center; gap: 8px; }
+    .back-link:hover { color: var(--black); }
+    .back-link::before { content: '←'; }
+    .next-link { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); text-decoration: none; transition: color .15s; display: flex; align-items: center; gap: 8px; }
+    .next-link:hover { color: var(--black); }
+    .next-link::after { content: '→'; }
+
+    footer { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 3rem; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; color: var(--mid); border-top: 1px solid rgba(140,28,42,0.2); background: transparent; }
+    .footer-name { color: var(--black); font-weight: 400; }
+
+    @media (max-width: 860px) {
+      nav { padding: 0 1.5rem; }
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .hero-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 2rem; margin-bottom: 2rem; }
+      .hero-right { padding-left: 0; }
+      .section { padding: 2.5rem 1.5rem; }
+      .two-col, .two-col-wide { grid-template-columns: 1fr; gap: 2rem; }
+      .meta-grid { grid-template-columns: 1fr 1fr; }
+      .outcomes { grid-template-columns: 1fr; }
+      .outcome-item { border-right: none; border-bottom: 1px solid var(--rule); }
+      .outcome-item:last-child { border-bottom: none; }
+      .postcard-grid { grid-template-columns: 1fr; }
+      .bottom-nav { padding: 1.5rem; }
+      footer { padding: 1.25rem 1.5rem; flex-direction: column; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-back">All work</a>
+    <a href="index.html" class="nav-name">Shambhavi Singh</a>
+    <span class="nav-index">01 / 06</span>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div>
+        <div class="hero-eyebrow">Real client · Brand &amp; Strategy</div>
+        <h1 class="hero-title">AWS Cloud<br>Innovation<br><em>Center</em></h1>
+        <p class="hero-desc">Marketing strategy, visual systems, and technical communication for the AI Cloud Innovation Center at Arizona State University — powered by AWS.</p>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="meta-label">Client</div>
+          <div class="meta-value">Arizona State University<br>Artificial Intelligence Cloud Innovation Center<br>powered by AWS</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Role</div>
+          <div class="role-tags">
+            <span class="role-tag">Marketing Design</span>
+            <span class="role-tag">Visual Strategy</span>
+            <span class="role-tag">Technical Comms</span>
+          </div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Deliverables</div>
+          <div class="role-tags">
+            <span class="role-tag">Architecture Infographic</span>
+            <span class="role-tag">LinkedIn Banner</span>
+            <span class="role-tag">Innovation Island</span>
+            <span class="role-tag">Office Postcard</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE BRIEF -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">—</span>
+      <span class="section-title">The brief</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="two-col-wide">
+      <div>
+        <div class="label">Context</div>
+        <p class="body-text">The AWS AI Cloud Innovation Center at ASU works with public sector organisations — government agencies, education institutions, and nonprofits — to apply AI and cloud technology to mission-critical challenges.</p>
+        <p class="body-text-mid">My role as a marketing and content strategist was to translate what CIC does — technically complex, deeply consequential work — into visual language that non-technical audiences could understand and engage with. From social-facing graphics to live event displays.</p>
+        <p class="body-text-mid">The through-line across all deliverables: complexity is not the barrier. Unclear communication is.</p>
+      </div>
+      <div>
+        <div class="pull-quote">"Technical systems need visual translators — people who understand the work well enough to simplify it without losing what matters."</div>
+        <p class="body-text-mid">Each project required me to study the underlying system first, then build the visual output second. The design was always downstream of comprehension.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 01 ARCHITECTURE INFOGRAPHIC -->
+  <section class="section section-alt">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Architecture infographic</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="two-col-wide">
+      <div>
+        <div class="label">The problem</div>
+        <p class="body-text">CIC's Boys Town partnership involved a detailed AWS architecture diagram — accurate and complete, but built for engineers. It needed to work for a non-technical marketing audience and be suitable for LinkedIn distribution.</p>
+        <p class="body-text-mid">I studied the underlying technical structure to understand what the system actually does: audio is uploaded, transcribed, coordinated through Lambda, and evaluated by AI. Then I rebuilt the logic as a spatial, step-based visual infographic — replacing system notation with plain-language labels, directional flow, and icon-based service identifiers that non-engineers could follow.</p>
+        <div class="label" style="margin-top: 1.5rem;">Outcome</div>
+        <p class="body-text-mid">A marketing-ready infographic distributed on LinkedIn and used in presentations — bridging the gap between CIC's technical work and its public-facing communication without losing accuracy.</p>
+      </div>
+      <div>
+        <div class="img-frame">
+          <img src="boys_town_arch.png" alt="AWS Boys Town architecture infographic">
+          <div class="img-caption">AWS × Boys Town — architecture to infographic</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 LINKEDIN BANNER -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">LinkedIn banner redesign</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="label">The problem</div>
+        <p class="body-text">CIC's existing LinkedIn banner had strong visual elements but suffered from low contrast and unclear hierarchy — dense and dark in a feed context where immediate legibility matters.</p>
+        <p class="body-text-mid">The redesign focused on legibility, color harmony, and visual hierarchy for public-facing use. I brought the topographic texture system forward as the primary design language — rooted in Arizona context and CIC's technical identity — while clearing the type hierarchy so the institution name and mission read cleanly at banner scale.</p>
+        <p class="body-text-mid">The result: a cleaner, more legible banner that works at every scale LinkedIn serves it — from a desktop profile visit to a mobile feed scroll.</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+        <div class="before-after-label">Before — low contrast, unclear hierarchy</div>
+        <div class="img-frame">
+          <img src="cic_linkedin_before.png" alt="CIC LinkedIn banner — before">
+          <div class="img-caption">Original — dense, dark, illegible at scale</div>
+        </div>
+        <div class="before-after-label after-label">After — redesigned</div>
+        <div class="img-frame">
+          <img src="cic_Linkedin_after.png" alt="CIC LinkedIn banner — redesigned">
+          <div class="img-caption">Redesigned — clear hierarchy, legible at every scale</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 INNOVATION ISLAND -->
+  <section class="section section-alt">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <span class="section-title">Innovation Island</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="two-col-wide">
+      <div>
+        <div class="label">The brief</div>
+        <p class="body-text">An AWS-based interactive visual environment designed to present CIC's public sector partnerships and development projects in an accessible, exploratory format — used for live event promotion and booth displays.</p>
+        <p class="body-text-mid">I used AWS Nova Canvas to generate initial visual concepts, extending my prompt-engineering practice into a different large language model, then refined the outputs using additional AI tools and manual design edits to correct imperfections, improve clarity, and align the visuals with CIC's narrative and technical goals.</p>
+        <p class="body-text-mid">The spatial island metaphor — each project represented as a landmark on a floating environment — translated complex AI and cloud initiatives into something visually intuitive and immediately engaging for non-technical visitors.</p>
+        <div class="label" style="margin-top: 1.5rem;">Process</div>
+        <div class="role-tags" style="flex-direction: row; flex-wrap: wrap; gap: 8px;">
+          <span class="role-tag">AWS Nova Canvas</span>
+          <span class="role-tag">Prompt engineering</span>
+          <span class="role-tag">AI image refinement</span>
+          <span class="role-tag">Manual design editing</span>
+          <span class="role-tag">Spatial narrative</span>
+        </div>
+      </div>
+      <div>
+        <div class="img-frame">
+          <img src="innovations_island.jpg" alt="Innovation Island — AWS interactive visual environment">
+          <div class="img-caption">Innovation Island — event booth display</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 OFFICE POSTCARD -->
+  <section class="section">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <span class="section-title">Office postcard</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="label">The challenge</div>
+        <p class="body-text">A postcard that had to work throughout the year — not tied to seasons or celebrations, but durably representing CIC's identity as a public institution with a technological mission rooted in place.</p>
+        <p class="body-text-mid">The primary design challenge was restraint. Over-decorated institutional print collateral is common and forgettable. CIC needed something that distilled its identity to essential visual signals: the Arizona landscape, the circuit-pattern language of AI and cloud technology, and the topographic texture that runs through all CIC's visual work.</p>
+        <p class="body-text-mid">The result was a two-sided system — front with the Arizona desert and circuit-board silhouette motif, reverse with the institutional identity, mission statement, and contact details — clean, durable, and on-brand year-round.</p>
+      </div>
+      <div>
+        <div class="postcard-grid">
+          <div class="img-frame">
+            <img src="CIC_Postcards_-_11.png" alt="CIC postcard front">
+            <div class="img-caption">Postcard front</div>
+          </div>
+          <div class="img-frame">
+            <img src="CIC_Postcards_-_13.png" alt="CIC postcard reverse">
+            <div class="img-caption">Postcard reverse</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT THIS TAUGHT ME -->
+  <section class="section section-alt">
+    <div class="section-header">
+      <span class="section-num">—</span>
+      <span class="section-title">What this work taught me</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <p class="body-text">Working inside a real institution — with real stakeholders, real technical constraints, and real public-facing outputs — is different from self-initiated work in one specific way: the brief comes with pre-existing identity, brand constraints, and audiences you don't choose.</p>
+        <p class="body-text-mid">Every deliverable required me to understand the system before I could communicate it. The architecture infographic required me to read AWS documentation. Innovation Island required me to understand what each project actually did before I could represent it spatially. The postcard required me to understand what CIC's identity needed to feel like to someone who had never heard of it.</p>
+        <p class="body-text-mid">That sequence — comprehend, then communicate — is the one I carry into every project now.</p>
+      </div>
+      <div>
+        <div class="outcomes">
+          <div class="outcome-item">
+            <div class="outcome-num">5</div>
+            <div class="outcome-label">Deliverables across<br>strategy + design</div>
+          </div>
+          <div class="outcome-item">
+            <div class="outcome-num">Real</div>
+            <div class="outcome-label">Client with public-<br>sector reach</div>
+          </div>
+          <div class="outcome-item">
+            <div class="outcome-num">Live</div>
+            <div class="outcome-label">Used at events +<br>LinkedIn distribution</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="bottom-nav">
+    <a href="index.html" class="back-link">Back to all work</a>
+    <a href="buff-curl.html" class="next-link">Next — Buff Curl</a>
+  </div>
+
+  <footer>
+    <span class="footer-name">Shambhavi Singh</span>
+    <span>shambhavi.design</span>
+    <span>© 2026</span>
+  </footer>
+
+</body>
+</html>

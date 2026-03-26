@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Previous Work — Shambhavi Singh</title>
+  <meta name="description" content="Herberger Institute Student Success infographic series — 11 pieces, real client, measurable improvement.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --white:  #F9F7F4;
+      --black:  #1F3028;
+      --mid:    #6B6860;
+      --rule:   rgba(31,48,40,0.12);
+      --red:    #8C001A;
+      --gold:   #C8900A;
+      --warm:   #EDE6D6;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    
+
+    body {
+      background: var(--white);
+      color: var(--black);
+      font-family: 'DM Mono', monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 56px;
+      border-bottom: 1px solid var(--rule);
+      background: var(--white);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .nav-back {
+      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--mid); text-decoration: none;
+      display: flex; align-items: center; gap: 8px; transition: color .15s;
+    }
+    .nav-back:hover { color: var(--black); }
+    .nav-back::before { content: '←'; font-size: 12px; }
+    .nav-name {
+      font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase;
+      text-decoration: none; color: var(--black);
+    }
+    .nav-index { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--mid); }
+
+    /* ── HERO ── */
+    .hero {
+      padding: 5rem 3rem 4rem;
+      display: grid; grid-template-columns: 1.1fr 0.9fr;
+      gap: 0; align-items: stretch;
+      background: linear-gradient(180deg, #FDF8EE 0%, #F5E8C0 55%, #EDE6D6 100%);
+    }
+    .hero-left {
+      padding-right: 4rem;
+      border-right: 1px solid rgba(140,0,26,0.12);
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .hero-right { padding-left: 4rem; display: flex; flex-direction: column; justify-content: flex-end; }
+
+    .hero-eyebrow {
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--red); margin-bottom: 2rem;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .hero-eyebrow::before { content: '06'; }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 5vw, 58px);
+      font-weight: 300; line-height: 1.0;
+      letter-spacing: -1.5px; margin-bottom: 1.5rem;
+    }
+    .hero-title em { font-style: italic; color: var(--red); }
+
+    .hero-desc {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; line-height: 1.65; color: var(--black);
+      font-weight: 300; max-width: 420px;
+      border-top: 1px solid rgba(140,0,26,0.15); padding-top: 1.5rem;
+    }
+
+    .meta-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      border-top: 1px solid rgba(140,0,26,0.15); margin-bottom: 2rem;
+    }
+    .meta-item {
+      padding: 1.25rem 1.5rem 1.25rem 0;
+      border-right: 1px solid rgba(140,0,26,0.12); margin-right: 1.5rem;
+    }
+    .meta-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .meta-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); margin-bottom: 6px; }
+    .meta-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 300; color: var(--black); line-height: 1.4;
+    }
+    .role-tags { display: flex; flex-direction: column; gap: 5px; }
+    .role-tag {
+      font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+      border: 1px solid rgba(140,0,26,0.2); padding: 3px 8px;
+      color: var(--red); display: inline-block; width: fit-content;
+      background: rgba(140,0,26,0.04);
+    }
+
+    /* ── SECTIONS ── */
+    .section { padding: 4rem 3rem; }
+    .section-alt { background: transparent; }
+    .section-dark {
+      background: linear-gradient(180deg, #A01830 0%, #6B0F1A 10%, #3D0008 40%, #6B0F1A 75%, #8C1C2A 100%);
+      color: #FDF8EE;
+    }
+
+    .section-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 3rem; }
+    .section-num { font-size: 10px; color: var(--red); letter-spacing: 1px; }
+    .section-num-light { color: rgba(253,248,238,0.5); }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px; font-weight: 400; letter-spacing: -0.75px;
+    }
+    .section-rule { flex: 1; height: 1px; background: var(--rule); }
+    .section-rule-light { background: rgba(253,248,238,0.15); }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .two-col-wide { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 4rem; align-items: start; }
+
+    .body-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; line-height: 1.7; font-weight: 300; color: var(--black); margin-bottom: 1.25rem;
+    }
+    .body-text-light {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; line-height: 1.7; font-weight: 300; color: rgba(253,248,238,0.75); margin-bottom: 1.25rem;
+    }
+    .body-mid {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; line-height: 1.7; font-weight: 300; color: var(--black); opacity: 0.72; margin-bottom: 1rem;
+    }
+
+    .label {
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
+    .label-light { color: rgba(253,248,238,0.45); }
+    .label-light::after { background: rgba(253,248,238,0.15); }
+
+    .pull-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 300; line-height: 1.5;
+      border-left: 2px solid var(--red); padding-left: 1.5rem; margin: 2rem 0;
+    }
+
+    /* ── PERFORMANCE CHART ── */
+    .chart-container {
+      border: 1px solid var(--rule); background: rgba(253,248,238,0.65); backdrop-filter: blur(6px);
+      padding: 2rem; margin-top: 2rem;
+    }
+    .chart-title {
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--mid); margin-bottom: 1.5rem; text-align: center;
+    }
+    .chart-area {
+      position: relative; height: 200px;
+      border-left: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+      margin: 0 2rem 1rem 3rem;
+    }
+    .y-label {
+      position: absolute; left: -2.5rem; top: 50%;
+      transform: translateY(-50%) rotate(-90deg);
+      font-size: 8px; letter-spacing: 1px; text-transform: uppercase; color: var(--mid);
+      white-space: nowrap;
+    }
+    .grid-line {
+      position: absolute; left: 0; right: 0;
+      height: 1px; background: rgba(31,48,40,0.06);
+    }
+    .chart-svg { width: 100%; height: 100%; overflow: visible; }
+    .chart-legend {
+      display: flex; gap: 1.5rem; justify-content: center; margin-top: 0.75rem;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: var(--mid);
+    }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-blue { background: #1A5276; }
+    .dot-orange { background: var(--red); }
+    .chart-note {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px; font-style: italic; color: var(--mid);
+      text-align: center; margin-top: 1rem; padding-top: 1rem;
+      border-top: 1px solid var(--rule);
+    }
+
+    /* ── INFOGRAPHIC GRID ── */
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem; margin-top: 2rem;
+    }
+    .ig-card {
+      border: 1px solid var(--rule);
+      overflow: hidden; cursor: pointer;
+      transition: transform .15s, box-shadow .15s;
+      position: relative;
+    }
+    .ig-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(31,48,40,0.12); z-index: 2; }
+    .ig-card img { width: 100%; display: block; }
+    .ig-card-label {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: rgba(31,48,40,0.85);
+      padding: 6px 10px;
+      font-size: 8px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      opacity: 0; transition: opacity .15s;
+    }
+    .ig-card:hover .ig-card-label { opacity: 1; }
+    .ig-card-wide { grid-column: span 2; }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none; position: fixed; inset: 0;
+      background: rgba(10,10,10,0.92);
+      z-index: 1000; align-items: center; justify-content: center;
+      padding: 2rem;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 90vw; max-height: 88vh;
+      object-fit: contain;
+      box-shadow: 0 20px 80px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+      position: fixed; top: 1.5rem; right: 1.5rem;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,0.2); }
+    .lightbox-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+      color: #fff; font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .15s;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.2); }
+    .lb-prev { left: 1.5rem; }
+    .lb-next { right: 1.5rem; }
+    .lightbox-counter {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      font-family: 'DM Mono', monospace;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ── FEEDBACK CARD ── */
+    .feedback-card {
+      border: 1px solid rgba(253,248,238,0.15);
+      border-radius: 8px; padding: 1.5rem;
+      background: rgba(253,248,238,0.06); margin-top: 2rem;
+    }
+    .feedback-stars { font-size: 14px; margin-bottom: 0.75rem; letter-spacing: 2px; }
+    .feedback-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px; font-weight: 300; line-height: 1.65;
+      color: rgba(253,248,238,0.9); margin-bottom: 1rem;
+      font-style: italic;
+    }
+    .feedback-meta { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(253,248,238,0.4); }
+    .feedback-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.75rem; }
+    .feedback-tag {
+      font-size: 8px; letter-spacing: 1px; text-transform: uppercase;
+      border: 1px solid rgba(253,248,238,0.2); padding: 3px 8px;
+      color: rgba(253,248,238,0.5); border-radius: 2px;
+    }
+
+    /* ── OUTCOMES ── */
+    .outcomes {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 0; border: 1px solid rgba(253,248,238,0.15); margin-top: 2rem;
+    }
+    .outcome-item { padding: 1.5rem; border-right: 1px solid rgba(253,248,238,0.15); }
+    .outcome-item:last-child { border-right: none; }
+    .outcome-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px; font-weight: 300;
+      color: var(--gold); letter-spacing: -1px; line-height: 1; margin-bottom: 6px;
+    }
+    .outcome-label {
+      font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: rgba(253,248,238,0.5); line-height: 1.5;
+    }
+
+    /* ── BOTTOM NAV ── */
+    .bottom-nav {
+      padding: 2rem 3rem; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-link {
+      font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--mid); text-decoration: none; transition: color .15s;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .nav-link:hover { color: var(--black); }
+    .nav-link-back::before { content: '←'; }
+
+    /* ── FOOTER ── */
+    footer {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 3rem;
+      font-size: 10px; letter-spacing: 1px; text-transform: uppercase;
+      color: var(--mid); background: #FDF8EE;
+    }
+    .footer-name {
+      color: var(--black);
+      font-family: 'Syne', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px;
+    }
+    .footer-links { display: flex; gap: 20px; }
+    .footer-links a { color: var(--mid); text-decoration: none; transition: color .15s; }
+    .footer-links a:hover { color: var(--black); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      nav { padding: 0 1.5rem; }
+      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
+      .hero-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 2rem; margin-bottom: 2rem; }
+      .hero-right { padding-left: 0; }
+      .section { padding: 2.5rem 1.5rem; }
+      .two-col, .two-col-wide { grid-template-columns: 1fr; gap: 2rem; }
+      .ig-grid { grid-template-columns: repeat(2, 1fr); }
+      .ig-card-wide { grid-column: span 1; }
+      .outcomes { grid-template-columns: 1fr; }
+      .outcome-item { border-right: none; border-bottom: 1px solid rgba(253,248,238,0.15); }
+      .outcome-item:last-child { border-bottom: none; }
+      footer { flex-direction: column; gap: 8px; padding: 1.25rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <button class="lightbox-nav lb-prev" onclick="event.stopPropagation(); changeImage(-1)">‹</button>
+    <img id="lb-img" src="" alt="">
+    <button class="lightbox-nav lb-next" onclick="event.stopPropagation(); changeImage(1)">›</button>
+    <div class="lightbox-counter" id="lb-counter"></div>
+  </div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-back">All work</a>
+    <a href="index.html" class="nav-name">Shambhavi Singh</a>
+    <span class="nav-index">06 / 06</span>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-left">
+      <div>
+        <div class="hero-eyebrow">Real client · Infographic Design · Visual Communication</div>
+        <h1 class="hero-title">Herberger<br>Institute<br><em>Infographics</em></h1>
+        <p class="hero-desc">An 11-piece infographic series for Herberger Institute Student Success — designed to make complex wellbeing topics accessible, visual, and actionable for students.</p>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="meta-label">Client</div>
+          <div class="meta-value">Herberger Institute<br>Student Success, ASU</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Supervisor</div>
+          <div class="meta-value">Wendi Maroney<br>Asst. Director, Student Engagement</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Scope</div>
+          <div class="meta-value">11 infographics<br>across 3 topic series</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Skills</div>
+          <div class="role-tags">
+            <span class="role-tag">Infographic Design</span>
+            <span class="role-tag">Brand Communication</span>
+            <span class="role-tag">Client needs assessment</span>
+            <span class="role-tag">Visual strategy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE BRIEF -->
+  <section class="section" style="background: linear-gradient(180deg, #EDE6D6 0%, #E8E0CE 100%);">
+    <div class="section-header">
+      <span class="section-num">—</span>
+      <span class="section-title">The brief</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="two-col-wide">
+      <div>
+        <div class="label">Context</div>
+        <p class="body-text">Herberger Institute Student Success needed a series of infographics to help students navigate complex wellbeing topics — perfectionism, burnout, and imposter syndrome — in a way that felt accessible, visually engaging, and grounded in research.</p>
+        <p class="body-mid">The challenge was translating dense psychological concepts into designs that students would actually stop and read. Not simplified to the point of losing meaning, but not so clinical that they wouldn't connect.</p>
+        <p class="body-mid">11 pieces across three topic series. Each required a distinct visual approach — different enough to feel fresh, consistent enough to feel like a system.</p>
+      </div>
+      <div>
+        <div class="pull-quote">"The goal was never to dumb it down. It was to make it land."</div>
+        <p class="body-mid">The series was also a learning arc. Over 11 infographics, I tracked my own design time against the quality of each output — and the pattern that emerged became part of the story: every piece got faster and better at the same time.</p>
+        <a href="https://asu.riipen.com/users/YLrRQ1oL" target="_blank" style="display: inline-block; margin-top: 1.5rem; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--red); text-decoration: none; border: 1px solid rgba(140,0,26,0.2); padding: 8px 16px; transition: background .15s;">View Riipen profile ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERFORMANCE -->
+  <section class="section section-alt" style="background: linear-gradient(180deg, #E8E0CE 0%, #EDE6D6 40%, #F0EAE0 100%);">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <span class="section-title">Performance over 11 pieces</span>
+      <div class="section-rule"></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="label">What the data showed</div>
+        <p class="body-text">As the series progressed, design time decreased and quality increased — consistently, across all 11 pieces.</p>
+        <p class="body-mid">The first infographic took approximately 6 hours. By piece 11, it took under 1 hour. Quality, as assessed by the supervisor, moved in the opposite direction — improving with each piece as I refined my understanding of the brief, the audience, and the visual system.</p>
+        <p class="body-mid">This is what deliberate practice looks like when it's documented. Not just getting faster — getting better faster.</p>
+      </div>
+      <div>
+        <div class="chart-container">
+          <div class="chart-title">Design hours vs. quality score — across 11 infographics</div>
+          <div class="chart-area">
+            <span class="y-label">Hours / Quality</span>
+            <div class="grid-line" style="bottom: 80%;"></div>
+            <div class="grid-line" style="bottom: 60%;"></div>
+            <div class="grid-line" style="bottom: 40%;"></div>
+            <div class="grid-line" style="bottom: 20%;"></div>
+            <svg class="chart-svg" viewBox="0 0 440 200" preserveAspectRatio="none">
+              <polyline points="20,170 60,155 100,140 140,125 180,110 220,90 260,75 300,60 340,45 380,28 420,16" fill="none" stroke="#1A5276" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="20,168 60,160 100,150 140,135 180,115 220,95 260,78 300,60 340,40 380,22 420,10" fill="none" stroke="#8C001A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="5,3"/>
+              <circle cx="20"  cy="170" r="3.5" fill="#1A5276"/><circle cx="60"  cy="155" r="3.5" fill="#1A5276"/>
+              <circle cx="100" cy="140" r="3.5" fill="#1A5276"/><circle cx="140" cy="125" r="3.5" fill="#1A5276"/>
+              <circle cx="180" cy="110" r="3.5" fill="#1A5276"/><circle cx="220" cy="90"  r="3.5" fill="#1A5276"/>
+              <circle cx="260" cy="75"  r="3.5" fill="#1A5276"/><circle cx="300" cy="60"  r="3.5" fill="#1A5276"/>
+              <circle cx="340" cy="45"  r="3.5" fill="#1A5276"/><circle cx="380" cy="28"  r="3.5" fill="#1A5276"/>
+              <circle cx="420" cy="16"  r="3.5" fill="#1A5276"/>
+              <circle cx="20"  cy="168" r="3.5" fill="#8C001A"/><circle cx="60"  cy="160" r="3.5" fill="#8C001A"/>
+              <circle cx="100" cy="150" r="3.5" fill="#8C001A"/><circle cx="140" cy="135" r="3.5" fill="#8C001A"/>
+              <circle cx="180" cy="115" r="3.5" fill="#8C001A"/><circle cx="220" cy="95"  r="3.5" fill="#8C001A"/>
+              <circle cx="260" cy="78"  r="3.5" fill="#8C001A"/><circle cx="300" cy="60"  r="3.5" fill="#8C001A"/>
+              <circle cx="340" cy="40"  r="3.5" fill="#8C001A"/><circle cx="380" cy="22"  r="3.5" fill="#8C001A"/>
+              <circle cx="420" cy="10"  r="3.5" fill="#8C001A"/>
+              <text x="20"  y="195" font-size="8" fill="#6B6860" text-anchor="middle">1</text>
+              <text x="100" y="195" font-size="8" fill="#6B6860" text-anchor="middle">3</text>
+              <text x="180" y="195" font-size="8" fill="#6B6860" text-anchor="middle">5</text>
+              <text x="260" y="195" font-size="8" fill="#6B6860" text-anchor="middle">7</text>
+              <text x="340" y="195" font-size="8" fill="#6B6860" text-anchor="middle">9</text>
+              <text x="420" y="195" font-size="8" fill="#6B6860" text-anchor="middle">11</text>
+            </svg>
+          </div>
+          <div class="chart-legend">
+            <div class="legend-item"><div class="legend-dot dot-blue"></div>Hours (decreasing)</div>
+            <div class="legend-item"><div class="legend-dot dot-orange"></div>Quality (increasing)</div>
+          </div>
+          <div class="chart-note">Infographic 1: ~6 hrs · Infographic 11: &lt;1 hr — quality improved throughout</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE WORK -->
+  <section class="section" style="background: linear-gradient(180deg, #F0EAE0 0%, #F2E8DC 60%, #D8607A 100%);">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <span class="section-title">The 11 infographics</span>
+      <div class="section-rule"></div>
+    </div>
+    <p class="body-mid" style="max-width: 600px; margin-bottom: 0;">Three topic series — perfectionism, burnout, and imposter syndrome — each requiring a distinct visual language while maintaining coherence as a set. Click any to view full size.</p>
+
+    <div class="ig-grid" id="ig-grid">
+      <div class="ig-card" onclick="openLightbox(0)"><img src="ig_1.png" alt="Signs of Perfectionism"><div class="ig-card-label">01 — Signs of Perfectionism</div></div>
+      <div class="ig-card" onclick="openLightbox(1)"><img src="ig_2.png" alt="Ways to Resist Perfectionism"><div class="ig-card-label">02 — Ways to Resist Perfectionism</div></div>
+      <div class="ig-card" onclick="openLightbox(2)"><img src="ig_3.png" alt="Ways to Resist Perfectionism pt 2"><div class="ig-card-label">03 — Resist Perfectionism pt. 2</div></div>
+      <div class="ig-card" onclick="openLightbox(3)"><img src="ig_4.png" alt="Excellencism vs Perfectionism"><div class="ig-card-label">04 — Excellencism vs Perfectionism</div></div>
+      <div class="ig-card" onclick="openLightbox(4)"><img src="ig_5.png" alt="Burnout"><div class="ig-card-label">05 — Burnout</div></div>
+      <div class="ig-card" onclick="openLightbox(5)"><img src="ig_6.png" alt="Signs You May Have Burnout"><div class="ig-card-label">06 — Signs of Burnout</div></div>
+      <div class="ig-card" onclick="openLightbox(6)"><img src="ig_7.png" alt="Resisting Burnout"><div class="ig-card-label">07 — Resisting Burnout</div></div>
+      <div class="ig-card" onclick="openLightbox(7)"><img src="ig_8.png" alt="Imposter Syndrome Affects Many"><div class="ig-card-label">08 — Imposter Syndrome Affects Many</div></div>
+      <div class="ig-card" onclick="openLightbox(8)"><img src="ig_9.png" alt="How Does Imposter Syndrome Show Up"><div class="ig-card-label">09 — How Imposter Syndrome Shows Up</div></div>
+      <div class="ig-card" onclick="openLightbox(9)"><img src="ig_10.png" alt="Imposter Syndrome signs"><div class="ig-card-label">10 — Imposter Syndrome Signs</div></div>
+      <div class="ig-card ig-card-wide" onclick="openLightbox(10)"><img src="ig_11.png" alt="You Belong. Here's How to Believe It."><div class="ig-card-label">11 — You Belong. Here's How to Believe It.</div></div>
+    </div>
+  </section>
+
+  <!-- FEEDBACK -->
+  <section class="section section-dark">
+    <div class="section-header">
+      <span class="section-num section-num-light">03</span>
+      <span class="section-title" style="color: #FDF8EE;">Supervisor feedback</span>
+      <div class="section-rule section-rule-light"></div>
+    </div>
+    <div class="two-col">
+      <div>
+        <div class="label label-light">The endorsement</div>
+        <div class="feedback-card">
+          <div class="feedback-stars">★★★★★</div>
+          <div class="feedback-quote">"Working with Shambhavi was great and the perfect fit for our needs. She was attentive to the brief, worked efficiently and was responsive to feedback."</div>
+          <div class="feedback-meta">Wendi Maroney · Asst. Director, Student Engagement · May 26, 2025</div>
+          <div class="feedback-tags">
+            <span class="feedback-tag">Collaboration</span>
+            <span class="feedback-tag">Creative brief</span>
+            <span class="feedback-tag">Brand communication</span>
+            <span class="feedback-tag">Client needs assessment</span>
+            <span class="feedback-tag">User feedback</span>
+            <span class="feedback-tag">Target audience</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="label label-light">What this project demonstrates</div>
+        <div class="outcomes">
+          <div class="outcome-item">
+            <div class="outcome-num">11</div>
+            <div class="outcome-label">Pieces delivered<br>for a real client</div>
+          </div>
+          <div class="outcome-item">
+            <div class="outcome-num">↓6×</div>
+            <div class="outcome-label">Design time reduced<br>across the series</div>
+          </div>
+          <div class="outcome-item">
+            <div class="outcome-num">5★</div>
+            <div class="outcome-label">Supervisor rating<br>on Riipen</div>
+          </div>
+        </div>
+        <p class="body-text-light" style="margin-top: 1.5rem; font-size: 16px;">Being attentive to the brief. Working efficiently. Being responsive to feedback. These are the professional habits that matter in a first role — and they are documented here.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND IDENTITY WORK -->
+  <section class="section" style="background: linear-gradient(180deg, #8C1C2A 0%, #A83040 2%, #C85060 4%, #D07070 6%, #E0A090 8%, #ECC8B8 10%, #F5E8E0 13%, #F9F4EE 16%, #F9F7F4 20%, #F9F7F4 100%);">
+    <div class="section-header">
+      <span class="section-num">—</span>
+      <span class="section-title">Brand identity work</span>
+      <div class="section-rule"></div>
+    </div>
+    <p class="body-text" style="max-width: 560px; margin-bottom: 2rem; color: var(--black);">Self-initiated brand identity projects including Lint Away, Full Plates, Rattle, and De Novo Bakes — packaging, logotype, and visual identity systems across four different product categories.</p>
+
+    <!-- ── LINT AWAY ── -->
+    <div style="margin-top: 3rem; background: linear-gradient(180deg, #F9F7F4 0%, rgba(80,100,180,0.4) 3%, rgba(13,43,107,0.85) 7%, #0D2B6B 12%, #1565C0 30%, #7B1FA2 55%, #C62828 78%, #8B0000 100%); padding: 3rem; margin-left: -3rem; margin-right: -3rem; padding-left: 3rem; padding-right: 3rem; padding-bottom: 4rem;">
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <span class="section-num" style="color: rgba(255,255,255,0.5);">—</span>
+        <span class="section-title" style="font-size: 30px; font-weight: 400; color: #fff;">Lint Away — Brand &amp; Collateral Refresh</span>
+        <div class="section-rule" style="background: rgba(255,255,255,0.2);"></div>
+      </div>
+      <div class="two-col" style="margin-bottom: 2rem;">
+        <div>
+          <div class="label" style="color: rgba(255,255,255,0.5);">The brief</div>
+          <p class="body-text" style="color: #fff;">Lint Away's existing materials felt cluttered and dated — not matching the quality of the service they were actually providing. The rebrand needed to communicate "professional and trustworthy" to homeowners at a glance.</p>
+          <p class="body-mid" style="color: rgba(255,255,255,0.7);">Over nearly two years of freelance work, I refreshed the full collateral system: logo refinement, a new mascot character (Big Clumpy), business card redesign, promotional coupons, and service flyers for residential, commercial, and specialty segments.</p>
+        </div>
+        <div>
+          <div class="label" style="color: rgba(255,255,255,0.5);">Scope</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid rgba(255,255,255,0.15);">
+            <div style="padding: 1rem; border-right: 1px solid rgba(255,255,255,0.15); border-bottom: 1px solid rgba(255,255,255,0.15);">
+              <div style="font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px;">Role</div>
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; color: #fff;">Freelance Graphic Designer</div>
+            </div>
+            <div style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.15);">
+              <div style="font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px;">Timeline</div>
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; color: #fff;">March 2023 – January 2025</div>
+            </div>
+            <div style="padding: 1rem; border-right: 1px solid rgba(255,255,255,0.15);">
+              <div style="font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px;">Deliverables</div>
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; line-height: 1.5; color: #fff;">Logo refinement · Mascot · Business cards · Coupons · Service flyers</div>
+            </div>
+            <div style="padding: 1rem;">
+              <div style="font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 4px;">Client</div>
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; color: #fff;">Lint Away Duct Cleaning<br>Phoenix, AZ</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+        <div class="ig-card" onclick="openLA(0)"><img src="la_bc_1.png" alt="Business card 1"><div class="ig-card-label">Business card — front</div></div>
+        <div class="ig-card" onclick="openLA(0)"><img src="la_bc_2.png" alt="Business card 2"><div class="ig-card-label">Business card — back</div></div>
+        <div class="ig-card" onclick="openLA(0)"><img src="la_com_1.png" alt="Commercial flyer 1"><div class="ig-card-label">Commercial — pet salon</div></div>
+        <div class="ig-card" onclick="openLA(0)"><img src="la_com_2.png" alt="Commercial flyer 2"><div class="ig-card-label">Commercial — beauty salon</div></div>
+        <div class="ig-card" onclick="openLA(0)"><img src="la_com_3.png" alt="Commercial flyer 3"><div class="ig-card-label">Commercial — why dryer vent</div></div>
+        <div class="ig-card" onclick="openLA(0)"><img src="la_com_4.png" alt="Commercial flyer 4"><div class="ig-card-label">Commercial — dryer vent cleaning</div></div>
+        <div class="ig-card" onclick="openLA(0)"><img src="la_coup_1.png" alt="Coupon 1"><div class="ig-card-label">Coupon — 50% off flyer</div></div>
+        <div class="ig-card" onclick="openLA(0)"><img src="la_coup_2.png" alt="Coupon 2"><div class="ig-card-label">Coupon — $25 off flyer</div></div>
+        <div class="ig-card" onclick="openLA(0)"><img src="la_coup_3.png" alt="Coupon 3"><div class="ig-card-label">Coupon — 50% off sheet</div></div>
+        <div class="ig-card" onclick="openLA(0)"><img src="la_coup_4.png" alt="Coupon 4"><div class="ig-card-label">Coupon — $25 off sheet</div></div>
+        <div class="ig-card" onclick="openLA(0)"><img src="la_laundry_1.png" alt="Laundromat flyer 1"><div class="ig-card-label">Laundromat — vent cleaning</div></div>
+        <div class="ig-card" onclick="openLA(0)"><img src="la_laundry_2.png" alt="Laundromat flyer 2"><div class="ig-card-label">Laundromat — photo version</div></div>
+      </div>
+    </div>
+
+    <!-- ── FULL PLATES ── -->
+    <div style="margin-top: 0; background: linear-gradient(180deg, #8B0000 0%, #B03020 5%, #C0392B 12%, #E8724A 22%, #F0A060 34%, #F5C878 50%, #FBE8A0 68%, #FDF8E1 100%); padding: 4rem 3rem 3rem; margin-left: -3rem; margin-right: -3rem; padding-left: 3rem; padding-right: 3rem;">
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <span class="section-num" style="color: rgba(255,255,255,0.5);">—</span>
+        <span class="section-title" style="font-size: 30px; font-weight: 400; color: #ffffff;">Full Plates — Brand, Website &amp; Policy</span>
+        <div class="section-rule" style="background: rgba(255,255,255,0.2);"></div>
+      </div>
+      <div class="two-col" style="margin-bottom: 2.5rem;">
+        <div>
+          <div class="label" style="color: rgba(255,255,255,0.6);">The origin</div>
+          <p class="body-text" style="color: #ffffff;">Full Plates began as a Hackathon project in December 2024 — a team concept for connecting restaurants with surplus food to shelters, NGOs, and communities in need. The tagline: Feeding Communities, Fighting Waste.</p>
+          <p class="body-mid" style="color: rgba(255,255,255,0.8);">After the hackathon, I took it in my own direction. I built out the full brand system and website prototype — 14 pages covering the mission, app design, zero-waste model, impact metrics, and a global growth roadmap — then extended it into a zine and policy brief exploring food redistribution through law, logistics, and design.</p>
+          <div class="pull-quote" style="border-left-color: #FFD166; color: #ffffff;">"This shows the project from one place to another — hackathon idea to brand to policy thinking."</div>
+        </div>
+        <div>
+          <div class="label" style="color: rgba(255,255,255,0.6);">What this became</div>
+          <div style="display: flex; flex-direction: column; gap: 0; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.15);">
+            <div style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.15); display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #FFD166; min-width: 2rem;">01</div>
+              <div><div style="font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: #ffffff; margin-bottom: 2px;">Hackathon prototype</div><div style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5;">Team project, December 2024 — brand concept, app wireframes, pitch deck</div></div>
+            </div>
+            <div style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.15); display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #FFD166; min-width: 2rem;">02</div>
+              <div><div style="font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: #ffffff; margin-bottom: 2px;">Full brand + website</div><div style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5;">14-page Canva website — logo, app UI, impact data, global roadmap</div></div>
+            </div>
+            <div style="padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.15); display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #FFD166; min-width: 2rem;">03</div>
+              <div><div style="font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: #ffffff; margin-bottom: 2px;">Policy brief</div><div style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5;">Enabling Local Food Redistribution through Law, Logistics, and Design — with GPS logistics optimization proposal</div></div>
+            </div>
+            <div style="padding: 1rem; display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #FFD166; min-width: 2rem;">04</div>
+              <div><div style="font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: #ffffff; margin-bottom: 2px;">Zine</div><div style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.5;">Visual editorial exploring food systems — connected to Substack essay "Worldbuilding and Fiction Dreams"</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-bottom: 1rem;"><div class="label" style="color: rgba(255,255,255,0.6);">Website prototype — 14 pages</div></div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem;">
+        <div class="ig-card" onclick="openFP(0)"><img src="fp_1.png" alt="Full Plates homepage"><div class="ig-card-label">Homepage — brand + identity</div></div>
+        <div class="ig-card" onclick="openFP(1)"><img src="fp_2.png" alt="Zero net waste"><div class="ig-card-label">Zero net waste model</div></div>
+        <div class="ig-card" onclick="openFP(2)"><img src="fp_3.png" alt="App screens"><div class="ig-card-label">Check out our App</div></div>
+        <div class="ig-card" onclick="openFP(3)"><img src="fp_4.png" alt="Zero waste + sustainable system"><div class="ig-card-label">Zero waste · Sustainable food system</div></div>
+        <div class="ig-card" onclick="openFP(4)"><img src="fp_5.png" alt="Path to impact"><div class="ig-card-label">Our Path to Impact timeline</div></div>
+        <div class="ig-card" onclick="openFP(5)"><img src="fp_6.png" alt="Global footprint"><div class="ig-card-label">Global Footprint</div></div>
+        <div class="ig-card" onclick="openFP(6)"><img src="fp_7.png" alt="Progress in numbers"><div class="ig-card-label">Progress in Numbers</div></div>
+        <div class="ig-card" onclick="openFP(7)"><img src="fp_8.png" alt="Progress visualized"><div class="ig-card-label">Progress Visualized</div></div>
+        <div class="ig-card" onclick="openFP(8)"><img src="fp_9.png" alt="Impact snapshot"><div class="ig-card-label">Impact Snapshot</div></div>
+        <div class="ig-card" onclick="openFP(9)"><img src="fp_10.png" alt="Building a sustainable future"><div class="ig-card-label">Building a Sustainable Future</div></div>
+        <div class="ig-card" onclick="openFP(10)"><img src="fp_11.png" alt="What's in our future"><div class="ig-card-label">What's in our future?</div></div>
+        <div class="ig-card" onclick="openFP(11)"><img src="fp_12.png" alt="Let's connect"><div class="ig-card-label">Let's make food available to everyone</div></div>
+      </div>
+      <div style="margin-top: 1.5rem; display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="https://open.substack.com/pub/ssing382/p/worldbuilding-and-fiction-dreams?utm_campaign=post-expanded-share&utm_medium=post%20viewer" target="_blank" style="font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #8B1A00; text-decoration: none; border: 1px solid rgba(139,26,0,0.3); padding: 8px 16px; display: inline-block; background: rgba(255,255,255,0.4);">Read on Substack ↗</a>
+        <a href="https://drive.google.com/file/d/1fyzbTpnLOEXSxnqeU_gk_lGKVrEQvRgF/view?usp=sharing" target="_blank" style="font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #8B1A00; text-decoration: none; border: 1px solid rgba(139,26,0,0.3); padding: 8px 16px; display: inline-block; background: rgba(255,255,255,0.4);">View zine PDF ↗</a>
+        <a href="https://drive.google.com/file/d/1YDTyhHbMOBJi3P4YtN54f7nnsZ3JPI-m/view?usp=sharing" target="_blank" style="font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #8B1A00; text-decoration: none; border: 1px solid rgba(139,26,0,0.3); padding: 8px 16px; display: inline-block; background: rgba(255,255,255,0.4);">View policy brief ↗</a>
+      </div>
+    </div>
+
+    <!-- ── RATTLE ── -->
+    <div style="margin-top: 0; background: linear-gradient(180deg, #FDF8E1 0%, #EEF2E4 10%, #D8EDD0 28%, #B8DDB0 48%, #7EC080 65%, #4A9468 80%, #2D6A4F 100%); padding: 4rem 3rem 3rem; margin-left: -3rem; margin-right: -3rem; padding-left: 3rem; padding-right: 3rem;">
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <span class="section-num" style="color: rgba(45,106,79,0.6);">—</span>
+        <span class="section-title" style="font-size: 30px; font-weight: 400; color: #1B4332;">Rattle (Robot+Cattle) — Speculative Worldbuilding</span>
+        <div class="section-rule" style="background: rgba(45,106,79,0.2);"></div>
+      </div>
+      <div class="two-col" style="margin-bottom: 2.5rem;">
+        <div>
+          <div class="label" style="color: rgba(27,67,50,0.6);">The project</div>
+          <p class="body-text" style="color: #1B4332;">In my junior year at ASU, I developed a world built around an imagined community food system — integrating social networks, wellness rituals, and emerging farm technologies. Across three documents, I mapped the world's geography and daily life, then dove into Rattle: an innovative natural-cultivation technology designed for Arizona's climate.</p>
+          <p class="body-mid" style="color: rgba(27,67,50,0.75);">This project blends speculative narrative, systems design, and visual prototyping to explore how people might live, eat, and care for one another in a future food-centered culture. It sits at the intersection of design fiction, policy thinking, and technology concept work.</p>
+          <div class="pull-quote" style="border-left-color: #40916C; color: #1B4332;">"What if a local farmer could control crop health from outside the crop area using Virtual Reality?"</div>
+        </div>
+        <div>
+          <div class="label" style="color: rgba(27,67,50,0.6);">Three documents, one world</div>
+          <div style="display: flex; flex-direction: column; gap: 0; border: 1px solid rgba(45,106,79,0.2); background: rgba(255,255,255,0.5);">
+            <div style="padding: 1.25rem; border-bottom: 1px solid rgba(45,106,79,0.15); display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #40916C; min-width: 2rem;">01</div>
+              <div><div style="font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: #1B4332; margin-bottom: 3px;">Rattle (Robot+Cattle)</div><div style="font-size: 12px; color: rgba(27,67,50,0.7); line-height: 1.55;">An Arduino-based autonomous farm robot that moves to infected plants, identifies disease via IoT sensors and ML algorithms, and sprays the appropriate pesticide — tending fields without manual labour.</div></div>
+            </div>
+            <div style="padding: 1.25rem; border-bottom: 1px solid rgba(45,106,79,0.15); display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #40916C; min-width: 2rem;">02</div>
+              <div><div style="font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: #1B4332; margin-bottom: 3px;">Naturally Occurring Nurtured Foods</div><div style="font-size: 12px; color: rgba(27,67,50,0.7); line-height: 1.55;">How can organic foods be made more affordable by changing the supply chain? Explores community farming models, vegetation incubation, and democratizing cultivation technology for Arizona's arid climate.</div></div>
+            </div>
+            <div style="padding: 1.25rem; display: flex; gap: 1rem; align-items: flex-start;">
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 300; color: #40916C; min-width: 2rem;">03</div>
+              <div><div style="font-family: 'Syne', sans-serif; font-size: 12px; font-weight: 700; color: #1B4332; margin-bottom: 3px;">Naturopathy</div><div style="font-size: 12px; color: rgba(27,67,50,0.7); line-height: 1.55;">A "third space" — shared green rooms and simple rituals where people swap cubicles for compost circles. Care farming as community infrastructure.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-bottom: 1rem;"><div class="label" style="color: rgba(27,67,50,0.6);">System concepts</div></div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem;">
+        <div style="background: rgba(255,255,255,0.55); border: 1px solid rgba(45,106,79,0.2); padding: 1.25rem; border-radius: 4px;">
+          <div style="font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #40916C; margin-bottom: 0.5rem;">Rattle — Core tech</div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: #1B4332; line-height: 1.5;">IoT sensors · ML algorithms · Arduino UNO · Blockchain data logging · Cloud platform</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.55); border: 1px solid rgba(45,106,79,0.2); padding: 1.25rem; border-radius: 4px;">
+          <div style="font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #40916C; margin-bottom: 0.5rem;">What it monitors</div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: #1B4332; line-height: 1.5;">Soil moisture · Light intensity · Temperature · Humidity · Pest population · Nutrient levels</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.55); border: 1px solid rgba(45,106,79,0.2); padding: 1.25rem; border-radius: 4px;">
+          <div style="font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #40916C; margin-bottom: 0.5rem;">NONF Crops (Arizona)</div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: #1B4332; line-height: 1.5;">Strawberries · Blueberries · Melons · Bell peppers · Cucumbers · Lettuce · Tomatoes</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.55); border: 1px solid rgba(45,106,79,0.2); padding: 1.25rem; border-radius: 4px;">
+          <div style="font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #40916C; margin-bottom: 0.5rem;">Next steps</div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; color: #1B4332; line-height: 1.5;">Supply chain experiments · Naturopathy pop-up retreats · Ongoing Substack documentation</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+        <a href="https://open.substack.com/pub/ssing382/p/worldbuilding-and-fiction-dreams?utm_campaign=post-expanded-share&utm_medium=post%20viewer" target="_blank" style="font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #1B4332; text-decoration: none; border: 1px solid rgba(27,67,50,0.35); padding: 8px 16px; display: inline-block; background: rgba(255,255,255,0.5);">Read on Substack ↗</a>
+      </div>
+    </div>
+
+    <!-- ── DE NOVO BAKES ── -->
+    <div style="margin-top: 0; background: linear-gradient(180deg, #2D6A4F 0%, #4A7C3F 4%, #7A9830 11%, #B8A020 21%, #D4B825 32%, #E8CC3A 46%, #F2D94E 58%, #F8E570 72%, #FCED90 85%, #FFF5B0 100%); padding: 4rem 3rem 3.5rem; margin-left: -3rem; margin-right: -3rem; padding-left: 3rem; padding-right: 3rem;">
+
+      <div class="section-header" style="margin-bottom: 2rem;">
+        <span class="section-num" style="color: rgba(31,48,40,0.4);">—</span>
+        <span class="section-title" style="font-size: 30px; font-weight: 400; color: #1F3028;">De Novo Bakes — First Freelance Project</span>
+        <div class="section-rule" style="background: rgba(31,48,40,0.15);"></div>
+      </div>
+
+      <div class="two-col" style="margin-bottom: 2.5rem;">
+        <div>
+          <div class="label" style="color: rgba(31,48,40,0.5);">The brief</div>
+          <p class="body-text" style="color: #1F3028;">De Novo Bakes was my very first freelancing project — a cloud kitchen bakery run by Aakriti that needed a full menu card to match the warmth and personality of everything she baked. The brief: make it feel handcrafted, appetising, and easy to read at a glance.</p>
+          <p class="body-mid" style="color: rgba(31,48,40,0.7);">The result was a 3-page menu book — cover, cakes, and everything else — with a soft yellow palette drawn directly from the brand, custom typography pairings, and clear dietary indicators for veg, egg, and non-veg items across 60+ products.</p>
+          <div class="pull-quote" style="border-left-color: #C8900A; color: #1F3028;">"My first client. My first brief. The one that made me realise design could be useful to real people building real things."</div>
+        </div>
+        <div>
+          <div class="label" style="color: rgba(31,48,40,0.5);">Project details</div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid rgba(31,48,40,0.15); background: rgba(255,255,255,0.5);">
+            <div style="padding: 1rem; border-right: 1px solid rgba(31,48,40,0.12); border-bottom: 1px solid rgba(31,48,40,0.12);">
+              <div style="font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(31,48,40,0.5); margin-bottom: 4px;">Year</div>
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; color: #1F3028;">2020</div>
+            </div>
+            <div style="padding: 1rem; border-bottom: 1px solid rgba(31,48,40,0.12);">
+              <div style="font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(31,48,40,0.5); margin-bottom: 4px;">Type</div>
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; color: #1F3028;">Freelance · First project</div>
+            </div>
+            <div style="padding: 1rem; border-right: 1px solid rgba(31,48,40,0.12);">
+              <div style="font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(31,48,40,0.5); margin-bottom: 4px;">Client</div>
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 16px; font-weight: 300; color: #1F3028;">De Novo Bakes<br>by Aakriti · Cloud kitchen</div>
+            </div>
+            <div style="padding: 1rem;">
+              <div style="font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(31,48,40,0.5); margin-bottom: 4px;">Deliverables</div>
+              <div style="font-family: 'Cormorant Garamond', serif; font-size: 15px; font-weight: 300; line-height: 1.5; color: #1F3028;">Cover · Menu layout · Typography · Dietary iconography</div>
+            </div>
+          </div>
+          <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1rem;">
+            <span style="font-size: 8px; letter-spacing: 1px; text-transform: uppercase; border: 1px solid rgba(31,48,40,0.18); padding: 3px 9px; color: #1F3028; background: rgba(255,255,255,0.5);">Menu Design</span>
+            <span style="font-size: 8px; letter-spacing: 1px; text-transform: uppercase; border: 1px solid rgba(31,48,40,0.18); padding: 3px 9px; color: #1F3028; background: rgba(255,255,255,0.5);">Brand Collateral</span>
+            <span style="font-size: 8px; letter-spacing: 1px; text-transform: uppercase; border: 1px solid rgba(31,48,40,0.18); padding: 3px 9px; color: #1F3028; background: rgba(255,255,255,0.5);">Typography</span>
+            <span style="font-size: 8px; letter-spacing: 1px; text-transform: uppercase; border: 1px solid rgba(31,48,40,0.18); padding: 3px 9px; color: #1F3028; background: rgba(255,255,255,0.5);">Print Layout</span>
+            <span style="font-size: 8px; letter-spacing: 1px; text-transform: uppercase; border: 1px solid rgba(31,48,40,0.18); padding: 3px 9px; color: #1F3028; background: rgba(255,255,255,0.5);">Client Brief</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- What the menu covers -->
+      <div style="margin-bottom: 1rem;"><div class="label" style="color: rgba(31,48,40,0.5);">What the menu covers — 60+ items across 9 categories</div></div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2.5rem;">
+        <div style="background: rgba(255,255,255,0.55); border: 1px solid rgba(31,48,40,0.12); padding: 1.1rem;">
+          <div style="font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #C8900A; margin-bottom: 0.5rem;">Celebration Cakes</div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 300; color: #1F3028; line-height: 1.6;">Signature 1kg · Classics · Red velvet, Hazelnut fererro, Tiramisu, Boston cream pie, Dulce de leche &amp; more</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.55); border: 1px solid rgba(31,48,40,0.12); padding: 1.1rem;">
+          <div style="font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #C8900A; margin-bottom: 0.5rem;">Cheese &amp; Tea Cakes</div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 300; color: #1F3028; line-height: 1.6;">New York style · Fererro hazelnut · Salted caramel · Pineapple upside down · Chai spice · Coffee loaf</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.55); border: 1px solid rgba(31,48,40,0.12); padding: 1.1rem;">
+          <div style="font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #C8900A; margin-bottom: 0.5rem;">Pies, Breads &amp; Cupcakes</div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 300; color: #1F3028; line-height: 1.6;">Apple &amp; banoffee pie · Nutella babka · Bagels · Cinnamon roll · French vanilla &amp; red velvet cupcakes</div>
+        </div>
+        <div style="background: rgba(255,255,255,0.55); border: 1px solid rgba(31,48,40,0.12); padding: 1.1rem;">
+          <div style="font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: #C8900A; margin-bottom: 0.5rem;">Brownies, Cookies &amp; Savouries</div>
+          <div style="font-family: 'Cormorant Garamond', serif; font-size: 14px; font-weight: 300; color: #1F3028; line-height: 1.6;">Hazelnut nutella brownie · Snickerdoodle · Chicken &amp; spinach quiche · Cottage cheese &amp; capsicum pie</div>
+        </div>
+      </div>
+
+      <!-- Menu gallery -->
+      <div style="margin-bottom: 1rem;"><div class="label" style="color: rgba(31,48,40,0.5);">Menu pages</div></div>
+      <div style="display: grid; grid-template-columns: 0.85fr 1.15fr 1.15fr; gap: 1rem; margin-bottom: 2rem;">
+
+        <!-- Card 1: Cover -->
+        <div class="ig-card" onclick="openDN(0)" style="border-color: rgba(31,48,40,0.15); min-height: 280px; background: linear-gradient(160deg,#FDF8EE 0%,#F5E8C0 45%,#E8C870 75%,#C8900A 100%);">
+          <img src="denovo_cover.png" alt="De Novo Bakes Menu Cover" style="width:100%; display:block;" onerror="this.style.display='none'">
+          <div class="ig-card-label">Cover — Menu Book</div>
+        </div>
+
+        <!-- Card 2: Cakes page -->
+        <div class="ig-card" onclick="openDN(1)" style="border-color: rgba(31,48,40,0.15); min-height: 280px; background: linear-gradient(160deg,#FDF8F5 0%,#FBF0E8 60%,#F5DDD0 100%);">
+          <img src="denovo_menu_1.png" alt="De Novo Bakes Cakes Menu" style="width:100%; display:block;" onerror="this.style.display='none'">
+          <div class="ig-card-label">Page 2 — Celebration, Cheese &amp; Tea Cakes</div>
+        </div>
+
+        <!-- Card 3: Everything else -->
+        <div class="ig-card" onclick="openDN(2)" style="border-color: rgba(31,48,40,0.15); min-height: 280px; background: linear-gradient(160deg,#F5F8F0 0%,#EAF0E4 50%,#D8EDD0 100%);">
+          <img src="denovo_menu_2.png" alt="De Novo Bakes Full Menu" style="width:100%; display:block;" onerror="this.style.display='none'">
+          <div class="ig-card-label">Page 3 — Pies, Breads, Brownies &amp; Savouries</div>
+        </div>
+      </div>
+
+      <!-- Closing reflection -->
+      <div style="border-top: 1px solid rgba(31,48,40,0.12); padding-top: 1.5rem; display: flex; align-items: flex-start; gap: 3rem; flex-wrap: wrap;">
+        <div style="flex: 1; min-width: 260px;">
+          <div style="font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: rgba(31,48,40,0.5); margin-bottom: 0.5rem;">Why this project closes the chapter</div>
+          <p style="font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 300; color: rgba(31,48,40,0.75); line-height: 1.7; max-width: 520px;">Every project since has built on what this one taught me: that design for a real client isn't just about making something look good — it's about making their product feel real to someone who's never tasted it.</p>
+        </div>
+        <div style="display: flex; gap: 2rem;">
+          <div style="text-align: center;">
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: #C8900A; line-height: 1;">3</div>
+            <div style="font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(31,48,40,0.5); margin-top: 4px;">Pages</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: #C8900A; line-height: 1;">60+</div>
+            <div style="font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(31,48,40,0.5); margin-top: 4px;">Menu items</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 300; color: #C8900A; line-height: 1;">01</div>
+            <div style="font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(31,48,40,0.5); margin-top: 4px;">First client</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- end De Novo Bakes -->
+
+  </section>
+
+  <!-- BOTTOM NAV -->
+  <div class="bottom-nav" style="background: linear-gradient(180deg, #FFF5B0 0%, #FDF8EE 100%);">
+    <a href="index.html" class="nav-link nav-link-back">Back to all work</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-name">Shambhavi Singh</span>
+    <div class="footer-links">
+      <a href="index.html">Portfolio</a>
+      <a href="/cdn-cgi/l/email-protection#33505c5d4752504773405b525e515b52455a1d505c5e">Contact</a>
+    </div>
+    <span>© 2026</span>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // ── Image sets ──
+    const images = [
+      {src: 'ig_1.png',  label: '01 — Signs of Perfectionism'},
+      {src: 'ig_2.png',  label: '02 — Ways to Resist Perfectionism'},
+      {src: 'ig_3.png',  label: '03 — Resist Perfectionism pt. 2'},
+      {src: 'ig_4.png',  label: '04 — Excellencism vs Perfectionism'},
+      {src: 'ig_5.png',  label: '05 — Burnout'},
+      {src: 'ig_6.png',  label: '06 — Signs of Burnout'},
+      {src: 'ig_7.png',  label: '07 — Resisting Burnout'},
+      {src: 'ig_8.png',  label: '08 — Imposter Syndrome Affects Many'},
+      {src: 'ig_9.png',  label: '09 — How Imposter Syndrome Shows Up'},
+      {src: 'ig_10.png', label: '10 — Imposter Syndrome Signs'},
+      {src: 'ig_11.png', label: '11 — You Belong. Here\'s How to Believe It.'},
+    ];
+
+    const fpImages = [
+      {src: 'fp_1.png',  label: 'Homepage — brand + identity'},
+      {src: 'fp_2.png',  label: 'Zero net waste model'},
+      {src: 'fp_3.png',  label: 'Check out our App'},
+      {src: 'fp_4.png',  label: 'Zero waste · Sustainable food system'},
+      {src: 'fp_5.png',  label: 'Our Path to Impact'},
+      {src: 'fp_6.png',  label: 'Global Footprint'},
+      {src: 'fp_7.png',  label: 'Progress in Numbers'},
+      {src: 'fp_8.png',  label: 'Progress Visualized'},
+      {src: 'fp_9.png',  label: 'Impact Snapshot'},
+      {src: 'fp_10.png', label: 'Building a Sustainable Future'},
+      {src: 'fp_11.png', label: "What's in our future?"},
+      {src: 'fp_12.png', label: "Let's make food available to everyone"},
+    ];
+
+    const laImages = [
+      {src: 'la_bc_1.png',      label: 'Business card — front'},
+      {src: 'la_bc_2.png',      label: 'Business card — back'},
+      {src: 'la_com_1.png',     label: 'Commercial — pet salon'},
+      {src: 'la_com_2.png',     label: 'Commercial — beauty salon'},
+      {src: 'la_com_3.png',     label: 'Commercial — why dryer vent'},
+      {src: 'la_com_4.png',     label: 'Commercial — dryer vent cleaning'},
+      {src: 'la_coup_1.png',    label: 'Coupon — 50% off flyer'},
+      {src: 'la_coup_2.png',    label: 'Coupon — $25 off flyer'},
+      {src: 'la_coup_3.png',    label: 'Coupon — 50% off sheet'},
+      {src: 'la_coup_4.png',    label: 'Coupon — $25 off sheet'},
+      {src: 'la_laundry_1.png', label: 'Laundromat — vent cleaning'},
+      {src: 'la_laundry_2.png', label: 'Laundromat — photo version'},
+    ];
+
+    const dnImages = [
+      {src: 'denovo_cover.png',  label: 'Cover — De Novo Bakes Menu Book'},
+      {src: 'denovo_menu_1.png', label: 'Page 2 — Celebration, Cheese &amp; Tea Cakes'},
+      {src: 'denovo_menu_2.png', label: 'Page 3 — Pies, Breads, Brownies &amp; Savouries'},
+    ];
+
+    let current = 0;
+
+    function openLightbox(index) {
+      window._activeSet = images;
+      current = index;
+      showLightbox(images[current]);
+    }
+    function openFP(index) {
+      window._activeSet = fpImages;
+      current = index;
+      showLightbox(fpImages[current]);
+    }
+    function openLA(index) {
+      window._activeSet = laImages;
+      current = index;
+      showLightbox(laImages[current]);
+    }
+    function openDN(index) {
+      window._activeSet = dnImages;
+      current = index;
+      showLightbox(dnImages[current]);
+    }
+
+    function showLightbox(item) {
+      const set = window._activeSet;
+      document.getElementById('lb-img').src = item.src;
+      document.getElementById('lb-counter').textContent = item.label + ' · ' + (current + 1) + ' / ' + set.length;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function changeImage(dir) {
+      const set = window._activeSet || images;
+      current = (current + dir + set.length) % set.length;
+      showLightbox(set[current]);
+    }
+
+    function closeLightbox(e) {
+      if (e && e.target !== document.getElementById('lightbox') && e.target !== document.querySelector('.lightbox-close')) return;
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      if (document.getElementById('lightbox').classList.contains('open')) {
+        if (e.key === 'ArrowRight') changeImage(1);
+        if (e.key === 'ArrowLeft')  changeImage(-1);
+        if (e.key === 'Escape
