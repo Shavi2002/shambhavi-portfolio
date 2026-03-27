@@ -28,6 +28,14 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    /* ── MAX WIDTH — centered on very wide screens ── */
+    @media (min-width: 1600px) {
+      nav { max-width: 1600px; margin: 0 auto; }
+      .hero, .ticker, .work, .about, .bio-section, .contact, footer {
+        max-width: 1600px; margin-left: auto; margin-right: auto;
+      }
+    }
+
     /* ── ANIMATIONS ── */
     @keyframes riseIn {
       from { opacity: 0; transform: translateY(22px); }
@@ -209,7 +217,7 @@
       letter-spacing: -0.5px;
     }
     .discipline-list li:last-child { border-bottom: 1px solid var(--rule); }
-    .disc-arrow { font-size: 14px; color: var(--mid); }
+    .disc-arrow { display: none; }
 
     .hero-cta {
       display: flex;
@@ -706,6 +714,14 @@
       footer { padding: 1.25rem 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
     }
   </style>
+  <!-- Microsoft Clarity — visitor analytics -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "REPLACE_WITH_YOUR_CLARITY_ID");
+  </script>
 </head>
 <body>
 
@@ -761,10 +777,10 @@
     <div class="hero-right">
       <div class="hero-right-top">Disciplines</div>
       <ul class="discipline-list">
-        <li class="anim-pan d-1">Brand Identity <span class="disc-arrow">↗</span></li>
-        <li class="anim-pan d-2">Visual Systems <span class="disc-arrow">↗</span></li>
-        <li class="anim-pan d-3">Product Design <span class="disc-arrow">↗</span></li>
-        <li class="anim-pan d-4">Content Strategy <span class="disc-arrow">↗</span></li>
+        <li class="anim-pan d-1">Brand Identity</li>
+        <li class="anim-pan d-2">Visual Systems</li>
+        <li class="anim-pan d-3">Product Design</li>
+        <li class="anim-pan d-4">Content Strategy</li>
       </ul>
       <div class="hero-cta">
         <a href="#work" class="btn-work">View work</a>
@@ -807,7 +823,7 @@
     <a class="project-row anim-rise d-1" href="cic-case-study.html">
       <div class="proj-num">01</div>
       <div class="proj-info">
-        <div class="proj-name">AWS Cloud Innovation Center</div>
+        <div class="proj-name">AWS AI Cloud Innovation Center</div>
         <div class="proj-desc">Marketing strategy · Visual systems · Technical communication · Innovation Island</div>
       </div>
       <div class="proj-tags">
@@ -890,7 +906,7 @@
           <div class="resume-label">Shambhavi Singh — Visual &amp; Brand Designer</div>
           <div class="resume-meta">
             <span>B.A. Design, Arizona State University</span>
-            <span>AWS Cloud Innovation Center</span>
+            <span>AWS AI Cloud Innovation Center</span>
             <span>Open to full-time roles</span>
           </div>
         </div>
@@ -950,7 +966,7 @@
       <div class="bio-role">Visual &amp; Brand Designer<br>Arizona State University, B.A.</div>
       <ul class="bio-facts">
         <li>Based in Tempe, AZ</li>
-        <li>AWS Cloud Innovation Center</li>
+        <li>AWS AI Cloud Innovation Center</li>
         <li>Hackathon Mentor — Principled Innovation Academy</li>
         <li>Open to full-time roles</li>
       </ul>
@@ -971,9 +987,8 @@
       <div class="contact-sub">Open to full-time roles · Freelance · Collaboration</div>
     </div>
     <div class="contact-links">
-      <a href="mailto:ssing382@asu.edu" class="contact-link primary">Say hello</a>
+      <a href="/cdn-cgi/l/email-protection#9eededf7f0f9ada6acdeffedebb0fbfaeb" class="contact-link primary">Say hello</a>
       <a href="https://www.linkedin.com/in/shambhavi-singh2002/" target="_blank" class="contact-link">LinkedIn</a>
-      <a href="https://behance.net" target="_blank" class="contact-link">Behance</a>
       <a href="https://drive.google.com/file/d/1gNK5vK2E2sjEoDpvKmqlTjVjOHPTUKQt/view?usp=sharing" target="_blank" class="contact-link resume">Résumé ↗</a>
     </div>
   </section>
@@ -982,8 +997,4 @@
   <footer>
     <span class="footer-name">Shambhavi Singh</span>
     <span>shambhavi.design</span>
-    <span>© 2026</span>
-  </footer>
-
-</body>
-</html>
+    <span>© 20
