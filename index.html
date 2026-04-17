@@ -1,1015 +1,871 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shambhavi Singh — Visual & Brand Designer</title>
-  <meta name="description" content="Visual and brand designer working at the intersection of concept and system. Based in Tempe, AZ.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --white: #F9F7F4;
-      --black: #1F3028;
-      --mid: #6B6860;
-      --rule: rgba(31,48,40,0.12);
-      --red: #C1341A;
-    }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      background: var(--white);
-      color: var(--black);
-      font-family: 'DM Mono', monospace;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── MAX WIDTH — centered on very wide screens ── */
-    @media (min-width: 1600px) {
-      nav { max-width: 1600px; margin: 0 auto; }
-      .hero, .ticker, .work, .about, .bio-section, .contact, footer {
-        max-width: 1600px; margin-left: auto; margin-right: auto;
-      }
-    }
-
-    /* ── ANIMATIONS ── */
-    @keyframes riseIn {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes panRight {
-      from { opacity: 0; transform: translateX(-16px); }
-      to   { opacity: 1; transform: translateX(0); }
-    }
-
-    .anim-rise { opacity: 0; animation: riseIn 0.75s cubic-bezier(.22,1,.36,1) forwards; }
-    .anim-pan  { opacity: 0; animation: panRight 0.75s cubic-bezier(.22,1,.36,1) forwards; }
-
-    .d-1 { animation-delay: 0.1s; }
-    .d-2 { animation-delay: 0.28s; }
-    .d-3 { animation-delay: 0.46s; }
-    .d-4 { animation-delay: 0.64s; }
-    .d-5 { animation-delay: 0.82s; }
-    .d-6 { animation-delay: 1.0s; }
-
-    /* ── NAV ── */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 3rem;
-      height: 56px;
-      border-bottom: 1px solid var(--rule);
-      background: var(--white);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-
-    .nav-name {
-      font-family: 'Syne', sans-serif;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-    }
-
-    .nav-links { display: flex; list-style: none; }
-
-    .nav-links a {
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--mid);
-      text-decoration: none;
-      padding: 0 16px;
-      height: 56px;
-      line-height: 56px;
-      display: block;
-      transition: color .15s;
-      border-left: 1px solid var(--rule);
-    }
-    .nav-links a:hover { color: var(--black); }
-    .nav-links li:last-child a { border-right: 1px solid var(--rule); }
-
-    /* Resume link in nav — slightly highlighted */
-    .nav-links .nav-resume a {
-      color: var(--black);
-      font-weight: 400;
-    }
-    .nav-links .nav-resume a:hover { color: var(--red); }
-
-    /* ── HERO ── */
-    .hero {
-      padding: 5rem 3rem 4rem;
-      border-bottom: 1px solid var(--rule);
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      min-height: 480px;
-      align-items: stretch;
-    }
-
-    .hero-left {
-      padding-right: 4rem;
-      border-right: 1px solid var(--rule);
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .hero-right {
-      padding-left: 4rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .hero-index {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .hero-index::before { content: ''; width: 24px; height: 1px; background: var(--mid); }
-
-    h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(52px, 7vw, 80px);
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -2px;
-      position: relative;
-      z-index: 2;
-      text-align: center;
-    }
-    h1 em { font-style: italic; color: var(--mid); line-height: inherit; vertical-align: baseline; }
-
-    .h1-wrap {
-      position: relative;
-      display: block;
-      padding: 80px 0;
-      margin: 0;
-      text-align: center;
-    }
-
-    .seal-rays {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 320px;
-      height: 320px;
-      pointer-events: none;
-      z-index: 0;
-      animation: seal-spin 28s linear infinite;
-      overflow: visible;
-    }
-
-    @keyframes seal-spin {
-      from { transform: translate(-50%, -50%) rotate(0deg); }
-      to   { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
-    .h1-wrap h1 { position: relative; z-index: 2; }
-
-    .hero-desc {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 18px;
-      line-height: 1.65;
-      color: var(--mid);
-      font-weight: 300;
-      max-width: 380px;
-      border-top: 1px solid var(--rule);
-      padding-top: 1.5rem;
-    }
-
-    .hero-right-top {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--mid);
-      padding-top: 0.5rem;
-    }
-
-    .discipline-list { list-style: none; margin: 2rem 0; }
-
-    .discipline-list li {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      font-weight: 300;
-      border-top: 1px solid var(--rule);
-      padding: 12px 0;
-      color: var(--black);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      letter-spacing: -0.5px;
-    }
-    .discipline-list li:last-child { border-bottom: 1px solid var(--rule); }
-    .disc-arrow { display: none; }
-
-    .hero-cta {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--rule);
-    }
-
-    .btn-work {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      border: 1px solid var(--black);
-      padding: 10px 20px;
-      cursor: pointer;
-      background: var(--black);
-      color: var(--white);
-      transition: all .15s;
-      text-decoration: none;
-    }
-    .btn-work:hover { background: var(--red); border-color: var(--red); }
-
-    .btn-cv {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      border: 1px solid var(--rule);
-      padding: 10px 20px;
-      cursor: pointer;
-      background: transparent;
-      color: var(--mid);
-      transition: all .15s;
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .btn-cv:hover { border-color: var(--black); color: var(--black); }
-    .btn-cv::before {
-      content: '';
-      display: inline-block;
-      width: 10px;
-      height: 12px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 12' fill='none'%3E%3Crect x='1' y='1' width='8' height='10' rx='1' stroke='%236B6860' stroke-width='1'/%3E%3Cline x1='3' y1='4' x2='7' y2='4' stroke='%236B6860' stroke-width='0.8'/%3E%3Cline x1='3' y1='6' x2='7' y2='6' stroke='%236B6860' stroke-width='0.8'/%3E%3Cline x1='3' y1='8' x2='5.5' y2='8' stroke='%236B6860' stroke-width='0.8'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-size: contain;
-      opacity: 0.7;
-      flex-shrink: 0;
-    }
-
-    /* ── TICKER ── */
-    .ticker {
-      border-bottom: 1px solid var(--rule);
-      height: 38px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-    }
-
-    .ticker-inner {
-      display: flex;
-      white-space: nowrap;
-      animation: tick 24s linear infinite;
-    }
-
-    @keyframes tick {
-      0%   { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-
-    .ticker-item {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--mid);
-      padding: 0 32px;
-      border-right: 1px solid var(--rule);
-      height: 38px;
-      line-height: 38px;
-      flex-shrink: 0;
-    }
-    .ticker-item span { color: var(--red); margin-right: 8px; }
-
-    /* ── WORK ── */
-    .work { padding: 0 3rem 4rem; border-bottom: 1px solid var(--rule); }
-
-    .work-header {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-      padding: 2rem 0 1.5rem;
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .work-title {
-      font-family: 'Syne', sans-serif;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      font-weight: 700;
-    }
-
-    .work-count {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: var(--mid);
-      letter-spacing: 1px;
-    }
-
-    .project-row {
-      display: grid;
-      grid-template-columns: 80px 1fr 160px 60px;
-      align-items: center;
-      gap: 0;
-      border-bottom: 1px solid var(--rule);
-      padding: 1.5rem 0;
-      cursor: pointer;
-      transition: background .12s;
-      text-decoration: none;
-      color: inherit;
-    }
-    .project-row:hover { background: rgba(193,52,26,0.03); }
-    .project-row:hover .proj-num { color: var(--red); }
-    .project-row:hover .proj-arrow { opacity: 1; transform: translateX(4px); }
-
-    .proj-num {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--mid);
-      letter-spacing: 1px;
-      transition: color .15s;
-    }
-
-    .proj-info { padding-right: 3rem; }
-
-    .proj-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 32px;
-      font-weight: 300;
-      letter-spacing: -0.5px;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-    .proj-name em { font-style: italic; }
-
-    .proj-desc {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      color: var(--mid);
-      letter-spacing: 0.5px;
-      line-height: 1.5;
-    }
-
-    .proj-tags { display: flex; flex-direction: column; gap: 4px; }
-
-    .proj-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--mid);
-      border: 1px solid var(--rule);
-      padding: 3px 8px;
-      display: inline-block;
-      width: fit-content;
-    }
-
-    .proj-arrow {
-      font-size: 16px;
-      color: var(--mid);
-      opacity: 0;
-      transition: all .15s;
-      text-align: right;
-    }
-
-    /* ── RESUME STRIP ── */
-    .resume-strip {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.75rem 0;
-      border-bottom: 1px solid var(--rule);
-      gap: 2rem;
-    }
-
-    .resume-strip-left {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-    }
-
-    .resume-eyebrow {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--mid);
-      white-space: nowrap;
-    }
-
-    .resume-label {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px;
-      font-weight: 300;
-      color: var(--black);
-      letter-spacing: -0.25px;
-    }
-
-    .resume-meta {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--mid);
-      display: flex;
-      gap: 16px;
-    }
-
-    .resume-meta span::before {
-      content: '·';
-      margin-right: 16px;
-      color: var(--rule);
-    }
-    .resume-meta span:first-child::before { display: none; }
-
-    .btn-resume {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      border: 1px solid var(--black);
-      padding: 10px 22px;
-      color: var(--black);
-      text-decoration: none;
-      transition: all .15s;
-      background: transparent;
-      white-space: nowrap;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-shrink: 0;
-    }
-    .btn-resume:hover {
-      background: var(--black);
-      color: var(--white);
-    }
-    .btn-resume::after { content: '↗'; font-size: 11px; }
-
-    /* ── ABOUT + CAPABILITIES ── */
-    .about {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .about-left {
-      padding: 3rem;
-      border-right: 1px solid var(--rule);
-    }
-
-    .about-right { padding: 3rem; }
-
-    .section-label {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 2rem;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .section-label::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
-
-    .about-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(28px, 3.5vw, 40px);
-      font-weight: 300;
-      line-height: 1.2;
-      letter-spacing: -0.5px;
-      margin-bottom: 1.5rem;
-    }
-    .about-headline em { font-style: italic; color: var(--mid); }
-
-    .about-body {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--mid);
-      font-weight: 300;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      margin-top: 1rem;
-    }
-
-    .skill-group {
-      padding: 1.5rem;
-      border: 1px solid var(--rule);
-      margin: -1px 0 0 -1px;
-    }
-
-    .skill-group-title {
-      font-family: 'DM Mono', monospace;
-      font-size: 9px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 12px;
-    }
-
-    .skill-item {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 16px;
-      font-weight: 300;
-      color: var(--black);
-      line-height: 1.8;
-    }
-
-    /* ── BIO ── */
-    .bio-section {
-      border-bottom: 1px solid var(--rule);
-      padding: 4rem 3rem;
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 0;
-    }
-
-    .bio-left {
-      padding-right: 3rem;
-      border-right: 1px solid var(--rule);
-    }
-
-    .bio-right { padding-left: 3rem; }
-
-    .bio-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(36px, 4vw, 52px);
-      font-weight: 300;
-      line-height: 1;
-      letter-spacing: -1px;
-      margin-bottom: 0.5rem;
-    }
-    .bio-name em { font-style: italic; color: var(--mid); }
-
-    .bio-role {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-bottom: 2rem;
-      line-height: 1.8;
-    }
-
-    .bio-facts { list-style: none; margin-top: 2rem; }
-
-    .bio-facts li {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--mid);
-      border-top: 1px solid var(--rule);
-      padding: 10px 0;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .bio-facts li:last-child { border-bottom: 1px solid var(--rule); }
-    .bio-facts li::before {
-      content: '';
-      width: 4px;
-      height: 4px;
-      background: var(--red);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    .bio-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
-      line-height: 1.7;
-      font-weight: 300;
-      color: var(--black);
-      margin-bottom: 1.5rem;
-    }
-
-    .bio-text-secondary {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px;
-      line-height: 1.7;
-      font-weight: 300;
-      color: var(--mid);
-      margin-top: 1.25rem;
-    }
-
-    /* ── CONTACT ── */
-    .contact {
-      padding: 4rem 3rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--rule);
-    }
-
-    .contact-headline {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 300;
-      letter-spacing: -1px;
-      line-height: 1;
-    }
-    .contact-headline em { font-style: italic; color: var(--mid); }
-
-    .contact-sub {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--mid);
-      margin-top: 1rem;
-    }
-
-    .contact-links { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-
-    .contact-link {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      border: 1px solid var(--rule);
-      padding: 10px 20px;
-      color: var(--mid);
-      text-decoration: none;
-      transition: all .15s;
-    }
-    .contact-link:hover { border-color: var(--black); color: var(--black); }
-    .contact-link.primary {
-      background: var(--black);
-      color: var(--white);
-      border-color: var(--black);
-    }
-    .contact-link.primary:hover { background: var(--red); border-color: var(--red); }
-
-    /* Resume link in contact — sits alongside other links */
-    .contact-link.resume {
-      border-color: var(--black);
-      color: var(--black);
-    }
-    .contact-link.resume:hover { background: var(--black); color: var(--white); }
-
-    /* ── FOOTER ── */
-    footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1.25rem 3rem;
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--mid);
-      border-top: 1px solid var(--rule);
-    }
-    .footer-name { color: var(--black); font-weight: 400; }
-
-    /* ── RESPONSIVE ── */
-    @media (max-width: 860px) {
-      nav { padding: 0 1.5rem; }
-      .nav-links { display: none; }
-      .hero { grid-template-columns: 1fr; padding: 3rem 1.5rem; }
-      .hero-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 2rem; margin-bottom: 2rem; }
-      .hero-right { padding-left: 0; }
-      .work { padding: 0 1.5rem 3rem; }
-      .project-row { grid-template-columns: 50px 1fr; }
-      .proj-tags { display: none; }
-      .proj-arrow { display: none; }
-      .resume-strip { flex-direction: column; align-items: flex-start; gap: 1rem; }
-      .about { grid-template-columns: 1fr; }
-      .about-left { border-right: none; border-bottom: 1px solid var(--rule); }
-      .bio-section { grid-template-columns: 1fr; padding: 2.5rem 1.5rem; }
-      .bio-left { border-right: none; padding-right: 0; border-bottom: 1px solid var(--rule); padding-bottom: 2rem; margin-bottom: 2rem; }
-      .bio-right { padding-left: 0; }
-      .contact { flex-direction: column; gap: 2rem; padding: 2.5rem 1.5rem; }
-      footer { padding: 1.25rem 1.5rem; flex-direction: column; gap: 8px; text-align: center; }
-    }
-  </style>
-  <!-- Microsoft Clarity — visitor analytics -->
-  <script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "w23wtop35z");
-  </script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Shambhavi Singh — Designer & Strategist</title>
+<meta name="description" content="Visual and brand designer working at the intersection of concept and system. Based in Tempe, AZ."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,wght@0,200;0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
+
+<!-- Microsoft Clarity — visitor analytics (preserved from original) -->
+<script type="text/javascript">
+(function(c,l,a,r,i,t,y){
+  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window,document,"clarity","script","w23wtop35z");
+</script>
+
+<style>
+/* ────────────────────────────────────────
+   DESIGN TOKENS — full dark, hero palette
+──────────────────────────────────────── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:    #07070e;
+  --bg2:   #0d0d1a;
+  --bg3:   #121226;
+  --bg4:   #181835;
+
+  --tx:    #eeeef8;
+  --tx2:   #7878a0;
+  --tx3:   #3e3e58;
+
+  --bd:    rgba(238,238,248,.065);
+  --bd2:   rgba(238,238,248,.12);
+  --bd3:   rgba(238,238,248,.2);
+
+  /* brand — pulled from hero canvas palette */
+  --or:    #c8440a;
+  --am:    #e8a020;
+  --ic:    #7dd3fc;
+  --co:    #4e8ce0;
+
+  --glow-or: rgba(200,68,10,.1);
+  --glow-am: rgba(232,160,32,.08);
+  --glow-ic: rgba(125,211,252,.08);
+
+  --serif: 'Cormorant Garamond',Georgia,serif;
+  --sans:  'DM Sans','Helvetica Neue',sans-serif;
+  --mono:  'DM Mono',monospace;
+}
+
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--tx);
+  overflow-x:hidden;
+  cursor:none;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── GRADIENT CURSOR ── */
+#cur{
+  position:fixed;width:12px;height:12px;border-radius:50%;
+  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
+  background:conic-gradient(var(--or),var(--am),var(--ic),var(--or));
+  animation:cspin 2s linear infinite;
+}
+#cur-ring{
+  position:fixed;width:40px;height:40px;border-radius:50%;
+  pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
+  transition:width .18s,height .18s;
+}
+#cur-ring-inner{
+  width:100%;height:100%;border-radius:50%;
+  border:1.5px solid transparent;
+  background:conic-gradient(
+    rgba(200,68,10,.55),rgba(232,160,32,.55),
+    rgba(125,211,252,.55),rgba(200,68,10,.55)
+  ) border-box;
+  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:destination-out;mask-composite:exclude;
+  animation:cspin 3s linear infinite reverse;
+}
+@keyframes cspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.5rem 3rem;transition:all .4s;
+}
+nav.scrolled{
+  background:rgba(7,7,14,.9);backdrop-filter:blur(20px);
+  padding:1rem 3rem;border-bottom:1px solid var(--bd);
+}
+.nav-logo{
+  font-family:var(--serif);font-weight:300;font-size:1.1rem;
+  color:var(--tx);text-decoration:none;letter-spacing:.02em;
+}
+.nav-logo em{font-style:italic;color:var(--am)}
+.nav-links{display:flex;align-items:center;gap:0;list-style:none}
+.nav-links a{
+  font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--tx2);text-decoration:none;transition:color .2s;
+  padding:0 1rem;
+}
+.nav-links a:hover{color:var(--tx)}
+.nav-links .nav-resume a{color:var(--tx);border-left:1px solid var(--bd2)}
+.nav-links .nav-resume a:hover{color:var(--am)}
+.nav-cta{
+  font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
+  padding:.45rem 1.1rem;border:1px solid var(--bd2);
+  color:var(--tx2);text-decoration:none;transition:all .2s;border-radius:2px;
+}
+.nav-cta:hover{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+@media(max-width:768px){nav{padding:1rem 1.25rem}.nav-links{display:none}}
+
+/* ── HERO ── */
+#hero{
+  position:relative;height:100vh;min-height:620px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;background:var(--bg);
+}
+#hero-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.h-vig{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 72% 72% at 50% 50%,transparent,rgba(7,7,14,.5));
+}
+/* Bottom fade — hero bleeds into first panel */
+.h-fade{
+  position:absolute;bottom:0;left:0;right:0;height:200px;pointer-events:none;
+  background:linear-gradient(to bottom,transparent,var(--bg));
+}
+.h-inner{
+  position:relative;z-index:2;text-align:center;
+  padding:0 2rem;max-width:900px;
+}
+.h-eyebrow{
+  font-family:var(--mono);font-size:.7rem;color:rgba(125,211,252,.48);
+  letter-spacing:.18em;text-transform:uppercase;margin-bottom:2rem;
+  opacity:0;animation:fup .8s ease .3s forwards;
+}
+.h-title{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(3.5rem,9vw,8rem);line-height:.92;
+  letter-spacing:-.025em;color:var(--tx);margin-bottom:1.75rem;
+  opacity:0;animation:fup .9s ease .5s forwards;
+}
+.h-title em{font-style:italic;color:var(--am)}
+.h-title .l2{display:block;padding-left:clamp(2rem,7vw,6rem)}
+.h-sub{
+  font-size:.95rem;color:var(--tx2);max-width:480px;
+  margin:0 auto 2.5rem;line-height:1.9;
+  opacity:0;animation:fup .8s ease .72s forwards;
+}
+.h-tags{
+  display:flex;gap:.65rem;flex-wrap:wrap;justify-content:center;
+  opacity:0;animation:fup .8s ease .95s forwards;
+}
+.h-tag{
+  font-family:var(--mono);font-size:.65rem;letter-spacing:.07em;
+  padding:.32rem .8rem;border:1px solid rgba(125,211,252,.16);
+  color:rgba(125,211,252,.5);border-radius:100px;
+}
+#scroll-hint{
+  position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);
+  z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem;
+  color:rgba(255,255,255,.23);font-size:.65rem;letter-spacing:.12em;
+  text-transform:uppercase;font-family:var(--mono);
+  opacity:0;animation:fup .7s ease 1.4s forwards;
+  transition:opacity .5s ease;pointer-events:none;
+}
+#scroll-hint.hidden{opacity:0!important}
+.s-bar{
+  width:1px;height:36px;
+  background:linear-gradient(to bottom,transparent,rgba(125,211,252,.32));
+  animation:sbounce 2s ease infinite;
+}
+@keyframes fup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes sbounce{0%,100%{opacity:.25;transform:scaleY(1)}50%{opacity:.7;transform:scaleY(1.3)}}
+
+/* ══════════════════════════════════════════
+   GRADIENT BRIDGES — connect every section
+══════════════════════════════════════════ */
+.gb{height:80px;flex-shrink:0}
+.gb-bg-bg2   {background:linear-gradient(to bottom,var(--bg),var(--bg2))}
+.gb-bg2-bg3  {background:linear-gradient(to bottom,var(--bg2),var(--bg3))}
+.gb-bg3-bg   {background:linear-gradient(to bottom,var(--bg3),var(--bg))}
+.gb-bg-bg2-r {background:linear-gradient(to bottom,var(--bg2),var(--bg))}
+.gb-bg2-bg-r {background:linear-gradient(to bottom,var(--bg2),var(--bg))}
+.gb-tall{height:100px}
+
+/* ══════════════════════════════════════════
+   STICKY PANELS
+══════════════════════════════════════════ */
+.pin-wrap{position:relative;height:200vh}
+.panel{
+  position:sticky;top:0;height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  opacity:0;transform:translateY(28px) scale(.985);
+  transition:opacity .55s ease,transform .55s ease;pointer-events:none;
+}
+.panel.active{opacity:1;transform:none;pointer-events:auto}
+.panel.out{opacity:0;transform:translateY(-20px) scale(1.006)}
+
+/* Panel 1 — Identity */
+#p-id{background:var(--bg2)}
+.id-wrap{
+  max-width:960px;width:100%;padding:0 3rem;
+  display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:center;
+}
+@media(max-width:768px){.id-wrap{grid-template-columns:1fr;gap:2.5rem;padding:0 1.5rem}}
+.id-kicker{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--or);text-transform:uppercase;margin-bottom:1.25rem}
+.id-h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.06;letter-spacing:-.025em;color:var(--tx);margin-bottom:2rem}
+.id-h2 em{font-style:italic;color:var(--or)}
+.id-list{display:flex;flex-direction:column}
+.id-item{display:flex;align-items:center;gap:.9rem;padding:.7rem 0;border-bottom:1px solid var(--bd);font-size:.82rem;color:var(--tx2);transition:color .2s}
+.id-item:hover{color:var(--tx)}
+.id-dot{width:5px;height:5px;border-radius:50%;background:var(--or);flex-shrink:0}
+.id-right p{font-size:.92rem;color:var(--tx2);line-height:1.95;margin-bottom:1.1rem}
+
+/* Panel 2 — Capabilities */
+#p-cap{background:var(--bg3)}
+.cap-wrap{max-width:1050px;width:100%;padding:0 3rem}
+@media(max-width:768px){.cap-wrap{padding:0 1.5rem}}
+.cap-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
+.cap-h2{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,5vw,3.5rem);line-height:1;letter-spacing:-.025em;color:var(--tx)}
+.cap-h2 em{font-style:italic;color:var(--am)}
+.cap-note{font-family:var(--mono);font-size:.68rem;color:var(--tx3);letter-spacing:.08em;max-width:180px;text-align:right;line-height:1.75}
+.cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bd)}
+@media(max-width:700px){.cap-grid{grid-template-columns:repeat(2,1fr)}}
+.cap-cell{background:var(--bg3);padding:1.75rem 1.5rem;transition:background .2s}
+.cap-cell:hover{background:var(--bg4)}
+.cap-lbl{font-family:var(--mono);font-size:.63rem;letter-spacing:.12em;color:var(--am);text-transform:uppercase;margin-bottom:1.1rem}
+.cap-cell ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.cap-cell ul li{font-size:.8rem;color:var(--tx2);line-height:1.5}
+
+/* ══════════════════════════════════════════
+   MAIN CONTENT
+══════════════════════════════════════════ */
+#main{background:var(--bg)}
+.sw{max-width:1100px;margin:0 auto;padding:0 3rem}
+@media(max-width:768px){.sw{padding:0 1.5rem}}
+
+/* Section header */
+.sec-hd{
+  display:flex;align-items:baseline;justify-content:space-between;
+  margin-bottom:3.5rem;padding-bottom:1.25rem;
+  border-bottom:1px solid var(--bd2);flex-wrap:wrap;gap:.75rem;
+}
+.sec-title{font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-.02em;color:var(--tx)}
+.sec-title em{font-style:italic;color:var(--or)}
+.sec-ct{font-family:var(--mono);font-size:.68rem;color:var(--tx3);letter-spacing:.1em}
+
+/* ── WORK ── */
+.work-s{padding:7rem 0;position:relative;overflow:hidden}
+@media(max-width:768px){.work-s{padding:4.5rem 0}}
+/* Ambient glow */
+.work-s::before{
+  content:'';position:absolute;width:500px;height:300px;border-radius:50%;
+  background:var(--glow-or);filter:blur(80px);
+  top:6rem;right:-80px;pointer-events:none;z-index:0;
+}
+
+/* ── DEBATE ENGINE FEATURE CARD ──
+   Key UX fixes:
+   · .df-h3 is a <div> not <h3> — eliminates browser-default h3 margin
+     that was rendering as the "black extension"
+   · GitHub link uses onclick stopPropagation
+   · Outer <a> is the only navigation target
+*/
+.dfc{
+  margin-bottom:1.25rem;position:relative;z-index:1;
+  border:1px solid rgba(125,211,252,.16);border-radius:8px;
+  background:var(--bg2);overflow:hidden;
+  display:grid;grid-template-columns:1fr 1fr;
+  text-decoration:none;color:inherit;
+  transition:border-color .3s,transform .3s,box-shadow .3s;
+}
+.dfc:hover{
+  border-color:rgba(125,211,252,.34);
+  transform:translateY(-3px);
+  box-shadow:0 20px 50px rgba(0,0,0,.35);
+}
+@media(max-width:768px){.dfc{grid-template-columns:1fr}}
+.dfl{
+  padding:2.75rem 3rem;display:flex;
+  flex-direction:column;justify-content:space-between;gap:2rem;
+}
+@media(max-width:768px){.dfl{padding:2rem 1.75rem}}
+.dfl-eye{
+  font-family:var(--mono);font-size:.67rem;letter-spacing:.12em;color:var(--ic);
+  text-transform:uppercase;display:flex;align-items:center;gap:.45rem;margin-bottom:1rem;
+}
+.dfl-pd{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.28}}
+
+/* THE FIX: df-h3 is a styled <div>, NOT a <h3> element.
+   Browser agent stylesheet gives <h3> a margin-block-end of ~1em
+   which was creating the "black extension" gap between the heading
+   and the "View project" button. Using <div> eliminates it entirely. */
+.df-h3{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1.08;
+  letter-spacing:-.025em;color:var(--tx);margin-bottom:.85rem;
+}
+.df-h3 em{font-style:italic;color:var(--ic)}
+.df-p{font-size:.82rem;color:var(--tx2);line-height:1.9;max-width:360px}
+.dfl-links{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.5rem}
+.dfl-btn{
+  font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;
+  padding:.65rem 1.3rem;border-radius:3px;
+  transition:all .2s;display:inline-flex;align-items:center;gap:.35rem;
+  white-space:nowrap;text-decoration:none;
+}
+.dfl-btn.pr{background:var(--ic);color:#000;border:none}
+.dfl-btn.pr:hover{opacity:.82;transform:translateY(-1px)}
+.dfl-btn.gh{border:1px solid var(--bd2);color:var(--tx2);background:transparent}
+.dfl-btn.gh:hover{border-color:var(--bd3);color:var(--tx)}
+.dfr{
+  background:linear-gradient(135deg,#0c1220 0%,#141e36 100%);
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem;position:relative;overflow:hidden;min-height:260px;
+}
+.dfr::before{
+  content:'';position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(125,211,252,.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(125,211,252,.04) 1px,transparent 1px);
+  background-size:36px 36px;
+}
+.dfr::after{
+  content:'';position:absolute;width:180px;height:180px;
+  bottom:-40px;right:-40px;border-radius:50%;
+  background:var(--glow-am);filter:blur(50px);pointer-events:none;
+}
+/* Code window */
+.dw{
+  width:100%;max-width:340px;
+  border:1px solid rgba(125,211,252,.14);
+  border-radius:9px;overflow:hidden;
+  background:var(--bg);position:relative;z-index:1;
+}
+.dw-bar{
+  display:flex;align-items:center;gap:.38rem;
+  padding:.55rem .85rem;background:rgba(255,255,255,.03);
+  border-bottom:1px solid rgba(255,255,255,.055);
+}
+.dd{width:9px;height:9px;border-radius:50%}
+.dw-body{padding:1rem 1.15rem}
+.dl{font-family:var(--mono);font-size:.63rem;line-height:1.65;margin-bottom:.28rem;white-space:nowrap}
+.dc0{color:#3a3a52}.da0{color:var(--ic)}.dg0{color:#4ade80}.dr0{color:#f87171}.dw0{color:var(--am)}
+.dcbar{display:flex;align-items:center;gap:.45rem;margin-top:.65rem;padding-top:.65rem;border-top:1px solid rgba(255,255,255,.05)}
+.dct{flex:1;height:2px;background:rgba(255,255,255,.07);border-radius:1px;overflow:hidden}
+.dcf{height:100%;border-radius:1px;background:var(--am);width:0%;transition:width 1.5s ease}
+.dcv{font-family:var(--mono);font-size:.58rem;color:var(--am)}
+
+/* ── PROJECT GRID ── */
+.pg{display:grid;grid-template-columns:repeat(12,1fr);gap:1.25rem;position:relative;z-index:1}
+@media(max-width:1024px){.pg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.pg{grid-template-columns:1fr}}
+.pc{
+  display:block;text-decoration:none;color:inherit;
+  border:1px solid var(--bd);background:var(--bg2);
+  border-radius:4px;overflow:hidden;position:relative;
+  transition:transform .3s,border-color .3s,box-shadow .3s;
+}
+.pc:hover{transform:translateY(-4px);border-color:var(--bd2);box-shadow:0 14px 36px rgba(0,0,0,.3)}
+.cw8{grid-column:span 8}.cw4{grid-column:span 4}
+.cw6{grid-column:span 6}.cw4b{grid-column:span 4}
+@media(max-width:1024px){.cw8,.cw4,.cw6,.cw4b{grid-column:span 1}}
+.pt{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.pt::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.32))}
+.pt-lbl{position:relative;z-index:1;font-family:var(--serif);font-weight:300;font-size:clamp(1.4rem,2.5vw,2rem);letter-spacing:-.01em;padding:1.25rem;text-align:center}
+.pt-lbl em{font-style:italic;display:block}
+/* Thumb themes */
+.ts {background:linear-gradient(135deg,#140e08,#2e1c08);color:rgba(255,200,150,.82)}
+.tai{background:linear-gradient(135deg,#080e18,#102040);color:rgba(140,190,255,.85)}
+.tbr{background:linear-gradient(135deg,#180806,#5c1006);color:rgba(255,180,160,.85)}
+.ted{background:linear-gradient(135deg,#141008,#2c2408);color:rgba(255,232,150,.82)}
+.tdi{background:linear-gradient(135deg,#081410,#0e2418);color:rgba(150,255,190,.8)}
+.tmi{background:linear-gradient(135deg,#0e0e18,#181428);color:rgba(195,180,255,.82)}
+.tin{background:linear-gradient(135deg,#081414,#102820);color:rgba(170,235,215,.82)}
+.pb{padding:1.35rem 1.5rem}
+.pn{font-family:var(--mono);font-size:.63rem;color:var(--tx3);letter-spacing:.07em;margin-bottom:.75rem}
+.ptit{font-family:var(--serif);font-weight:400;font-size:1.22rem;line-height:1.2;letter-spacing:-.01em;color:var(--tx);margin-bottom:.45rem}
+.ptit em{font-style:italic}
+.pdesc{font-size:.78rem;color:var(--tx2);line-height:1.75;margin-bottom:1.1rem}
+.ptg{display:flex;flex-wrap:wrap;gap:.35rem}
+.ptag{font-family:var(--mono);font-size:.6rem;padding:.25rem .6rem;border:1px solid var(--bd2);color:var(--tx3);border-radius:2px}
+.parr{position:absolute;bottom:1.1rem;right:1.35rem;font-size:1rem;color:var(--tx3);transition:transform .2s,color .2s}
+.pc:hover .parr{transform:translate(3px,-3px);color:var(--or)}
+
+/* ── ABOUT — dark surface bg2 ── */
+.about-s{padding:7rem 0;background:var(--bg2);position:relative;overflow:hidden}
+@media(max-width:768px){.about-s{padding:4.5rem 0}}
+.about-s::before{
+  content:'';position:absolute;width:500px;height:500px;border-radius:50%;
+  background:var(--glow-ic);filter:blur(100px);
+  top:-100px;left:-100px;pointer-events:none;
+}
+.ag{display:grid;grid-template-columns:1fr 1.75fr;gap:5rem;align-items:start;position:relative;z-index:1}
+@media(max-width:900px){.ag{grid-template-columns:1fr;gap:3rem}}
+.aname{font-family:var(--serif);font-weight:300;font-size:clamp(2.5rem,6vw,4.5rem);line-height:.95;letter-spacing:-.03em;color:var(--tx)}
+.aname em{font-style:italic;display:block;color:var(--or)}
+.arole{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;margin-top:.85rem;margin-bottom:2rem}
+.ameta{display:flex;flex-direction:column;gap:.65rem;font-size:.79rem;color:var(--tx2);line-height:1.6;padding:1.25rem 0;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);margin-bottom:2rem}
+.ameta span{display:flex;align-items:center;gap:.55rem}
+.amd{width:4px;height:4px;border-radius:50%;background:var(--or);flex-shrink:0}
+.al{display:flex;gap:.75rem;flex-wrap:wrap}
+.alink{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;padding:.5rem 1.1rem;border:1px solid var(--bd2);color:var(--tx2);text-decoration:none;border-radius:2px;transition:all .2s}
+.alink:hover{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.alink.prim{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.alink.prim:hover{background:var(--or);border-color:var(--or);color:#fff}
+.apull{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(1.7rem,3.2vw,2.5rem);line-height:1.15;letter-spacing:-.02em;color:var(--tx);margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--bd2)}
+.arght p{font-size:.9rem;color:var(--tx2);line-height:2;margin-bottom:1.1rem}
+
+/* ── CONTACT ── */
+.contact-s{padding:7rem 0;text-align:center}
+@media(max-width:768px){.contact-s{padding:4.5rem 0}}
+.cs-lbl{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--tx3);text-transform:uppercase;margin-bottom:1.25rem}
+.cs-h2{font-family:var(--serif);font-weight:300;font-size:clamp(3rem,7vw,5.5rem);line-height:.95;letter-spacing:-.03em;color:var(--tx);margin-bottom:1.75rem}
+.cs-h2 em{font-style:italic;color:var(--am)}
+.cs-p{font-size:.9rem;color:var(--tx2);max-width:400px;margin:0 auto 2.75rem;line-height:1.9}
+.cs-btns{display:flex;gap:.85rem;justify-content:center;flex-wrap:wrap}
+.cs-btn{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;padding:.8rem 1.85rem;border-radius:3px;text-decoration:none;transition:all .2s}
+.cs-btn.fl{background:var(--am);color:#000;border:none}
+.cs-btn.fl:hover{opacity:.85;transform:translateY(-2px)}
+.cs-btn.ot{border:1px solid var(--bd2);color:var(--tx2)}
+.cs-btn.ot:hover{border-color:var(--bd3);color:var(--tx)}
+
+/* ── FOOTER ── */
+footer{
+  padding:1.75rem 3rem;border-top:1px solid var(--bd);background:var(--bg);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
+}
+@media(max-width:768px){footer{padding:1.5rem 1.25rem;flex-direction:column;align-items:flex-start}}
+.fl2{font-family:var(--mono);font-size:.68rem;color:var(--tx3)}
+.fr{display:flex;gap:1.5rem;list-style:none}
+.fr a{font-family:var(--mono);font-size:.68rem;color:var(--tx3);text-decoration:none;transition:color .2s}
+.fr a:hover{color:var(--tx2)}
+
+/* ── SCROLL REVEAL ── */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .75s ease,transform .75s ease}
+.rv.vis{opacity:1;transform:none}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+</style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <div class="nav-name">Shambhavi Singh</div>
-    <ul class="nav-links">
+<div id="cur"></div>
+<div id="cur-ring"><div id="cur-ring-inner"></div></div>
+
+<!-- ── NAV ──
+  Links verified against original index.html:
+  · #work, #about, #writing (bio section anchor), #contact — all internal anchors
+  · Resume: absolute URL to GitHub Pages PDF
+-->
+<nav id="nav">
+  <a href="#" class="nav-logo">Shambhavi <em>Singh</em></a>
+  <ul class="nav-links">
+    <li><a href="#work">Work</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#writing">Writing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li class="nav-resume"><a href="https://shavi2002.github.io/shambhavi-portfolio/shambhavi_singh_resume.pdf" target="_blank">Résumé ↗</a></li>
+  </ul>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="h-vig"></div>
+  <div class="h-fade"></div>
+  <div class="h-inner">
+    <p class="h-eyebrow">Media Arts &amp; Engineering · Brand · Strategy · AI</p>
+    <h1 class="h-title">Concept<span class="l2">before <em>canvas.</em></span></h1>
+    <p class="h-sub">I design at the intersection of concept and system — turning complex ideas into brands, strategies, and tools that communicate with clarity and intention.</p>
+    <div class="h-tags">
+      <span class="h-tag">Brand Identity</span>
+      <span class="h-tag">Visual Systems</span>
+      <span class="h-tag">AI Strategy</span>
+      <span class="h-tag">Org Design</span>
+      <span class="h-tag">Digital Product</span>
+    </div>
+  </div>
+  <div id="scroll-hint"><span>Scroll</span><div class="s-bar"></div></div>
+</section>
+
+<!-- GRADIENT BRIDGE: hero → panel 1 -->
+<div class="gb gb-bg-bg2"></div>
+
+<!-- ── STICKY PANEL 1: Identity ── -->
+<div class="pin-wrap" id="pin1">
+  <section class="panel" id="p-id">
+    <div class="id-wrap">
+      <div>
+        <p class="id-kicker">About the work</p>
+        <h2 class="id-h2">Complexity is not the enemy.<br/><em>Unclear thinking is.</em></h2>
+        <div class="id-list">
+          <div class="id-item"><span class="id-dot"></span>Brand Identity &amp; Visual Systems</div>
+          <div class="id-item"><span class="id-dot"></span>AI Strategy &amp; Technical Communication</div>
+          <div class="id-item"><span class="id-dot"></span>Non-Profit Organizational Design</div>
+          <div class="id-item"><span class="id-dot"></span>Digital Product &amp; UI Systems</div>
+          <div class="id-item"><span class="id-dot"></span>Instructional Design &amp; Frameworks</div>
+        </div>
+      </div>
+      <div class="id-right">
+        <p>I'm Shambhavi — a brand designer and strategist with a Media Arts &amp; Engineering (Design) degree and a habit of starting with "why" before touching a typeface.</p>
+        <p>My work spans brand identity, product design, packaging, instructional systems, and organizational strategy. Most recently I've been building at the intersection of AI and design — translating complex systems into tools that actually think.</p>
+        <p>At the AWS AI Cloud Innovation Center at ASU, I translate complex technical architecture into accessible visual narratives for public-sector audiences.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- GRADIENT BRIDGE: panel 1 → panel 2 -->
+<div class="gb gb-bg2-bg3"></div>
+
+<!-- ── STICKY PANEL 2: Capabilities ── -->
+<div class="pin-wrap" id="pin2">
+  <section class="panel" id="p-cap">
+    <div class="cap-wrap">
+      <div class="cap-head">
+        <h2 class="cap-h2">What I<br/><em>bring.</em></h2>
+        <p class="cap-note">A compound operator — strategy, brand, AI, and execution in one.</p>
+      </div>
+      <div class="cap-grid">
+        <div class="cap-cell"><div class="cap-lbl">Brand</div><ul><li>Identity systems</li><li>Logo design</li><li>Color + typography</li><li>Brand guidelines</li><li>Packaging design</li></ul></div>
+        <div class="cap-cell"><div class="cap-lbl">Digital</div><ul><li>Web design</li><li>UI systems</li><li>Product design</li><li>HTML / CSS / JS</li><li>Next.js · React</li></ul></div>
+        <div class="cap-cell"><div class="cap-lbl">Strategy</div><ul><li>Non-profit strategy</li><li>Impact frameworks</li><li>Instructional design</li><li>Technical comms</li><li>SROI analysis</li></ul></div>
+        <div class="cap-cell"><div class="cap-lbl">AI &amp; Tech</div><ul><li>AI workflow design</li><li>Multi-agent systems</li><li>AWS AI CIC</li><li>API integration</li><li>Prompt engineering</li></ul></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- GRADIENT BRIDGE: panel 2 → main -->
+<div class="gb gb-bg3-bg"></div>
+
+<!-- ── MAIN CONTENT ── -->
+<div id="main">
+
+  <!-- WORK -->
+  <section class="work-s" id="work">
+    <div class="sw">
+      <div class="sec-hd">
+        <h2 class="sec-title">Selected <em>Work</em></h2>
+        <span class="sec-ct">08 Projects</span>
+      </div>
+
+      <!--
+        DEBATE ENGINE — featured card
+        Outer <a> → https://debate-engine-two.vercel.app/landing.html
+        GitHub nested <a> → https://github.com/Shavi2002/debate-engine
+        (stopPropagation prevents firing outer card link)
+      -->
+      <a href="https://debate-engine-two.vercel.app/landing.html" target="_blank" class="dfc rv">
+        <div class="dfl">
+          <div>
+            <div class="dfl-eye"><span class="dfl-pd"></span>Live · Multi-Agent AI System</div>
+            <!-- .df-h3 is a <div> — fixes the "black extension" bug (was a bare <h3>) -->
+            <div class="df-h3"><em>Debate</em> Engine</div>
+            <p class="df-p">Two AI agents research opposing sides of any question using live web sources, structured belief graphs, and semantic contradiction detection. Built with thinkn.ai, Exa, and GPT-4o.</p>
+          </div>
+          <div class="dfl-links">
+            <span class="dfl-btn pr">View project →</span>
+            <a href="https://github.com/Shavi2002/debate-engine"
+               target="_blank"
+               class="dfl-btn gh"
+               onclick="event.preventDefault();event.stopPropagation();window.open('https://github.com/Shavi2002/debate-engine','_blank')">GitHub ↗</a>
+          </div>
+        </div>
+        <div class="dfr">
+          <div class="dw">
+            <div class="dw-bar">
+              <span class="dd" style="background:#ff5f57"></span>
+              <span class="dd" style="background:#febc2e"></span>
+              <span class="dd" style="background:#28c840"></span>
+            </div>
+            <div class="dw-body">
+              <div class="dl dc0">// Round 2 — fusing belief graph</div>
+              <div class="dl"><span class="dg0">proAgent</span>.after(webContent)</div>
+              <div class="dl"><span class="dr0">antiAgent</span>.after(webContent)</div>
+              <div class="dl dc0">// ⚡ contradiction detected</div>
+              <div class="dl dw0">contradictions: <span class="da0">3</span></div>
+              <div class="dl"><span class="dg0">beliefs</span>: 47 · <span class="dw0">sources</span>: 61</div>
+              <div class="dcbar">
+                <span class="dc0" style="font-family:var(--mono);font-size:.58rem">clarity</span>
+                <div class="dct"><div class="dcf" id="dbf"></div></div>
+                <span class="dcv">0.41</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <!--
+        PROJECT GRID — all links verified absolute:
+        01 → https://shavi2002.github.io/Non-profit-solutions/
+        02 → https://shavi2002.github.io/shambhavi-portfolio/cic-case-study.html
+        03 → https://shavi2002.github.io/shambhavi-portfolio/instructional-design.html
+        04 → https://shavi2002.github.io/shambhavi-portfolio/buff-curl.html
+        05 → https://shavi2002.github.io/shambhavi-portfolio/unstructure.html
+        06 → https://stapled.netlify.app/
+        07 → https://shavi2002.github.io/shambhavi-portfolio/previous-work.html
+        (Old site used relative paths like "buff-curl.html" — all now absolute)
+      -->
+      <div class="pg" style="margin-top:1.25rem">
+
+        <!-- 01 Non-Profit Solutions -->
+        <a href="https://shavi2002.github.io/Non-profit-solutions/" target="_blank" class="pc cw8 rv d1">
+          <div class="pt ts"><div class="pt-lbl">Non-Profit <em>Solutions</em></div></div>
+          <div class="pb">
+            <div class="pn">01</div>
+            <div class="ptit">Non-Profit <em>Solutions</em></div>
+            <div class="pdesc">Strategy framework · Organizational design · Instructional systems · Impact measurement · Train-the-Trainer certification</div>
+            <div class="ptg"><span class="ptag">Strategy</span><span class="ptag">Instructional Design</span><span class="ptag">Org Systems</span></div>
+          </div>
+          <span class="parr">→</span>
+        </a>
+
+        <!-- 02 AWS CIC -->
+        <a href="https://shavi2002.github.io/shambhavi-portfolio/cic-case-study.html" target="_blank" class="pc cw4 rv d2">
+          <div class="pt tai"><div class="pt-lbl">AWS AI <em>CIC</em></div></div>
+          <div class="pb">
+            <div class="pn">02</div>
+            <div class="ptit">AWS AI Cloud Innovation Center</div>
+            <div class="pdesc">Marketing strategy · Visual systems · Technical communication · Innovation Island</div>
+            <div class="ptg"><span class="ptag">Real Client</span><span class="ptag">Brand + Strategy</span></div>
+          </div>
+          <span class="parr">→</span>
+        </a>
+
+        <!-- 03 Instructional Design -->
+        <a href="https://shavi2002.github.io/shambhavi-portfolio/instructional-design.html" target="_blank" class="pc cw4b rv">
+          <div class="pt tin"><div class="pt-lbl">Designing for <em>Clarity</em></div></div>
+          <div class="pb">
+            <div class="pn">03</div>
+            <div class="ptit">Designing for <em>Clarity</em></div>
+            <div class="pdesc">Instructional design · Complex concept translation · Learner-centered content</div>
+            <div class="ptg"><span class="ptag">Instructional</span><span class="ptag">Communication</span></div>
+          </div>
+          <span class="parr">→</span>
+        </a>
+
+        <!-- 04 Buff Curl -->
+        <a href="https://shavi2002.github.io/shambhavi-portfolio/buff-curl.html" target="_blank" class="pc cw4b rv d1">
+          <div class="pt tbr"><div class="pt-lbl">Buff <em>Curl</em></div></div>
+          <div class="pb">
+            <div class="pn">04</div>
+            <div class="ptit">Buff <em>Curl</em></div>
+            <div class="pdesc">Self-initiated · Brand identity · Packaging · Product web design · Ingredient research</div>
+            <div class="ptg"><span class="ptag">Identity</span><span class="ptag">Product</span></div>
+          </div>
+          <span class="parr">→</span>
+        </a>
+
+        <!-- 05 (un)structure -->
+        <a href="https://shavi2002.github.io/shambhavi-portfolio/unstructure.html" target="_blank" class="pc cw4b rv d2">
+          <div class="pt ted"><div class="pt-lbl"><em>(un)</em>structure</div></div>
+          <div class="pb">
+            <div class="pn">05</div>
+            <div class="ptit"><em>(un)</em>structure</div>
+            <div class="pdesc">Design philosophy · Content system · Instagram · Substack essays</div>
+            <div class="ptg"><span class="ptag">Editorial</span><span class="ptag">Concept</span></div>
+          </div>
+          <span class="parr">→</span>
+        </a>
+
+        <!-- 06 Stapled -->
+        <a href="https://stapled.netlify.app/" target="_blank" class="pc cw6 rv">
+          <div class="pt tdi"><div class="pt-lbl">Stapled</div></div>
+          <div class="pb">
+            <div class="pn">06</div>
+            <div class="ptit">Stapled</div>
+            <div class="pdesc">Digital product design · Zine discovery platform · UI system · Coded + deployed</div>
+            <div class="ptg"><span class="ptag">Digital Product</span><span class="ptag">UI System</span></div>
+          </div>
+          <span class="parr">→</span>
+        </a>
+
+        <!-- 07 Previous Work -->
+        <a href="https://shavi2002.github.io/shambhavi-portfolio/previous-work.html" target="_blank" class="pc cw6 rv d1">
+          <div class="pt tmi"><div class="pt-lbl">Previous <em>Work</em></div></div>
+          <div class="pb">
+            <div class="pn">07</div>
+            <div class="ptit">Previous <em>Work</em></div>
+            <div class="pdesc">Herberger Institute · Lint Away · Full Plates · De Novo Bakes · Rattle — identity + packaging archive</div>
+            <div class="ptg"><span class="ptag">Various</span><span class="ptag">Identity + Packaging</span></div>
+          </div>
+          <span class="parr">→</span>
+        </a>
+
+      </div><!-- /pg -->
+    </div>
+  </section>
+
+  <!-- GRADIENT BRIDGE: work → about -->
+  <div class="gb gb-tall gb-bg-bg2"></div>
+
+  <!-- ABOUT — id="about" + id="writing" preserved from original nav -->
+  <section class="about-s" id="about">
+    <div id="writing" style="position:absolute;top:-80px"></div><!-- anchor for #writing nav link -->
+    <div class="sw">
+      <div class="ag">
+        <div class="rv">
+          <div class="aname">Shambhavi<em>Singh</em></div>
+          <div class="arole">Brand Designer &amp; Strategist</div>
+          <div class="ameta">
+            <span><span class="amd"></span>Tempe, AZ · Open to relocation</span>
+            <span><span class="amd"></span>AWS AI Cloud Innovation Center</span>
+            <span><span class="amd"></span>B.A. Media Arts &amp; Engineering (Design), ASU</span>
+            <span><span class="amd"></span>Hackathon Mentor — Kiro Spark Challenge</span>
+            <span><span class="amd"></span>Open to full-time roles</span>
+          </div>
+          <div class="al">
+            <a href="mailto:ssing382@asu.edu" class="alink prim">Say hello →</a>
+            <a href="https://www.linkedin.com/in/shambhavi-singh2002/" target="_blank" class="alink">LinkedIn ↗</a>
+            <a href="https://shavi2002.github.io/shambhavi-portfolio/shambhavi_singh_resume.pdf" target="_blank" class="alink">Résumé ↗</a>
+          </div>
+        </div>
+        <div class="arght rv d1">
+          <p class="apull">I start every project with a question: what does this actually need to communicate, and to whom?</p>
+          <p>My work spans brand identity, packaging, digital product design, editorial systems, instructional design, and organizational strategy. At the AWS AI Cloud Innovation Center at ASU, I translate complex technical architecture into accessible visual narratives for public-sector audiences.</p>
+          <p>Most recently I've been building AI-native tools — designing systems that don't just look intelligent but actually think. The Belief Debate Engine uses multi-agent architecture and structured belief graphs to research both sides of any question with calibrated uncertainty.</p>
+          <p>Outside of client work, I build from curiosity: Buff Curl began as a personal product gap, (un)structure began as a philosophical framework, and Stapled began as a question about why finding zines is so hard when finding books is so easy.</p>
+          <p>I mentor at the Principled Innovation Academy hackathon at ASU — the teams I worked with went on to win. I write about design, systems, and strategy on LinkedIn and Substack. Currently open to full-time roles in brand, visual, strategic, and AI-fluent design.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GRADIENT BRIDGE: about → contact -->
+  <div class="gb gb-tall gb-bg2-bg-r" style="background:linear-gradient(to bottom,var(--bg2),var(--bg))"></div>
+
+  <!-- CONTACT -->
+  <section class="contact-s" id="contact">
+    <div class="sw">
+      <p class="cs-lbl">Let's connect</p>
+      <h2 class="cs-h2">Let's make<br/><em>something real.</em></h2>
+      <p class="cs-p">Open to full-time roles, freelance, and collaboration.</p>
+      <div class="cs-btns">
+        <a href="mailto:ssing382@asu.edu" class="cs-btn fl">Say hello →</a>
+        <a href="https://www.linkedin.com/in/shambhavi-singh2002/" target="_blank" class="cs-btn ot">LinkedIn ↗</a>
+        <a href="https://shavi2002.github.io/shambhavi-portfolio/shambhavi_singh_resume.pdf" target="_blank" class="cs-btn ot">Résumé ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="fl2">Shambhavi Singh · shambhavi.design · © 2025</div>
+    <ul class="fr">
       <li><a href="#work">Work</a></li>
       <li><a href="#about">About</a></li>
       <li><a href="#writing">Writing</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li class="nav-resume"><a href="https://shavi2002.github.io/shambhavi-portfolio/shambhavi_singh_resume.pdf" target="_blank">Résumé ↗</a></li>
+      <li><a href="mailto:ssing382@asu.edu">Email</a></li>
+      <li><a href="https://www.linkedin.com/in/shambhavi-singh2002/" target="_blank">LinkedIn</a></li>
     </ul>
-  </nav>
+  </footer>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-left">
-      <div class="hero-index">Brand Designer &amp; Strategist</div>
-      <div class="h1-wrap">
-        <svg class="seal-rays" viewBox="0 0 320 320" xmlns="http://www.w3.org/2000/svg">
-          <g transform="translate(160,160)">
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(15)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(30)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(45)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(60)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(75)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(90)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(105)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(120)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(135)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(150)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(165)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(180)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(195)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(210)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(225)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(240)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(255)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(270)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(285)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(300)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(315)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(330)"/>
-            <line x1="0" y1="-88" x2="0" y2="-148" stroke="#EDE6D6" stroke-width="6" stroke-linecap="round" transform="rotate(345)"/>
-          </g>
-        </svg>
-        <h1>Concept<br>before<br><em><span style="display:inline-block;transform:translateY(-0.12em);">canvas.</span></em></h1>
-      </div>
-      <p class="hero-desc">I design at the intersection of concept and system — turning complex ideas into brands that communicate with clarity and intention.</p>
-    </div>
-    <div class="hero-right">
-      <div class="hero-right-top">Disciplines</div>
-      <ul class="discipline-list">
-        <li class="anim-pan d-1">Brand Identity</li>
-        <li class="anim-pan d-2">Visual Systems</li>
-        <li class="anim-pan d-3">Organizational Strategy</li>
-        <li class="anim-pan d-4">Instructional Design</li>
-      </ul>
-      <div class="hero-cta">
-        <a href="#work" class="btn-work">View work</a>
-        <a href="https://shavi2002.github.io/shambhavi-portfolio/shambhavi_singh_resume.pdf" target="_blank" class="btn-cv">View résumé</a>
-      </div>
-    </div>
-  </section>
+</div><!-- /main -->
 
-  <!-- TICKER -->
-  <div class="ticker">
-    <div class="ticker-inner">
-      <div class="ticker-item"><span>—</span>Brand Identity</div>
-      <div class="ticker-item"><span>—</span>Visual Systems</div>
-      <div class="ticker-item"><span>—</span>Product Design</div>
-      <div class="ticker-item"><span>—</span>Content Strategy</div>
-      <div class="ticker-item"><span>—</span>Packaging Design</div>
-      <div class="ticker-item"><span>—</span>Editorial Design</div>
-      <div class="ticker-item"><span>—</span>Design Philosophy</div>
-      <div class="ticker-item"><span>—</span>Instructional Design</div>
-      <div class="ticker-item"><span>—</span>Technical Communication</div>
-      <div class="ticker-item"><span>—</span>Brand Identity</div>
-      <div class="ticker-item"><span>—</span>Visual Systems</div>
-      <div class="ticker-item"><span>—</span>Product Design</div>
-      <div class="ticker-item"><span>—</span>Content Strategy</div>
-      <div class="ticker-item"><span>—</span>Packaging Design</div>
-      <div class="ticker-item"><span>—</span>Editorial Design</div>
-      <div class="ticker-item"><span>—</span>Design Philosophy</div>
-      <div class="ticker-item"><span>—</span>Instructional Design</div>
-      <div class="ticker-item"><span>—</span>Technical Communication</div>
-    </div>
-  </div>
+<script>
+/* ═══════════════════════════════════════
+   HERO CANVAS — Circuit + Lissajous + Fluid
+═══════════════════════════════════════ */
+(function(){
+  const cv=document.getElementById('hero-canvas');
+  const cx=cv.getContext('2d');
+  let W,H,t=0;
+  const COLS=[[200,68,10],[232,160,32],[125,211,252],[255,255,255],[80,140,220]];
+  const NP=700;const parts=[];
+  function n2(x,y,t){return Math.sin(x*1.4+t*.6)*.3+Math.sin(y*1.2-t*.45)*.28+Math.sin((x+y)*.8+t*.35)*.22+Math.cos(x*.55-y*.75+t*.28)*.2}
+  function sp(){const ci=Math.floor(Math.random()*COLS.length);return{x:Math.random()*W,y:Math.random()*H,vx:0,vy:0,age:0,life:140+Math.random()*220,sz:.6+Math.random()*2,spd:.5+Math.random()*1.2,col:COLS[ci],a:.38+Math.random()*.44}}
+  const curves=Array.from({length:5},(_,i)=>({ax:1+i*.5,ay:1+(i+1)*.7,px:Math.random()*Math.PI*2,py:Math.random()*Math.PI*2,col:COLS[i%5],al:.06+Math.random()*.08,sp:.0008+Math.random()*.001}));
+  const NN=28;const nodes=Array.from({length:NN},()=>({tx:Math.random(),ty:Math.random(),r:1.5+Math.random()*2.5,col:COLS[Math.floor(Math.random()*5)],phs:Math.random()*Math.PI*2,ps:.02+Math.random()*.024,conn:[]}));
+  function initN(){nodes.forEach(n=>{n.x=n.tx*W;n.y=n.ty*H});nodes.forEach((n,i)=>{n.conn=[];nodes.forEach((m,j)=>{if(i!==j&&Math.hypot(n.x-m.x,n.y-m.y)<W*.18)n.conn.push(j)})})}
+  function resize(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight;initN()}
+  function drawLis(lc){const hw=W/2,hh=H/2,rx=W*.38,ry=H*.38;const[r,g,b]=lc.col;cx.beginPath();for(let i=0;i<=360;i++){const th=(i/360)*Math.PI*2;const x=hw+rx*Math.sin(lc.ax*th+lc.px);const y=hh+ry*Math.sin(lc.ay*th+lc.py);i===0?cx.moveTo(x,y):cx.lineTo(x,y)}cx.strokeStyle=`rgba(${r},${g},${b},${lc.al})`;cx.lineWidth=.7;cx.stroke();lc.px+=lc.sp;lc.py+=lc.sp*1.3}
+  function drawCirc(){nodes.forEach(n=>{n.phs+=n.ps;const pa=.3+.25*Math.sin(n.phs);const[r,g,b]=n.col;n.conn.forEach(j=>{const m=nodes[j];const d=Math.hypot(n.x-m.x,n.y-m.y);const ea=(.045+.035*Math.sin(n.phs))*(1-d/(W*.18));cx.beginPath();const mx=(n.x+m.x)/2;cx.moveTo(n.x,n.y);cx.lineTo(mx,n.y);cx.lineTo(mx,m.y);cx.lineTo(m.x,m.y);cx.strokeStyle=`rgba(${r},${g},${b},${ea})`;cx.lineWidth=.5;cx.stroke()});cx.beginPath();cx.arc(n.x,n.y,n.r,0,Math.PI*2);cx.fillStyle=`rgba(${r},${g},${b},${pa})`;cx.fill();const pr=n.r+4+3*Math.sin(n.phs);cx.beginPath();cx.arc(n.x,n.y,pr,0,Math.PI*2);cx.strokeStyle=`rgba(${r},${g},${b},${pa*.22})`;cx.lineWidth=.6;cx.stroke()})}
+  function frame(){t+=.004;cx.fillStyle='rgba(7,7,14,.05)';cx.fillRect(0,0,W,H);curves.forEach(drawLis);drawCirc();parts.forEach((p,i)=>{const a=n2(p.x/240,p.y/240,t)*Math.PI*2.6;p.vx=p.vx*.9+Math.cos(a)*p.spd*.1;p.vy=p.vy*.9+Math.sin(a)*p.spd*.1;p.x+=p.vx;p.y+=p.vy;p.age++;const l=p.age/p.life;const al=l<.12?(l/.12)*p.a:l>.78?((1-l)/.22)*p.a:p.a;const[r,g,b]=p.col;cx.beginPath();cx.arc(p.x,p.y,p.sz,0,Math.PI*2);cx.fillStyle=`rgba(${r},${g},${b},${al})`;cx.fill();if(p.age>=p.life||p.x<-60||p.x>W+60||p.y<-60||p.y>H+60)parts[i]=sp()});const vg=cx.createRadialGradient(W/2,H/2,H*.15,W/2,H/2,H*.85);vg.addColorStop(0,'rgba(7,7,14,0)');vg.addColorStop(1,'rgba(7,7,14,.6)');cx.fillStyle=vg;cx.fillRect(0,0,W,H);requestAnimationFrame(frame)}
+  for(let i=0;i<NP;i++)parts.push(sp());
+  window.addEventListener('resize',resize);
+  resize();cx.fillStyle='#07070e';cx.fillRect(0,0,W,H);
+  frame();
+})();
 
-  <!-- WORK -->
-  <section class="work" id="work">
-    <div class="work-header">
-      <span class="work-title">Selected Work</span>
-      <span class="work-count">07 Projects</span>
-    </div>
+/* ═══════════════════════════════════════
+   GRADIENT CURSOR
+═══════════════════════════════════════ */
+(function(){
+  const dot=document.getElementById('cur');
+  const ring=document.getElementById('cur-ring');
+  let rx=window.innerWidth/2,ry=window.innerHeight/2,mx=rx,my=ry;
+  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+  (function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+  document.querySelectorAll('a,button,.pc,.dfc').forEach(el=>{
+    el.addEventListener('mouseenter',()=>{dot.style.width='22px';dot.style.height='22px';ring.style.width='60px';ring.style.height='60px'});
+    el.addEventListener('mouseleave',()=>{dot.style.width='12px';dot.style.height='12px';ring.style.width='40px';ring.style.height='40px'});
+  });
+})();
 
-    <a class="project-row anim-rise d-1" href="https://shavi2002.github.io/Non-profit-solutions/" target="_blank">
-      <div class="proj-num">01</div>
-      <div class="proj-info">
-        <div class="proj-name">Non-Profit <em>Solutions</em></div>
-        <div class="proj-desc">Strategy framework · Organizational design · Instructional systems · Impact measurement</div>
-      </div>
-      <div class="proj-tags">
-        <span class="proj-tag">Strategy</span>
-        <span class="proj-tag">Instructional Design</span>
-      </div>
-      <div class="proj-arrow">→</div>
-    </a>
+/* ═══════════════════════════════════════
+   NAV scrolled state
+═══════════════════════════════════════ */
+window.addEventListener('scroll',()=>{
+  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>80);
+},{passive:true});
 
-    <a class="project-row anim-rise d-2" href="instructional-design.html">
-      <div class="proj-num">02</div>
-      <div class="proj-info">
-        <div class="proj-name">Designing for Clarity</div>
-        <div class="proj-desc">Instructional design · Complex concept translation · Learner-centered content</div>
-      </div>
-      <div class="proj-tags">
-        <span class="proj-tag">Instructional</span>
-        <span class="proj-tag">Communication</span>
-      </div>
-      <div class="proj-arrow">→</div>
-    </a>
+/* ═══════════════════════════════════════
+   SCROLL HINT — hide on first scroll
+═══════════════════════════════════════ */
+window.addEventListener('scroll',function hide(){
+  document.getElementById('scroll-hint').classList.add('hidden');
+  window.removeEventListener('scroll',hide);
+},{passive:true,once:true});
 
-    <a class="project-row anim-rise d-3" href="cic-case-study.html">
-      <div class="proj-num">03</div>
-      <div class="proj-info">
-        <div class="proj-name">AWS AI Cloud Innovation Center</div>
-        <div class="proj-desc">Marketing strategy · Visual systems · Technical communication · Innovation Island</div>
-      </div>
-      <div class="proj-tags">
-        <span class="proj-tag">Real client</span>
-        <span class="proj-tag">Brand + Strategy</span>
-      </div>
-      <div class="proj-arrow">→</div>
-    </a>
+/* ═══════════════════════════════════════
+   STICKY PANELS
+═══════════════════════════════════════ */
+(function(){
+  const pins=[
+    {wrap:document.getElementById('pin1'),panel:document.getElementById('p-id')},
+    {wrap:document.getElementById('pin2'),panel:document.getElementById('p-cap')},
+  ];
+  function upd(){
+    const sy=window.scrollY,vh=window.innerHeight;
+    pins.forEach(({wrap,panel})=>{
+      const wt=wrap.offsetTop,wb=wt+wrap.offsetHeight;
+      const inV=sy+vh>wt+vh*.25&&sy<wb-vh*.1;
+      const past=sy>=wb-vh;
+      if(inV&&!past){panel.classList.remove('out');panel.classList.add('active')}
+      else if(past){panel.classList.add('out');panel.classList.remove('active')}
+      else{panel.classList.remove('active','out')}
+    });
+  }
+  window.addEventListener('scroll',upd,{passive:true});
+  window.addEventListener('resize',upd);
+  upd();
+})();
 
-    <a class="project-row anim-rise d-4" href="buff-curl.html">
-      <div class="proj-num">04</div>
-      <div class="proj-info">
-        <div class="proj-name">Buff Curl</div>
-        <div class="proj-desc">Self-initiated · Brand identity · Packaging · Product web design · Content</div>
-      </div>
-      <div class="proj-tags">
-        <span class="proj-tag">Self-initiated</span>
-        <span class="proj-tag">Identity + Product</span>
-      </div>
-      <div class="proj-arrow">→</div>
-    </a>
+/* ═══════════════════════════════════════
+   SCROLL REVEAL
+═══════════════════════════════════════ */
+(function(){
+  const obs=new IntersectionObserver(e=>{
+    e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('vis');obs.unobserve(en.target)}})
+  },{threshold:.08});
+  document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+})();
 
-    <a class="project-row anim-rise d-5" href="unstructure.html">
-      <div class="proj-num">05</div>
-      <div class="proj-info">
-        <div class="proj-name"><em>(un)structure</em></div>
-        <div class="proj-desc">Design philosophy · Content system · Instagram · Substack essays</div>
-      </div>
-      <div class="proj-tags">
-        <span class="proj-tag">Self-initiated</span>
-        <span class="proj-tag">Editorial + Concept</span>
-      </div>
-      <div class="proj-arrow">→</div>
-    </a>
-
-    <a class="project-row anim-rise d-6" href="https://stapled.netlify.app/" target="_blank">
-      <div class="proj-num">06</div>
-      <div class="proj-info">
-        <div class="proj-name">Stapled</div>
-        <div class="proj-desc">Digital product design · Zine discovery platform · UI system · Coded + deployed</div>
-      </div>
-      <div class="proj-tags">
-        <span class="proj-tag">Self-initiated</span>
-        <span class="proj-tag">Digital Product</span>
-      </div>
-      <div class="proj-arrow">→</div>
-    </a>
-
-    <a class="project-row anim-rise d-7" href="previous-work.html">
-      <div class="proj-num">07</div>
-      <div class="proj-info">
-        <div class="proj-name">Previous Work</div>
-        <div class="proj-desc">Herberger Institute · Lint Away · Full Plates · De Novo Bakes · Rattle</div>
-      </div>
-      <div class="proj-tags">
-        <span class="proj-tag">Various</span>
-        <span class="proj-tag">Identity + Packaging</span>
-      </div>
-      <div class="proj-arrow">→</div>
-    </a>
-
-    <!-- ── RÉSUMÉ STRIP ── -->
-    <div class="resume-strip">
-      <div class="resume-strip-left">
-        <div style="display:flex; flex-direction:column; gap: 4px;">
-          <div class="resume-eyebrow">Résumé</div>
-          <div class="resume-label">Shambhavi Singh — Brand Designer &amp; Strategist</div>
-          <div class="resume-meta">
-            <span>B.A. Design, Arizona State University</span>
-            <span>AWS AI Cloud Innovation Center</span>
-            <span>Open to full-time roles</span>
-          </div>
-        </div>
-      </div>
-      <a href="https://shavi2002.github.io/shambhavi-portfolio/shambhavi_singh_resume.pdf" target="_blank" class="btn-resume">View résumé</a>
-    </div>
-
-  </section>
-
-  <!-- ABOUT + CAPABILITIES -->
-  <section class="about" id="about">
-    <div class="about-left">
-      <div class="section-label">About</div>
-      <div class="about-headline">Complexity is not<br>the enemy.<br><em>Unclear thinking is.</em></div>
-      <p class="about-body">I'm Shambhavi — a brand designer and strategist with a design degree and a habit of starting with "why" before touching a typeface. My work spans brand identity, product design, packaging, instructional systems, and organizational strategy.<br><br>I'm drawn to projects where the concept is as important as the craft — where a framework, a brand, or a system needs to carry real meaning, not just aesthetics.</p>
-    </div>
-    <div class="about-right">
-      <div class="section-label">Capabilities</div>
-      <div class="skills-grid">
-        <div class="skill-group">
-          <div class="skill-group-title">Brand</div>
-          <div class="skill-item">Identity systems</div>
-          <div class="skill-item">Logo design</div>
-          <div class="skill-item">Color + type</div>
-          <div class="skill-item">Brand guidelines</div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Digital</div>
-          <div class="skill-item">Web design</div>
-          <div class="skill-item">UI systems</div>
-          <div class="skill-item">Product design</div>
-          <div class="skill-item">HTML / CSS</div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Print + Packaging</div>
-          <div class="skill-item">Label design</div>
-          <div class="skill-item">Editorial layout</div>
-          <div class="skill-item">Collateral</div>
-          <div class="skill-item">Postcards + print</div>
-        </div>
-        <div class="skill-group">
-          <div class="skill-group-title">Strategy</div>
-          <div class="skill-item">Non-profit strategy</div>
-          <div class="skill-item">Impact frameworks</div>
-          <div class="skill-item">Instructional design</div>
-          <div class="skill-item">Technical comms</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BIO -->
-  <section class="bio-section" id="writing">
-    <div class="bio-left">
-      <div class="section-label">Designer</div>
-      <div class="bio-name">Shambhavi<br><em>Singh</em></div>
-      <div class="bio-role">Brand Designer &amp; Strategist<br>Arizona State University, B.A.</div>
-      <ul class="bio-facts">
-        <li>Based in Tempe, AZ</li>
-        <li>AWS AI Cloud Innovation Center</li>
-        <li>Non-Profit Strategy Framework</li>
-        <li>Hackathon Mentor — Principled Innovation Academy</li>
-        <li>Open to full-time roles</li>
-      </ul>
-    </div>
-    <div class="bio-right">
-      <div class="section-label">Bio</div>
-      <p class="bio-text">I'm a brand designer and strategist who starts every project with a question: what does this actually need to communicate, and to whom?</p>
-      <p class="bio-text-secondary">My work spans brand identity, packaging, digital product design, editorial systems, instructional design, and organizational strategy. At the AWS AI Cloud Innovation Center at Arizona State University, I translated complex technical architecture into accessible visual narratives for public-sector audiences — work that required equal parts design thinking and strategic clarity.</p>
-      <p class="bio-text-secondary">Most recently, I built a comprehensive non-profit organizational strategy framework spanning capacity assessment, logic models, theory of change, SROI analysis, and instructional systems designed to train chapter founders. The work sits at the intersection of strategic design and systems thinking.</p>
-      <p class="bio-text-secondary">Outside of client work, I build things from my own curiosity: Buff Curl began as a personal product gap, (un)structure began as a philosophical framework, and Stapled began as a question about why finding zines is so hard when finding books is so easy.</p>
-      <p class="bio-text-secondary">I have mentored at the Principled Innovation Academy hackathon at ASU — the teams I worked with went on to win. I write about design, systems, and strategy on LinkedIn and Substack. Currently open to full-time roles in brand, visual, and strategic design.</p>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section class="contact" id="contact">
-    <div>
-      <div class="contact-headline">Let's make<br><em>something real.</em></div>
-      <div class="contact-sub">Open to full-time roles · Freelance · Collaboration</div>
-    </div>
-    <div class="contact-links">
-      <a href="mailto:ssing382@asu.edu" class="contact-link primary">Say hello</a>
-      <a href="https://www.linkedin.com/in/shambhavi-singh2002/" target="_blank" class="contact-link">LinkedIn</a>
-      <a href="https://shavi2002.github.io/shambhavi-portfolio/shambhavi_singh_resume.pdf" target="_blank" class="contact-link resume">Résumé ↗</a>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer>
-    <span class="footer-name">Shambhavi Singh</span>
-    <span>shambhavi.design</span>
-    <span>© 20
+/* ═══════════════════════════════════════
+   CLARITY BAR
+═══════════════════════════════════════ */
+(function(){
+  const f=document.getElementById('dbf');if(!f)return;
+  const obs=new IntersectionObserver(e=>{
+    if(e[0].isIntersecting){let n=0;const t=setInterval(()=>{f.style.width=(++n)+'%';if(n>=41)clearInterval(t)},28);obs.disconnect()}
+  },{threshold:.3});
+  obs.observe(f);
+})();
+</script>
+</body>
+</html>
