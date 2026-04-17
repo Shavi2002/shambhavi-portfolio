@@ -61,6 +61,11 @@ body{
   cursor:none;
   -webkit-font-smoothing:antialiased;
 }
+/* On touch/mobile devices restore normal cursor and hide custom cursor elements */
+@media(hover:none),(pointer:coarse){
+  body{cursor:auto}
+  #cur,#cur-ring{display:none!important}
+}
 
 /* ── GRADIENT CURSOR ── */
 #cur{
@@ -426,7 +431,16 @@ nav.scrolled{
 .cs-lbl{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--tx3);text-transform:uppercase;margin-bottom:1.25rem}
 .cs-h2{font-family:var(--serif);font-weight:300;font-size:clamp(3rem,7vw,5.5rem);line-height:.95;letter-spacing:-.03em;color:var(--tx);margin-bottom:1.75rem}
 .cs-h2 em{font-style:italic;color:var(--am)}
-.cs-p{font-size:.9rem;color:var(--tx2);max-width:400px;margin:0 auto 2.75rem;line-height:1.9}
+.cs-p{font-size:.9rem;color:var(--tx2);max-width:400px;margin:0 auto 1.5rem;line-height:1.9}
+.cs-email{
+  display:inline-block;
+  font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;
+  color:var(--ic);text-decoration:none;
+  border-bottom:1px solid rgba(125,211,252,.3);
+  padding-bottom:2px;margin-bottom:2.25rem;
+  transition:color .2s,border-color .2s;
+}
+.cs-email:hover{color:var(--am);border-color:rgba(232,160,32,.4)}
 .cs-btns{display:flex;gap:.85rem;justify-content:center;flex-wrap:wrap}
 .cs-btn{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;padding:.8rem 1.85rem;border-radius:3px;text-decoration:none;transition:all .2s}
 .cs-btn.fl{background:var(--am);color:#000;border:none}
@@ -745,6 +759,7 @@ footer{
       <p class="cs-lbl">Let's connect</p>
       <h2 class="cs-h2">Let's make<br/><em>something real.</em></h2>
       <p class="cs-p">Open to full-time roles, freelance, and collaboration.</p>
+      <a href="mailto:ssing382@asu.edu" class="cs-email">ssing382@asu.edu</a>
       <div class="cs-btns">
         <a href="mailto:ssing382@asu.edu" class="cs-btn fl">Say hello →</a>
         <a href="https://www.linkedin.com/in/shambhavi-singh2002/" target="_blank" class="cs-btn ot">LinkedIn ↗</a>
@@ -793,19 +808,23 @@ footer{
 })();
 
 /* ═══════════════════════════════════════
-   GRADIENT CURSOR
+   GRADIENT CURSOR — desktop only
+   Skipped entirely on touch/mobile devices
+   (matchMedia hover:hover = has a mouse)
 ═══════════════════════════════════════ */
-(function(){
-  const dot=document.getElementById('cur');
-  const ring=document.getElementById('cur-ring');
-  let rx=window.innerWidth/2,ry=window.innerHeight/2,mx=rx,my=ry;
-  document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
-  (function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
-  document.querySelectorAll('a,button,.pc,.dfc').forEach(el=>{
-    el.addEventListener('mouseenter',()=>{dot.style.width='22px';dot.style.height='22px';ring.style.width='60px';ring.style.height='60px'});
-    el.addEventListener('mouseleave',()=>{dot.style.width='12px';dot.style.height='12px';ring.style.width='40px';ring.style.height='40px'});
-  });
-})();
+if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+  (function(){
+    const dot=document.getElementById('cur');
+    const ring=document.getElementById('cur-ring');
+    let rx=window.innerWidth/2,ry=window.innerHeight/2,mx=rx,my=ry;
+    document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px'});
+    (function loop(){rx+=(mx-rx)*.13;ry+=(my-ry)*.13;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(loop)})();
+    document.querySelectorAll('a,button,.pc,.dfc').forEach(el=>{
+      el.addEventListener('mouseenter',()=>{dot.style.width='22px';dot.style.height='22px';ring.style.width='60px';ring.style.height='60px'});
+      el.addEventListener('mouseleave',()=>{dot.style.width='12px';dot.style.height='12px';ring.style.width='40px';ring.style.height='40px'});
+    });
+  })();
+}
 
 /* ═══════════════════════════════════════
    NAV scrolled state
