@@ -184,7 +184,7 @@ html[data-theme="light"] .h-tag{border-color:rgba(3,105,161,.25);color:rgba(3,10
 .dfc{margin-bottom:1.25rem;position:relative;z-index:1;border:1px solid rgba(125,211,252,.16);border-radius:8px;background:var(--bg2);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;text-decoration:none;color:inherit;transition:border-color .3s,transform .3s,box-shadow .3s,background .35s}
 .dfc:hover{border-color:rgba(125,211,252,.34);transform:translateY(-3px);box-shadow:0 20px 50px rgba(0,0,0,.3)}
 @media(max-width:768px){.dfc{grid-template-columns:1fr}}
-.dfl{padding:2.75rem 3rem;display:flex;flex-direction:column;justify-content:space-between;gap:2rem}
+.dfl{padding:2.75rem 3rem;display:flex;flex-direction:column;justify-content:space-between;gap:2rem;align-items:flex-start}
 @media(max-width:768px){.dfl{padding:2rem 1.75rem}}
 .dfl-eye{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:var(--ic);text-transform:uppercase;display:flex;align-items:center;gap:.45rem;margin-bottom:1rem}
 .dfl-pd{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite;flex-shrink:0}
@@ -192,12 +192,45 @@ html[data-theme="light"] .h-tag{border-color:rgba(3,105,161,.25);color:rgba(3,10
 .df-h3{font-family:var(--serif);font-weight:300;font-size:clamp(1.9rem,3.5vw,3rem);line-height:1.08;letter-spacing:-.025em;color:var(--tx);margin-bottom:.85rem}
 .df-h3 em{font-style:italic;color:var(--ic)}
 .df-p{font-size:.88rem;color:var(--tx2);line-height:1.95;max-width:380px}
-.dfl-links{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.5rem;align-items:flex-start;width:fit-content}
-.dfl-btn{font-family:var(--mono);font-size:.75rem;letter-spacing:.05em;padding:.7rem 1.4rem;border-radius:3px;transition:all .2s;display:inline-flex;align-items:center;gap:.35rem;white-space:nowrap;text-decoration:none;width:fit-content;flex-shrink:0}
-.dfl-btn.pr{background:var(--ic);color:#000;border:none}
-.dfl-btn.pr:hover{opacity:.82;transform:translateY(-1px)}
-html[data-theme="light"] .dfl-btn.pr{background:var(--ic);color:#fff}
-.dfl-btn.gh{border:1px solid var(--bd2);color:var(--tx2);background:transparent}
+.dfl-links{display:flex;align-items:center;gap:1rem;margin-top:.5rem;flex-wrap:wrap}
+/* ── DRAG SLIDER ── */
+.drag-slider{
+  position:relative;width:260px;height:48px;
+  background:rgba(125,211,252,.06);
+  border:1px solid rgba(125,211,252,.22);
+  border-radius:100px;overflow:hidden;cursor:grab;
+  flex-shrink:0;user-select:none;-webkit-user-select:none;
+}
+.drag-slider:active{cursor:grabbing}
+.drag-track-label{
+  position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;pointer-events:none;z-index:1;
+  font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(125,211,252,.5);
+  transition:opacity .2s;
+}
+.drag-slider.dragging .drag-track-label,
+.drag-slider.launched .drag-track-label{opacity:0}
+.drag-fill{
+  position:absolute;left:0;top:0;bottom:0;width:48px;
+  background:rgba(125,211,252,.08);
+  border-radius:100px;pointer-events:none;transition:none;
+}
+.drag-knob{
+  position:absolute;left:4px;top:4px;width:40px;height:40px;
+  background:var(--ic);border-radius:100px;
+  display:flex;align-items:center;justify-content:center;
+  z-index:2;transition:transform .08s,box-shadow .2s;
+  box-shadow:0 2px 12px rgba(125,211,252,.35);
+  will-change:transform;
+}
+html[data-theme="light"] .drag-knob{background:var(--ic)}
+.drag-knob svg{width:16px;height:16px;fill:none;stroke:#000;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+html[data-theme="light"] .drag-knob svg{stroke:#fff}
+.drag-slider.launched .drag-knob{background:#4ade80;box-shadow:0 2px 18px rgba(74,222,128,.5)}
+.drag-slider.launched .drag-knob svg{stroke:#000}
+/* GitHub button */
+.dfl-btn.gh{font-family:var(--mono);font-size:.75rem;letter-spacing:.05em;padding:.7rem 1.4rem;border-radius:3px;transition:all .2s;display:inline-flex;align-items:center;gap:.35rem;white-space:nowrap;text-decoration:none;width:fit-content;flex-shrink:0;border:1px solid var(--bd2);color:var(--tx2);background:transparent}
 .dfl-btn.gh:hover{border-color:var(--bd3);color:var(--tx)}
 .dfr{background:linear-gradient(135deg,#0c1220 0%,#141e36 100%);display:flex;align-items:center;justify-content:center;padding:2rem;position:relative;overflow:hidden;min-height:260px}
 .dfr::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(125,211,252,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(125,211,252,.04) 1px,transparent 1px);background-size:36px 36px}
@@ -399,7 +432,14 @@ footer{padding:1.75rem 3rem;border-top:1px solid var(--bd);background:var(--bg);
             <p class="df-p">Two AI agents research opposing sides of any question using live web sources, structured belief graphs, and semantic contradiction detection. Built with thinkn.ai, Exa, and GPT-4o.</p>
           </div>
           <div class="dfl-links">
-            <span class="dfl-btn pr">View project →</span>
+            <!-- Drag-to-launch slider -->
+            <div class="drag-slider" id="dragSlider" onclick="event.stopPropagation()">
+              <div class="drag-fill" id="dragFill"></div>
+              <div class="drag-track-label">Drag to open →</div>
+              <div class="drag-knob" id="dragKnob">
+                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
             <a href="https://github.com/Shavi2002/debate-engine" target="_blank" class="dfl-btn gh" onclick="event.preventDefault();event.stopPropagation();window.open('https://github.com/Shavi2002/debate-engine','_blank')">GitHub ↗</a>
           </div>
         </div>
@@ -619,6 +659,94 @@ window.addEventListener('scroll',function hide(){document.getElementById('scroll
 (function(){
   const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('vis');obs.unobserve(en.target)}})},{threshold:.08});
   document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
+})();
+
+
+/* ═══════════════════════════════════════
+   DRAG-TO-LAUNCH SLIDER
+═══════════════════════════════════════ */
+(function(){
+  const slider = document.getElementById('dragSlider');
+  const knob   = document.getElementById('dragKnob');
+  const fill   = document.getElementById('dragFill');
+  if (!slider) return;
+
+  const TARGET_URL = 'https://debate-engine-two.vercel.app/landing.html';
+  let dragging = false;
+  let startX = 0;
+  let knobX  = 0;
+  let maxX   = 0;
+  const THRESHOLD = 0.72; // 72% of track = launch
+
+  function getMax() {
+    return slider.offsetWidth - knob.offsetWidth - 8;
+  }
+
+  function setKnob(x) {
+    x = Math.max(0, Math.min(x, maxX));
+    knob.style.transform = `translateX(${x}px)`;
+    fill.style.width = (x + knob.offsetWidth + 4) + 'px';
+  }
+
+  function onStart(e) {
+    if (slider.classList.contains('launched')) return;
+    e.stopPropagation();
+    dragging = true;
+    maxX = getMax();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    startX = clientX - knobX;
+    slider.classList.add('dragging');
+    knob.style.transition = 'none';
+    fill.style.transition  = 'none';
+  }
+
+  function onMove(e) {
+    if (!dragging) return;
+    e.preventDefault();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    knobX = clientX - startX;
+    setKnob(knobX);
+  }
+
+  function onEnd(e) {
+    if (!dragging) return;
+    dragging = false;
+    slider.classList.remove('dragging');
+    knob.style.transition = '';
+    fill.style.transition  = '';
+
+    const progress = knobX / maxX;
+    if (progress >= THRESHOLD) {
+      // Launch!
+      knobX = maxX;
+      setKnob(maxX);
+      slider.classList.add('launched');
+      // Brief green flash then open
+      setTimeout(() => {
+        window.open(TARGET_URL, '_blank');
+        // Reset after opening
+        setTimeout(() => {
+          slider.classList.remove('launched');
+          knobX = 0;
+          setKnob(0);
+        }, 900);
+      }, 220);
+    } else {
+      // Snap back
+      knobX = 0;
+      setKnob(0);
+    }
+  }
+
+  // Mouse events
+  knob.addEventListener('mousedown', onStart);
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup', onEnd);
+
+  // Touch events
+  knob.addEventListener('touchstart', onStart, {passive:false});
+  window.addEventListener('touchmove', onMove, {passive:false});
+  window.addEventListener('touchend', onEnd);
 })();
 
 /* CLARITY BAR */
