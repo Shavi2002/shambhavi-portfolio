@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
@@ -8,8 +8,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:ital,wght@0,200;0,300;0,400;1,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet"/>
-
-<!-- Microsoft Clarity — visitor analytics (preserved from original) -->
 <script type="text/javascript">
 (function(c,l,a,r,i,t,y){
   c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
@@ -17,446 +15,277 @@
   y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
 })(window,document,"clarity","script","w23wtop35z");
 </script>
-
 <style>
-/* ────────────────────────────────────────
-   DESIGN TOKENS — full dark, hero palette
-──────────────────────────────────────── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* ── DARK TOKENS (default) ── */
 :root{
-  --bg:    #07070e;
-  --bg2:   #0d0d1a;
-  --bg3:   #121226;
-  --bg4:   #181835;
+  --bg:#07070e;--bg2:#0d0d1a;--bg3:#121226;--bg4:#181835;
+  --tx:#f0f0fa;--tx2:#b0b0d8;--tx3:#7878b0;
+  --bd:rgba(240,240,250,.09);--bd2:rgba(240,240,250,.16);--bd3:rgba(240,240,250,.28);
+  --or:#e05510;--am:#f0a820;--ic:#7dd3fc;--co:#4e8ce0;
+  --glow-or:rgba(200,68,10,.1);--glow-am:rgba(232,160,32,.08);--glow-ic:rgba(125,211,252,.08);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'DM Sans','Helvetica Neue',sans-serif;
+  --mono:'DM Mono',monospace;
+  --nav-bg:rgba(7,7,14,.0);--nav-scrolled:rgba(7,7,14,.92);
+  --tog-track:#1c1c38;--tog-knob:#f0f0fa;--tog-lbl:#7878b0;--tog-lbl-act:#f0f0fa;
+}
 
-  --tx:    #eeeef8;
-  --tx2:   #7878a0;
-  --tx3:   #3e3e58;
-
-  --bd:    rgba(238,238,248,.065);
-  --bd2:   rgba(238,238,248,.12);
-  --bd3:   rgba(238,238,248,.2);
-
-  /* brand — pulled from hero canvas palette */
-  --or:    #c8440a;
-  --am:    #e8a020;
-  --ic:    #7dd3fc;
-  --co:    #4e8ce0;
-
-  --glow-or: rgba(200,68,10,.1);
-  --glow-am: rgba(232,160,32,.08);
-  --glow-ic: rgba(125,211,252,.08);
-
-  --serif: 'Cormorant Garamond',Georgia,serif;
-  --sans:  'DM Sans','Helvetica Neue',sans-serif;
-  --mono:  'DM Mono',monospace;
+/* ── LIGHT TOKENS ── */
+html[data-theme="light"]{
+  --bg:#f5f2ed;--bg2:#ffffff;--bg3:#edeae4;--bg4:#e4e0d8;
+  --tx:#18140e;--tx2:#4a4030;--tx3:#8a7a60;
+  --bd:rgba(24,20,14,.09);--bd2:rgba(24,20,14,.16);--bd3:rgba(24,20,14,.28);
+  --or:#b83808;--am:#c07808;--ic:#0369a1;--co:#1e5fa8;
+  --glow-or:rgba(184,56,8,.06);--glow-am:rgba(192,120,8,.05);--glow-ic:rgba(3,105,161,.06);
+  --nav-bg:rgba(245,242,237,.0);--nav-scrolled:rgba(245,242,237,.94);
+  --tog-track:#e0dcd4;--tog-knob:#18140e;--tog-lbl:#8a7a60;--tog-lbl-act:#18140e;
 }
 
 html{scroll-behavior:smooth}
-body{
-  font-family:var(--sans);
-  background:var(--bg);
-  color:var(--tx);
-  overflow-x:hidden;
-  cursor:none;
-  -webkit-font-smoothing:antialiased;
-}
-/* On touch/mobile devices restore normal cursor and hide custom cursor elements */
-@media(hover:none),(pointer:coarse){
-  body{cursor:auto}
-  #cur,#cur-ring{display:none!important}
-}
+body{font-family:var(--sans);background:var(--bg);color:var(--tx);overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased;transition:background .35s,color .35s}
+@media(hover:none),(pointer:coarse){body{cursor:auto}#cur,#cur-ring{display:none!important}}
 
 /* ── GRADIENT CURSOR ── */
-#cur{
-  position:fixed;width:12px;height:12px;border-radius:50%;
-  pointer-events:none;z-index:9999;transform:translate(-50%,-50%);
-  background:conic-gradient(var(--or),var(--am),var(--ic),var(--or));
-  animation:cspin 2s linear infinite;
-}
-#cur-ring{
-  position:fixed;width:40px;height:40px;border-radius:50%;
-  pointer-events:none;z-index:9998;transform:translate(-50%,-50%);
-  transition:width .18s,height .18s;
-}
-#cur-ring-inner{
-  width:100%;height:100%;border-radius:50%;
-  border:1.5px solid transparent;
-  background:conic-gradient(
-    rgba(200,68,10,.55),rgba(232,160,32,.55),
-    rgba(125,211,252,.55),rgba(200,68,10,.55)
-  ) border-box;
-  -webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);
-  -webkit-mask-composite:destination-out;mask-composite:exclude;
-  animation:cspin 3s linear infinite reverse;
-}
+#cur{position:fixed;width:12px;height:12px;border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);background:conic-gradient(var(--or),var(--am),var(--ic),var(--or));animation:cspin 2s linear infinite}
+#cur-ring{position:fixed;width:40px;height:40px;border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .18s,height .18s}
+#cur-ring-inner{width:100%;height:100%;border-radius:50%;border:1.5px solid transparent;background:conic-gradient(rgba(200,68,10,.55),rgba(232,160,32,.55),rgba(125,211,252,.55),rgba(200,68,10,.55)) border-box;-webkit-mask:linear-gradient(#fff 0 0) padding-box,linear-gradient(#fff 0 0);-webkit-mask-composite:destination-out;mask-composite:exclude;animation:cspin 3s linear infinite reverse}
 @keyframes cspin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 
 /* ── NAV ── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.5rem 3rem;transition:all .4s;
-}
-nav.scrolled{
-  background:rgba(7,7,14,.9);backdrop-filter:blur(20px);
-  padding:1rem 3rem;border-bottom:1px solid var(--bd);
-}
-.nav-logo{
-  font-family:var(--serif);font-weight:300;font-size:1.1rem;
-  color:var(--tx);text-decoration:none;letter-spacing:.02em;
-}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 3rem;transition:all .4s;background:var(--nav-bg)}
+nav.scrolled{background:var(--nav-scrolled);backdrop-filter:blur(20px);padding:1rem 3rem;border-bottom:1px solid var(--bd)}
+.nav-logo{font-family:var(--serif);font-weight:300;font-size:1.2rem;color:var(--tx);text-decoration:none;letter-spacing:.02em;transition:color .3s}
 .nav-logo em{font-style:italic;color:var(--am)}
 .nav-links{display:flex;align-items:center;gap:0;list-style:none}
-.nav-links a{
-  font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;
-  color:var(--tx2);text-decoration:none;transition:color .2s;
-  padding:0 1rem;
-}
+.nav-links a{font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--tx2);text-decoration:none;transition:color .2s;padding:0 1rem}
 .nav-links a:hover{color:var(--tx)}
 .nav-links .nav-resume a{color:var(--tx);border-left:1px solid var(--bd2)}
 .nav-links .nav-resume a:hover{color:var(--am)}
-.nav-cta{
-  font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;
-  padding:.45rem 1.1rem;border:1px solid var(--bd2);
-  color:var(--tx2);text-decoration:none;transition:all .2s;border-radius:2px;
+.nav-right{display:flex;align-items:center;gap:1rem}
+
+/* ── THEME TOGGLE ── */
+.theme-toggle{
+  display:flex;align-items:center;gap:7px;cursor:pointer;
+  background:var(--tog-track);border-radius:100px;
+  padding:4px;border:1px solid var(--bd2);
+  transition:background .35s,border-color .35s;
+  flex-shrink:0;
 }
-.nav-cta:hover{background:var(--tx);color:var(--bg);border-color:var(--tx)}
-@media(max-width:768px){nav{padding:1rem 1.25rem}.nav-links{display:none}}
+.tog-opt{
+  font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;
+  text-transform:uppercase;padding:4px 10px;border-radius:100px;
+  color:var(--tog-lbl);transition:all .3s;user-select:none;
+  white-space:nowrap;line-height:1;
+}
+.tog-opt.active{
+  background:var(--tog-knob);
+  color:var(--bg);
+  font-weight:400;
+}
+html[data-theme="light"] .tog-opt.active{color:var(--bg2)}
+
+@media(max-width:768px){
+  nav{padding:1rem 1.25rem}
+  .nav-links{display:none}
+  .tog-opt{font-size:.55rem;padding:3px 8px}
+}
 
 /* ── HERO ── */
-#hero{
-  position:relative;height:100vh;min-height:620px;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;background:var(--bg);
-}
+#hero{position:relative;height:100vh;min-height:620px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--bg)}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
-.h-vig{
-  position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 72% 72% at 50% 50%,transparent,rgba(7,7,14,.5));
-}
-/* Bottom fade — hero bleeds into first panel */
-.h-fade{
-  position:absolute;bottom:0;left:0;right:0;height:200px;pointer-events:none;
-  background:linear-gradient(to bottom,transparent,var(--bg));
-}
-.h-inner{
-  position:relative;z-index:2;text-align:center;
-  padding:0 2rem;max-width:900px;
-}
-.h-eyebrow{
-  font-family:var(--mono);font-size:.7rem;color:rgba(125,211,252,.48);
-  letter-spacing:.18em;text-transform:uppercase;margin-bottom:2rem;
-  opacity:0;animation:fup .8s ease .3s forwards;
-}
-.h-title{
-  font-family:var(--serif);font-weight:300;
-  font-size:clamp(3.5rem,9vw,8rem);line-height:.92;
-  letter-spacing:-.025em;color:var(--tx);margin-bottom:1.75rem;
-  opacity:0;animation:fup .9s ease .5s forwards;
-}
-.h-title em{font-style:italic;color:var(--am)}
-.h-title .l2{display:block;padding-left:clamp(2rem,7vw,6rem)}
-.h-sub{
-  font-size:.95rem;color:var(--tx2);max-width:480px;
-  margin:0 auto 2.5rem;line-height:1.9;
-  opacity:0;animation:fup .8s ease .72s forwards;
-}
-.h-tags{
-  display:flex;gap:.65rem;flex-wrap:wrap;justify-content:center;
-  opacity:0;animation:fup .8s ease .95s forwards;
-}
-.h-tag{
-  font-family:var(--mono);font-size:.65rem;letter-spacing:.07em;
-  padding:.32rem .8rem;border:1px solid rgba(125,211,252,.16);
-  color:rgba(125,211,252,.5);border-radius:100px;
-}
-#scroll-hint{
-  position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);
-  z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem;
-  color:rgba(255,255,255,.23);font-size:.65rem;letter-spacing:.12em;
-  text-transform:uppercase;font-family:var(--mono);
-  opacity:0;animation:fup .7s ease 1.4s forwards;
-  transition:opacity .5s ease;pointer-events:none;
-}
-#scroll-hint.hidden{opacity:0!important}
-.s-bar{
-  width:1px;height:36px;
-  background:linear-gradient(to bottom,transparent,rgba(125,211,252,.32));
-  animation:sbounce 2s ease infinite;
-}
-@keyframes fup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
-@keyframes sbounce{0%,100%{opacity:.25;transform:scaleY(1)}50%{opacity:.7;transform:scaleY(1.3)}}
+.h-vig{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 72% 72% at 50% 50%,transparent,rgba(7,7,14,.5))}
+html[data-theme="light"] .h-vig{background:radial-gradient(ellipse 72% 72% at 50% 50%,transparent,rgba(245,242,237,.45))}
+.h-fade{position:absolute;bottom:0;left:0;right:0;height:200px;pointer-events:none;background:linear-gradient(to bottom,transparent,var(--bg))}
+.h-inner{position:relative;z-index:2;text-align:center;padding:0 2rem;max-width:1000px;width:100%;margin:0 auto}
 
-/* ══════════════════════════════════════════
-   GRADIENT BRIDGES — connect every section
-══════════════════════════════════════════ */
-.gb{height:80px;flex-shrink:0}
-.gb-bg-bg2   {background:linear-gradient(to bottom,var(--bg),var(--bg2))}
-.gb-bg2-bg3  {background:linear-gradient(to bottom,var(--bg2),var(--bg3))}
-.gb-bg3-bg   {background:linear-gradient(to bottom,var(--bg3),var(--bg))}
-.gb-bg-bg2-r {background:linear-gradient(to bottom,var(--bg2),var(--bg))}
-.gb-bg2-bg-r {background:linear-gradient(to bottom,var(--bg2),var(--bg))}
+/* eyebrow — bigger, more visible */
+.h-eyebrow{font-family:var(--mono);font-size:.82rem;color:var(--ic);letter-spacing:.16em;text-transform:uppercase;margin-bottom:2.5rem;opacity:0;animation:fup .8s ease .3s forwards;text-shadow:0 0 20px rgba(125,211,252,.3)}
+html[data-theme="light"] .h-eyebrow{text-shadow:none;color:var(--ic)}
+
+/* title — CENTERED, bigger */
+.h-title{font-family:var(--serif);font-weight:300;font-size:clamp(4rem,10vw,9.5rem);line-height:.92;letter-spacing:-.025em;color:var(--tx);margin-bottom:2rem;opacity:0;animation:fup .9s ease .5s forwards;text-align:center}
+.h-title em{font-style:italic;color:var(--am)}
+/* removed .l2 offset — everything centered now */
+.h-title .l2{display:block;padding-left:0}
+
+/* sub — bigger, more visible */
+.h-sub{font-size:1.08rem;color:var(--tx2);max-width:540px;margin:0 auto 2.75rem;line-height:1.95;opacity:0;animation:fup .8s ease .72s forwards;font-weight:300}
+html[data-theme="light"] .h-sub{color:var(--tx2)}
+
+.h-tags{display:flex;gap:.75rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:fup .8s ease .95s forwards}
+.h-tag{font-family:var(--mono);font-size:.72rem;letter-spacing:.07em;padding:.4rem 1rem;border:1px solid rgba(125,211,252,.22);color:rgba(125,211,252,.72);border-radius:100px}
+html[data-theme="light"] .h-tag{border-color:rgba(3,105,161,.25);color:rgba(3,105,161,.75)}
+
+#scroll-hint{position:absolute;bottom:3rem;left:50%;transform:translateX(-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:.5rem;color:var(--tx3);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-family:var(--mono);opacity:0;animation:fup .7s ease 1.4s forwards;transition:opacity .5s ease;pointer-events:none}
+#scroll-hint.hidden{opacity:0!important}
+.s-bar{width:1px;height:36px;background:linear-gradient(to bottom,transparent,var(--ic));animation:sbounce 2s ease infinite}
+@keyframes fup{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+@keyframes sbounce{0%,100%{opacity:.3;transform:scaleY(1)}50%{opacity:.8;transform:scaleY(1.3)}}
+
+/* ── GRADIENT BRIDGES ── */
+.gb{height:80px;flex-shrink:0;transition:background .35s}
+.gb-bg-bg2{background:linear-gradient(to bottom,var(--bg),var(--bg2))}
+.gb-bg2-bg3{background:linear-gradient(to bottom,var(--bg2),var(--bg3))}
+.gb-bg3-bg{background:linear-gradient(to bottom,var(--bg3),var(--bg))}
 .gb-tall{height:100px}
 
-/* ══════════════════════════════════════════
-   STICKY PANELS
-══════════════════════════════════════════ */
+/* ── STICKY PANELS ── */
 .pin-wrap{position:relative;height:200vh}
-.panel{
-  position:sticky;top:0;height:100vh;
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;
-  opacity:0;transform:translateY(28px) scale(.985);
-  transition:opacity .55s ease,transform .55s ease;pointer-events:none;
-}
+.panel{position:sticky;top:0;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden;opacity:0;transform:translateY(28px) scale(.985);transition:opacity .55s ease,transform .55s ease,background .35s;pointer-events:none}
 .panel.active{opacity:1;transform:none;pointer-events:auto}
 .panel.out{opacity:0;transform:translateY(-20px) scale(1.006)}
 
-/* Panel 1 — Identity */
+/* Panel 1 */
 #p-id{background:var(--bg2)}
-.id-wrap{
-  max-width:960px;width:100%;padding:0 3rem;
-  display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:center;
-}
+.id-wrap{max-width:960px;width:100%;padding:0 3rem;display:grid;grid-template-columns:1fr 1.3fr;gap:5rem;align-items:center}
 @media(max-width:768px){.id-wrap{grid-template-columns:1fr;gap:2.5rem;padding:0 1.5rem}}
-.id-kicker{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--or);text-transform:uppercase;margin-bottom:1.25rem}
-.id-h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1.06;letter-spacing:-.025em;color:var(--tx);margin-bottom:2rem}
+.id-kicker{font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;color:var(--or);text-transform:uppercase;margin-bottom:1.25rem}
+.id-h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,5vw,4rem);line-height:1.06;letter-spacing:-.025em;color:var(--tx);margin-bottom:2rem}
 .id-h2 em{font-style:italic;color:var(--or)}
 .id-list{display:flex;flex-direction:column}
-.id-item{display:flex;align-items:center;gap:.9rem;padding:.7rem 0;border-bottom:1px solid var(--bd);font-size:.82rem;color:var(--tx2);transition:color .2s}
+.id-item{display:flex;align-items:center;gap:.9rem;padding:.8rem 0;border-bottom:1px solid var(--bd);font-size:.9rem;color:var(--tx2);transition:color .2s}
 .id-item:hover{color:var(--tx)}
 .id-dot{width:5px;height:5px;border-radius:50%;background:var(--or);flex-shrink:0}
-.id-right p{font-size:.92rem;color:var(--tx2);line-height:1.95;margin-bottom:1.1rem}
+.id-right p{font-size:.98rem;color:var(--tx2);line-height:2;margin-bottom:1.15rem}
 
-/* Panel 2 — Capabilities */
+/* Panel 2 */
 #p-cap{background:var(--bg3)}
 .cap-wrap{max-width:1050px;width:100%;padding:0 3rem}
 @media(max-width:768px){.cap-wrap{padding:0 1.5rem}}
 .cap-head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:3rem;flex-wrap:wrap;gap:1rem}
-.cap-h2{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,5vw,3.5rem);line-height:1;letter-spacing:-.025em;color:var(--tx)}
+.cap-h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5vw,3.8rem);line-height:1;letter-spacing:-.025em;color:var(--tx)}
 .cap-h2 em{font-style:italic;color:var(--am)}
-.cap-note{font-family:var(--mono);font-size:.68rem;color:var(--tx3);letter-spacing:.08em;max-width:180px;text-align:right;line-height:1.75}
+.cap-note{font-family:var(--mono);font-size:.72rem;color:var(--tx3);letter-spacing:.08em;max-width:200px;text-align:right;line-height:1.75}
 .cap-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--bd)}
 @media(max-width:700px){.cap-grid{grid-template-columns:repeat(2,1fr)}}
-.cap-cell{background:var(--bg3);padding:1.75rem 1.5rem;transition:background .2s}
+.cap-cell{background:var(--bg3);padding:2rem 1.75rem;transition:background .2s}
 .cap-cell:hover{background:var(--bg4)}
-.cap-lbl{font-family:var(--mono);font-size:.63rem;letter-spacing:.12em;color:var(--am);text-transform:uppercase;margin-bottom:1.1rem}
-.cap-cell ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
-.cap-cell ul li{font-size:.8rem;color:var(--tx2);line-height:1.5}
+.cap-lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;color:var(--am);text-transform:uppercase;margin-bottom:1.25rem}
+.cap-cell ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.cap-cell ul li{font-size:.88rem;color:var(--tx2);line-height:1.5}
 
-/* ══════════════════════════════════════════
-   MAIN CONTENT
-══════════════════════════════════════════ */
-#main{background:var(--bg)}
+/* ── MAIN ── */
+#main{background:var(--bg);transition:background .35s}
 .sw{max-width:1100px;margin:0 auto;padding:0 3rem}
 @media(max-width:768px){.sw{padding:0 1.5rem}}
-
-/* Section header */
-.sec-hd{
-  display:flex;align-items:baseline;justify-content:space-between;
-  margin-bottom:3.5rem;padding-bottom:1.25rem;
-  border-bottom:1px solid var(--bd2);flex-wrap:wrap;gap:.75rem;
-}
-.sec-title{font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,4vw,2.7rem);letter-spacing:-.02em;color:var(--tx)}
+.sec-hd{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:3.5rem;padding-bottom:1.25rem;border-bottom:1px solid var(--bd2);flex-wrap:wrap;gap:.75rem}
+.sec-title{font-family:var(--serif);font-weight:300;font-size:clamp(2rem,4vw,3rem);letter-spacing:-.02em;color:var(--tx)}
 .sec-title em{font-style:italic;color:var(--or)}
-.sec-ct{font-family:var(--mono);font-size:.68rem;color:var(--tx3);letter-spacing:.1em}
+.sec-ct{font-family:var(--mono);font-size:.75rem;color:var(--tx3);letter-spacing:.1em}
 
 /* ── WORK ── */
 .work-s{padding:7rem 0;position:relative;overflow:hidden}
 @media(max-width:768px){.work-s{padding:4.5rem 0}}
-/* Ambient glow */
-.work-s::before{
-  content:'';position:absolute;width:500px;height:300px;border-radius:50%;
-  background:var(--glow-or);filter:blur(80px);
-  top:6rem;right:-80px;pointer-events:none;z-index:0;
-}
+.work-s::before{content:'';position:absolute;width:500px;height:300px;border-radius:50%;background:var(--glow-or);filter:blur(80px);top:6rem;right:-80px;pointer-events:none;z-index:0}
 
-/* ── DEBATE ENGINE FEATURE CARD ──
-   Key UX fixes:
-   · .df-h3 is a <div> not <h3> — eliminates browser-default h3 margin
-     that was rendering as the "black extension"
-   · GitHub link uses onclick stopPropagation
-   · Outer <a> is the only navigation target
-*/
-.dfc{
-  margin-bottom:1.25rem;position:relative;z-index:1;
-  border:1px solid rgba(125,211,252,.16);border-radius:8px;
-  background:var(--bg2);overflow:hidden;
-  display:grid;grid-template-columns:1fr 1fr;
-  text-decoration:none;color:inherit;
-  transition:border-color .3s,transform .3s,box-shadow .3s;
-}
-.dfc:hover{
-  border-color:rgba(125,211,252,.34);
-  transform:translateY(-3px);
-  box-shadow:0 20px 50px rgba(0,0,0,.35);
-}
+/* Debate feature card */
+.dfc{margin-bottom:1.25rem;position:relative;z-index:1;border:1px solid rgba(125,211,252,.16);border-radius:8px;background:var(--bg2);overflow:hidden;display:grid;grid-template-columns:1fr 1fr;text-decoration:none;color:inherit;transition:border-color .3s,transform .3s,box-shadow .3s,background .35s}
+.dfc:hover{border-color:rgba(125,211,252,.34);transform:translateY(-3px);box-shadow:0 20px 50px rgba(0,0,0,.3)}
 @media(max-width:768px){.dfc{grid-template-columns:1fr}}
-.dfl{
-  padding:2.75rem 3rem;display:flex;
-  flex-direction:column;justify-content:space-between;gap:2rem;
-}
+.dfl{padding:2.75rem 3rem;display:flex;flex-direction:column;justify-content:space-between;gap:2rem}
 @media(max-width:768px){.dfl{padding:2rem 1.75rem}}
-.dfl-eye{
-  font-family:var(--mono);font-size:.67rem;letter-spacing:.12em;color:var(--ic);
-  text-transform:uppercase;display:flex;align-items:center;gap:.45rem;margin-bottom:1rem;
-}
+.dfl-eye{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;color:var(--ic);text-transform:uppercase;display:flex;align-items:center;gap:.45rem;margin-bottom:1rem}
 .dfl-pd{width:6px;height:6px;border-radius:50%;background:#4ade80;animation:pulse 2s infinite;flex-shrink:0}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.28}}
-
-/* THE FIX: df-h3 is a styled <div>, NOT a <h3> element.
-   Browser agent stylesheet gives <h3> a margin-block-end of ~1em
-   which was creating the "black extension" gap between the heading
-   and the "View project" button. Using <div> eliminates it entirely. */
-.df-h3{
-  font-family:var(--serif);font-weight:300;
-  font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1.08;
-  letter-spacing:-.025em;color:var(--tx);margin-bottom:.85rem;
-}
+.df-h3{font-family:var(--serif);font-weight:300;font-size:clamp(1.9rem,3.5vw,3rem);line-height:1.08;letter-spacing:-.025em;color:var(--tx);margin-bottom:.85rem}
 .df-h3 em{font-style:italic;color:var(--ic)}
-.df-p{font-size:.82rem;color:var(--tx2);line-height:1.9;max-width:360px}
+.df-p{font-size:.88rem;color:var(--tx2);line-height:1.95;max-width:380px}
 .dfl-links{display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.5rem}
-.dfl-btn{
-  font-family:var(--mono);font-size:.7rem;letter-spacing:.05em;
-  padding:.65rem 1.3rem;border-radius:3px;
-  transition:all .2s;display:inline-flex;align-items:center;gap:.35rem;
-  white-space:nowrap;text-decoration:none;
-}
+.dfl-btn{font-family:var(--mono);font-size:.75rem;letter-spacing:.05em;padding:.7rem 1.4rem;border-radius:3px;transition:all .2s;display:inline-flex;align-items:center;gap:.35rem;white-space:nowrap;text-decoration:none}
 .dfl-btn.pr{background:var(--ic);color:#000;border:none}
 .dfl-btn.pr:hover{opacity:.82;transform:translateY(-1px)}
+html[data-theme="light"] .dfl-btn.pr{background:var(--ic);color:#fff}
 .dfl-btn.gh{border:1px solid var(--bd2);color:var(--tx2);background:transparent}
 .dfl-btn.gh:hover{border-color:var(--bd3);color:var(--tx)}
-.dfr{
-  background:linear-gradient(135deg,#0c1220 0%,#141e36 100%);
-  display:flex;align-items:center;justify-content:center;
-  padding:2rem;position:relative;overflow:hidden;min-height:260px;
-}
-.dfr::before{
-  content:'';position:absolute;inset:0;
-  background-image:
-    linear-gradient(rgba(125,211,252,.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(125,211,252,.04) 1px,transparent 1px);
-  background-size:36px 36px;
-}
-.dfr::after{
-  content:'';position:absolute;width:180px;height:180px;
-  bottom:-40px;right:-40px;border-radius:50%;
-  background:var(--glow-am);filter:blur(50px);pointer-events:none;
-}
-/* Code window */
-.dw{
-  width:100%;max-width:340px;
-  border:1px solid rgba(125,211,252,.14);
-  border-radius:9px;overflow:hidden;
-  background:var(--bg);position:relative;z-index:1;
-}
-.dw-bar{
-  display:flex;align-items:center;gap:.38rem;
-  padding:.55rem .85rem;background:rgba(255,255,255,.03);
-  border-bottom:1px solid rgba(255,255,255,.055);
-}
+.dfr{background:linear-gradient(135deg,#0c1220 0%,#141e36 100%);display:flex;align-items:center;justify-content:center;padding:2rem;position:relative;overflow:hidden;min-height:260px}
+.dfr::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(125,211,252,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(125,211,252,.04) 1px,transparent 1px);background-size:36px 36px}
+.dfr::after{content:'';position:absolute;width:180px;height:180px;bottom:-40px;right:-40px;border-radius:50%;background:var(--glow-am);filter:blur(50px);pointer-events:none}
+/* code window always stays dark regardless of theme */
+.dw{width:100%;max-width:340px;border:1px solid rgba(125,211,252,.14);border-radius:9px;overflow:hidden;background:#07070e;position:relative;z-index:1}
+.dw-bar{display:flex;align-items:center;gap:.38rem;padding:.55rem .85rem;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.055)}
 .dd{width:9px;height:9px;border-radius:50%}
 .dw-body{padding:1rem 1.15rem}
-.dl{font-family:var(--mono);font-size:.63rem;line-height:1.65;margin-bottom:.28rem;white-space:nowrap}
-.dc0{color:#3a3a52}.da0{color:var(--ic)}.dg0{color:#4ade80}.dr0{color:#f87171}.dw0{color:var(--am)}
+.dl{font-family:var(--mono);font-size:.65rem;line-height:1.65;margin-bottom:.28rem;white-space:nowrap}
+.dc0{color:#5050780}.da0{color:#7dd3fc}.dg0{color:#4ade80}.dr0{color:#f87171}.dw0{color:#f0a820}
 .dcbar{display:flex;align-items:center;gap:.45rem;margin-top:.65rem;padding-top:.65rem;border-top:1px solid rgba(255,255,255,.05)}
 .dct{flex:1;height:2px;background:rgba(255,255,255,.07);border-radius:1px;overflow:hidden}
-.dcf{height:100%;border-radius:1px;background:var(--am);width:0%;transition:width 1.5s ease}
-.dcv{font-family:var(--mono);font-size:.58rem;color:var(--am)}
+.dcf{height:100%;border-radius:1px;background:#f0a820;width:0%;transition:width 1.5s ease}
+.dcv{font-family:var(--mono);font-size:.6rem;color:#f0a820}
 
-/* ── PROJECT GRID ── */
+/* project grid */
 .pg{display:grid;grid-template-columns:repeat(12,1fr);gap:1.25rem;position:relative;z-index:1}
 @media(max-width:1024px){.pg{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:580px){.pg{grid-template-columns:1fr}}
-.pc{
-  display:block;text-decoration:none;color:inherit;
-  border:1px solid var(--bd);background:var(--bg2);
-  border-radius:4px;overflow:hidden;position:relative;
-  transition:transform .3s,border-color .3s,box-shadow .3s;
-}
-.pc:hover{transform:translateY(-4px);border-color:var(--bd2);box-shadow:0 14px 36px rgba(0,0,0,.3)}
-.cw8{grid-column:span 8}.cw4{grid-column:span 4}
-.cw6{grid-column:span 6}.cw4b{grid-column:span 4}
+.pc{display:block;text-decoration:none;color:inherit;border:1px solid var(--bd);background:var(--bg2);border-radius:4px;overflow:hidden;position:relative;transition:transform .3s,border-color .3s,box-shadow .3s,background .35s}
+.pc:hover{transform:translateY(-4px);border-color:var(--bd2);box-shadow:0 14px 36px rgba(0,0,0,.2)}
+.cw8{grid-column:span 8}.cw4{grid-column:span 4}.cw6{grid-column:span 6}.cw4b{grid-column:span 4}
 @media(max-width:1024px){.cw8,.cw4,.cw6,.cw4b{grid-column:span 1}}
 .pt{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
 .pt::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(0,0,0,.32))}
-.pt-lbl{position:relative;z-index:1;font-family:var(--serif);font-weight:300;font-size:clamp(1.4rem,2.5vw,2rem);letter-spacing:-.01em;padding:1.25rem;text-align:center}
+.pt-lbl{position:relative;z-index:1;font-family:var(--serif);font-weight:300;font-size:clamp(1.5rem,2.5vw,2.1rem);letter-spacing:-.01em;padding:1.25rem;text-align:center}
 .pt-lbl em{font-style:italic;display:block}
-/* Thumb themes */
-.ts {background:linear-gradient(135deg,#140e08,#2e1c08);color:rgba(255,200,150,.82)}
-.tai{background:linear-gradient(135deg,#080e18,#102040);color:rgba(140,190,255,.85)}
-.tbr{background:linear-gradient(135deg,#180806,#5c1006);color:rgba(255,180,160,.85)}
-.ted{background:linear-gradient(135deg,#141008,#2c2408);color:rgba(255,232,150,.82)}
-.tdi{background:linear-gradient(135deg,#081410,#0e2418);color:rgba(150,255,190,.8)}
-.tmi{background:linear-gradient(135deg,#0e0e18,#181428);color:rgba(195,180,255,.82)}
-.tin{background:linear-gradient(135deg,#081414,#102820);color:rgba(170,235,215,.82)}
-.pb{padding:1.35rem 1.5rem}
-.pn{font-family:var(--mono);font-size:.63rem;color:var(--tx3);letter-spacing:.07em;margin-bottom:.75rem}
-.ptit{font-family:var(--serif);font-weight:400;font-size:1.22rem;line-height:1.2;letter-spacing:-.01em;color:var(--tx);margin-bottom:.45rem}
+.ts{background:linear-gradient(135deg,#140e08,#2e1c08);color:rgba(255,210,160,.88)}
+.tai{background:linear-gradient(135deg,#080e18,#102040);color:rgba(150,200,255,.9)}
+.tbr{background:linear-gradient(135deg,#180806,#5c1006);color:rgba(255,185,165,.9)}
+.ted{background:linear-gradient(135deg,#141008,#2c2408);color:rgba(255,238,160,.88)}
+.tdi{background:linear-gradient(135deg,#081410,#0e2418);color:rgba(160,255,195,.85)}
+.tmi{background:linear-gradient(135deg,#0e0e18,#181428);color:rgba(200,185,255,.88)}
+.tin{background:linear-gradient(135deg,#081414,#102820);color:rgba(175,238,218,.88)}
+.pb{padding:1.5rem 1.6rem}
+.pn{font-family:var(--mono);font-size:.68rem;color:var(--tx3);letter-spacing:.07em;margin-bottom:.75rem}
+.ptit{font-family:var(--serif);font-weight:400;font-size:1.32rem;line-height:1.2;letter-spacing:-.01em;color:var(--tx);margin-bottom:.5rem}
 .ptit em{font-style:italic}
-.pdesc{font-size:.78rem;color:var(--tx2);line-height:1.75;margin-bottom:1.1rem}
-.ptg{display:flex;flex-wrap:wrap;gap:.35rem}
-.ptag{font-family:var(--mono);font-size:.6rem;padding:.25rem .6rem;border:1px solid var(--bd2);color:var(--tx3);border-radius:2px}
-.parr{position:absolute;bottom:1.1rem;right:1.35rem;font-size:1rem;color:var(--tx3);transition:transform .2s,color .2s}
+.pdesc{font-size:.84rem;color:var(--tx2);line-height:1.8;margin-bottom:1.1rem}
+.ptg{display:flex;flex-wrap:wrap;gap:.4rem}
+.ptag{font-family:var(--mono);font-size:.64rem;padding:.28rem .65rem;border:1px solid var(--bd2);color:var(--tx3);border-radius:2px}
+.parr{position:absolute;bottom:1.1rem;right:1.35rem;font-size:1.1rem;color:var(--tx3);transition:transform .2s,color .2s}
 .pc:hover .parr{transform:translate(3px,-3px);color:var(--or)}
 
-/* ── ABOUT — dark surface bg2 ── */
-.about-s{padding:7rem 0;background:var(--bg2);position:relative;overflow:hidden}
+/* ── ABOUT ── */
+.about-s{padding:7rem 0;background:var(--bg2);position:relative;overflow:hidden;transition:background .35s}
 @media(max-width:768px){.about-s{padding:4.5rem 0}}
-.about-s::before{
-  content:'';position:absolute;width:500px;height:500px;border-radius:50%;
-  background:var(--glow-ic);filter:blur(100px);
-  top:-100px;left:-100px;pointer-events:none;
-}
+.about-s::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:var(--glow-ic);filter:blur(100px);top:-100px;left:-100px;pointer-events:none}
 .ag{display:grid;grid-template-columns:1fr 1.75fr;gap:5rem;align-items:start;position:relative;z-index:1}
 @media(max-width:900px){.ag{grid-template-columns:1fr;gap:3rem}}
 .aname{font-family:var(--serif);font-weight:300;font-size:clamp(2.5rem,6vw,4.5rem);line-height:.95;letter-spacing:-.03em;color:var(--tx)}
 .aname em{font-style:italic;display:block;color:var(--or)}
-.arole{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;margin-top:.85rem;margin-bottom:2rem}
-.ameta{display:flex;flex-direction:column;gap:.65rem;font-size:.79rem;color:var(--tx2);line-height:1.6;padding:1.25rem 0;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);margin-bottom:2rem}
+.arole{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;color:var(--tx3);text-transform:uppercase;margin-top:.85rem;margin-bottom:2rem}
+.ameta{display:flex;flex-direction:column;gap:.7rem;font-size:.86rem;color:var(--tx2);line-height:1.65;padding:1.25rem 0;border-top:1px solid var(--bd);border-bottom:1px solid var(--bd);margin-bottom:2rem}
 .ameta span{display:flex;align-items:center;gap:.55rem}
-.amd{width:4px;height:4px;border-radius:50%;background:var(--or);flex-shrink:0}
+.amd{width:5px;height:5px;border-radius:50%;background:var(--or);flex-shrink:0}
 .al{display:flex;gap:.75rem;flex-wrap:wrap}
-.alink{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;padding:.5rem 1.1rem;border:1px solid var(--bd2);color:var(--tx2);text-decoration:none;border-radius:2px;transition:all .2s}
+.alink{font-family:var(--mono);font-size:.74rem;letter-spacing:.06em;padding:.55rem 1.2rem;border:1px solid var(--bd2);color:var(--tx2);text-decoration:none;border-radius:2px;transition:all .2s}
 .alink:hover{background:var(--tx);color:var(--bg);border-color:var(--tx)}
 .alink.prim{background:var(--tx);color:var(--bg);border-color:var(--tx)}
 .alink.prim:hover{background:var(--or);border-color:var(--or);color:#fff}
-.apull{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(1.7rem,3.2vw,2.5rem);line-height:1.15;letter-spacing:-.02em;color:var(--tx);margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--bd2)}
-.arght p{font-size:.9rem;color:var(--tx2);line-height:2;margin-bottom:1.1rem}
+.apull{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(1.8rem,3.2vw,2.6rem);line-height:1.15;letter-spacing:-.02em;color:var(--tx);margin-bottom:2.5rem;padding-bottom:2rem;border-bottom:1px solid var(--bd2)}
+.arght p{font-size:.96rem;color:var(--tx2);line-height:2.05;margin-bottom:1.15rem}
 
 /* ── CONTACT ── */
-.contact-s{padding:7rem 0;text-align:center}
+.contact-s{padding:7rem 0;text-align:center;transition:background .35s}
 @media(max-width:768px){.contact-s{padding:4.5rem 0}}
-.cs-lbl{font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;color:var(--tx3);text-transform:uppercase;margin-bottom:1.25rem}
+.cs-lbl{font-family:var(--mono);font-size:.75rem;letter-spacing:.14em;color:var(--tx3);text-transform:uppercase;margin-bottom:1.25rem}
 .cs-h2{font-family:var(--serif);font-weight:300;font-size:clamp(3rem,7vw,5.5rem);line-height:.95;letter-spacing:-.03em;color:var(--tx);margin-bottom:1.75rem}
 .cs-h2 em{font-style:italic;color:var(--am)}
-.cs-p{font-size:.9rem;color:var(--tx2);max-width:400px;margin:0 auto 1.5rem;line-height:1.9}
-.cs-email{
-  display:inline-block;
-  font-family:var(--mono);font-size:.82rem;letter-spacing:.06em;
-  color:var(--ic);text-decoration:none;
-  border-bottom:1px solid rgba(125,211,252,.3);
-  padding-bottom:2px;margin-bottom:2.25rem;
-  transition:color .2s,border-color .2s;
-}
+.cs-p{font-size:.96rem;color:var(--tx2);max-width:440px;margin:0 auto 1.5rem;line-height:1.95}
+.cs-email{display:inline-block;font-family:var(--mono);font-size:.88rem;letter-spacing:.06em;color:var(--ic);text-decoration:none;border-bottom:1px solid rgba(125,211,252,.35);padding-bottom:2px;margin-bottom:2.5rem;transition:color .2s,border-color .2s}
 .cs-email:hover{color:var(--am);border-color:rgba(232,160,32,.4)}
+html[data-theme="light"] .cs-email{border-bottom-color:rgba(3,105,161,.3)}
 .cs-btns{display:flex;gap:.85rem;justify-content:center;flex-wrap:wrap}
-.cs-btn{font-family:var(--mono);font-size:.75rem;letter-spacing:.06em;padding:.8rem 1.85rem;border-radius:3px;text-decoration:none;transition:all .2s}
+.cs-btn{font-family:var(--mono);font-size:.78rem;letter-spacing:.06em;padding:.85rem 2rem;border-radius:3px;text-decoration:none;transition:all .2s}
 .cs-btn.fl{background:var(--am);color:#000;border:none}
 .cs-btn.fl:hover{opacity:.85;transform:translateY(-2px)}
 .cs-btn.ot{border:1px solid var(--bd2);color:var(--tx2)}
 .cs-btn.ot:hover{border-color:var(--bd3);color:var(--tx)}
 
 /* ── FOOTER ── */
-footer{
-  padding:1.75rem 3rem;border-top:1px solid var(--bd);background:var(--bg);
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;
-}
+footer{padding:1.75rem 3rem;border-top:1px solid var(--bd);background:var(--bg);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;transition:background .35s,border-color .35s}
 @media(max-width:768px){footer{padding:1.5rem 1.25rem;flex-direction:column;align-items:flex-start}}
-.fl2{font-family:var(--mono);font-size:.68rem;color:var(--tx3)}
+.fl2{font-family:var(--mono);font-size:.72rem;color:var(--tx3)}
 .fr{display:flex;gap:1.5rem;list-style:none}
-.fr a{font-family:var(--mono);font-size:.68rem;color:var(--tx3);text-decoration:none;transition:color .2s}
+.fr a{font-family:var(--mono);font-size:.72rem;color:var(--tx3);text-decoration:none;transition:color .2s}
 .fr a:hover{color:var(--tx2)}
 
 /* ── SCROLL REVEAL ── */
@@ -470,11 +299,6 @@ footer{
 <div id="cur"></div>
 <div id="cur-ring"><div id="cur-ring-inner"></div></div>
 
-<!-- ── NAV ──
-  Links verified against original index.html:
-  · #work, #about, #writing (bio section anchor), #contact — all internal anchors
-  · Resume: absolute URL to GitHub Pages PDF
--->
 <nav id="nav">
   <a href="#" class="nav-logo">Shambhavi <em>Singh</em></a>
   <ul class="nav-links">
@@ -484,9 +308,15 @@ footer{
     <li><a href="#contact">Contact</a></li>
     <li class="nav-resume"><a href="https://shavi2002.github.io/shambhavi-portfolio/shambhavi_singh_resume.pdf" target="_blank">Résumé ↗</a></li>
   </ul>
+  <div class="nav-right">
+    <!-- Theme toggle: two labeled options, active one gets the knob pill -->
+    <div class="theme-toggle" id="themeToggle" role="button" aria-label="Toggle theme">
+      <span class="tog-opt active" id="tog-dark">Dark</span>
+      <span class="tog-opt" id="tog-light">Light</span>
+    </div>
+  </div>
 </nav>
 
-<!-- ── HERO ── -->
 <section id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="h-vig"></div>
@@ -506,10 +336,8 @@ footer{
   <div id="scroll-hint"><span>Scroll</span><div class="s-bar"></div></div>
 </section>
 
-<!-- GRADIENT BRIDGE: hero → panel 1 -->
 <div class="gb gb-bg-bg2"></div>
 
-<!-- ── STICKY PANEL 1: Identity ── -->
 <div class="pin-wrap" id="pin1">
   <section class="panel" id="p-id">
     <div class="id-wrap">
@@ -533,10 +361,8 @@ footer{
   </section>
 </div>
 
-<!-- GRADIENT BRIDGE: panel 1 → panel 2 -->
 <div class="gb gb-bg2-bg3"></div>
 
-<!-- ── STICKY PANEL 2: Capabilities ── -->
 <div class="pin-wrap" id="pin2">
   <section class="panel" id="p-cap">
     <div class="cap-wrap">
@@ -554,13 +380,10 @@ footer{
   </section>
 </div>
 
-<!-- GRADIENT BRIDGE: panel 2 → main -->
 <div class="gb gb-bg3-bg"></div>
 
-<!-- ── MAIN CONTENT ── -->
 <div id="main">
 
-  <!-- WORK -->
   <section class="work-s" id="work">
     <div class="sw">
       <div class="sec-hd">
@@ -568,35 +391,21 @@ footer{
         <span class="sec-ct">08 Projects</span>
       </div>
 
-      <!--
-        DEBATE ENGINE — featured card
-        Outer <a> → https://debate-engine-two.vercel.app/landing.html
-        GitHub nested <a> → https://github.com/Shavi2002/debate-engine
-        (stopPropagation prevents firing outer card link)
-      -->
       <a href="https://debate-engine-two.vercel.app/landing.html" target="_blank" class="dfc rv">
         <div class="dfl">
           <div>
             <div class="dfl-eye"><span class="dfl-pd"></span>Live · Multi-Agent AI System</div>
-            <!-- .df-h3 is a <div> — fixes the "black extension" bug (was a bare <h3>) -->
             <div class="df-h3"><em>Debate</em> Engine</div>
             <p class="df-p">Two AI agents research opposing sides of any question using live web sources, structured belief graphs, and semantic contradiction detection. Built with thinkn.ai, Exa, and GPT-4o.</p>
           </div>
           <div class="dfl-links">
             <span class="dfl-btn pr">View project →</span>
-            <a href="https://github.com/Shavi2002/debate-engine"
-               target="_blank"
-               class="dfl-btn gh"
-               onclick="event.preventDefault();event.stopPropagation();window.open('https://github.com/Shavi2002/debate-engine','_blank')">GitHub ↗</a>
+            <a href="https://github.com/Shavi2002/debate-engine" target="_blank" class="dfl-btn gh" onclick="event.preventDefault();event.stopPropagation();window.open('https://github.com/Shavi2002/debate-engine','_blank')">GitHub ↗</a>
           </div>
         </div>
         <div class="dfr">
           <div class="dw">
-            <div class="dw-bar">
-              <span class="dd" style="background:#ff5f57"></span>
-              <span class="dd" style="background:#febc2e"></span>
-              <span class="dd" style="background:#28c840"></span>
-            </div>
+            <div class="dw-bar"><span class="dd" style="background:#ff5f57"></span><span class="dd" style="background:#febc2e"></span><span class="dd" style="background:#28c840"></span></div>
             <div class="dw-body">
               <div class="dl dc0">// Round 2 — fusing belief graph</div>
               <div class="dl"><span class="dg0">proAgent</span>.after(webContent)</div>
@@ -604,123 +413,56 @@ footer{
               <div class="dl dc0">// ⚡ contradiction detected</div>
               <div class="dl dw0">contradictions: <span class="da0">3</span></div>
               <div class="dl"><span class="dg0">beliefs</span>: 47 · <span class="dw0">sources</span>: 61</div>
-              <div class="dcbar">
-                <span class="dc0" style="font-family:var(--mono);font-size:.58rem">clarity</span>
-                <div class="dct"><div class="dcf" id="dbf"></div></div>
-                <span class="dcv">0.41</span>
-              </div>
+              <div class="dcbar"><span class="dc0" style="font-family:var(--mono);font-size:.6rem">clarity</span><div class="dct"><div class="dcf" id="dbf"></div></div><span class="dcv">0.41</span></div>
             </div>
           </div>
         </div>
       </a>
 
-      <!--
-        PROJECT GRID — all links verified absolute:
-        01 → https://shavi2002.github.io/Non-profit-solutions/
-        02 → https://shavi2002.github.io/shambhavi-portfolio/cic-case-study.html
-        03 → https://shavi2002.github.io/shambhavi-portfolio/instructional-design.html
-        04 → https://shavi2002.github.io/shambhavi-portfolio/buff-curl.html
-        05 → https://shavi2002.github.io/shambhavi-portfolio/unstructure.html
-        06 → https://stapled.netlify.app/
-        07 → https://shavi2002.github.io/shambhavi-portfolio/previous-work.html
-        (Old site used relative paths like "buff-curl.html" — all now absolute)
-      -->
       <div class="pg" style="margin-top:1.25rem">
-
-        <!-- 01 Non-Profit Solutions -->
         <a href="https://shavi2002.github.io/Non-profit-solutions/" target="_blank" class="pc cw8 rv d1">
           <div class="pt ts"><div class="pt-lbl">Non-Profit <em>Solutions</em></div></div>
-          <div class="pb">
-            <div class="pn">01</div>
-            <div class="ptit">Non-Profit <em>Solutions</em></div>
-            <div class="pdesc">Strategy framework · Organizational design · Instructional systems · Impact measurement · Train-the-Trainer certification</div>
-            <div class="ptg"><span class="ptag">Strategy</span><span class="ptag">Instructional Design</span><span class="ptag">Org Systems</span></div>
-          </div>
+          <div class="pb"><div class="pn">01</div><div class="ptit">Non-Profit <em>Solutions</em></div><div class="pdesc">Strategy framework · Organizational design · Instructional systems · Impact measurement · Train-the-Trainer certification</div><div class="ptg"><span class="ptag">Strategy</span><span class="ptag">Instructional Design</span><span class="ptag">Org Systems</span></div></div>
           <span class="parr">→</span>
         </a>
-
-        <!-- 02 AWS CIC -->
         <a href="https://shavi2002.github.io/shambhavi-portfolio/cic-case-study.html" target="_blank" class="pc cw4 rv d2">
           <div class="pt tai"><div class="pt-lbl">AWS AI <em>CIC</em></div></div>
-          <div class="pb">
-            <div class="pn">02</div>
-            <div class="ptit">AWS AI Cloud Innovation Center</div>
-            <div class="pdesc">Marketing strategy · Visual systems · Technical communication · Innovation Island</div>
-            <div class="ptg"><span class="ptag">Real Client</span><span class="ptag">Brand + Strategy</span></div>
-          </div>
+          <div class="pb"><div class="pn">02</div><div class="ptit">AWS AI Cloud Innovation Center</div><div class="pdesc">Marketing strategy · Visual systems · Technical communication · Innovation Island</div><div class="ptg"><span class="ptag">Real Client</span><span class="ptag">Brand + Strategy</span></div></div>
           <span class="parr">→</span>
         </a>
-
-        <!-- 03 Instructional Design -->
         <a href="https://shavi2002.github.io/shambhavi-portfolio/instructional-design.html" target="_blank" class="pc cw4b rv">
           <div class="pt tin"><div class="pt-lbl">Designing for <em>Clarity</em></div></div>
-          <div class="pb">
-            <div class="pn">03</div>
-            <div class="ptit">Designing for <em>Clarity</em></div>
-            <div class="pdesc">Instructional design · Complex concept translation · Learner-centered content</div>
-            <div class="ptg"><span class="ptag">Instructional</span><span class="ptag">Communication</span></div>
-          </div>
+          <div class="pb"><div class="pn">03</div><div class="ptit">Designing for <em>Clarity</em></div><div class="pdesc">Instructional design · Complex concept translation · Learner-centered content</div><div class="ptg"><span class="ptag">Instructional</span><span class="ptag">Communication</span></div></div>
           <span class="parr">→</span>
         </a>
-
-        <!-- 04 Buff Curl -->
         <a href="https://shavi2002.github.io/shambhavi-portfolio/buff-curl.html" target="_blank" class="pc cw4b rv d1">
           <div class="pt tbr"><div class="pt-lbl">Buff <em>Curl</em></div></div>
-          <div class="pb">
-            <div class="pn">04</div>
-            <div class="ptit">Buff <em>Curl</em></div>
-            <div class="pdesc">Self-initiated · Brand identity · Packaging · Product web design · Ingredient research</div>
-            <div class="ptg"><span class="ptag">Identity</span><span class="ptag">Product</span></div>
-          </div>
+          <div class="pb"><div class="pn">04</div><div class="ptit">Buff <em>Curl</em></div><div class="pdesc">Self-initiated · Brand identity · Packaging · Product web design · Ingredient research</div><div class="ptg"><span class="ptag">Identity</span><span class="ptag">Product</span></div></div>
           <span class="parr">→</span>
         </a>
-
-        <!-- 05 (un)structure -->
         <a href="https://shavi2002.github.io/shambhavi-portfolio/unstructure.html" target="_blank" class="pc cw4b rv d2">
           <div class="pt ted"><div class="pt-lbl"><em>(un)</em>structure</div></div>
-          <div class="pb">
-            <div class="pn">05</div>
-            <div class="ptit"><em>(un)</em>structure</div>
-            <div class="pdesc">Design philosophy · Content system · Instagram · Substack essays</div>
-            <div class="ptg"><span class="ptag">Editorial</span><span class="ptag">Concept</span></div>
-          </div>
+          <div class="pb"><div class="pn">05</div><div class="ptit"><em>(un)</em>structure</div><div class="pdesc">Design philosophy · Content system · Instagram · Substack essays</div><div class="ptg"><span class="ptag">Editorial</span><span class="ptag">Concept</span></div></div>
           <span class="parr">→</span>
         </a>
-
-        <!-- 06 Stapled -->
         <a href="https://stapled.netlify.app/" target="_blank" class="pc cw6 rv">
           <div class="pt tdi"><div class="pt-lbl">Stapled</div></div>
-          <div class="pb">
-            <div class="pn">06</div>
-            <div class="ptit">Stapled</div>
-            <div class="pdesc">Digital product design · Zine discovery platform · UI system · Coded + deployed</div>
-            <div class="ptg"><span class="ptag">Digital Product</span><span class="ptag">UI System</span></div>
-          </div>
+          <div class="pb"><div class="pn">06</div><div class="ptit">Stapled</div><div class="pdesc">Digital product design · Zine discovery platform · UI system · Coded + deployed</div><div class="ptg"><span class="ptag">Digital Product</span><span class="ptag">UI System</span></div></div>
           <span class="parr">→</span>
         </a>
-
-        <!-- 07 Previous Work -->
         <a href="https://shavi2002.github.io/shambhavi-portfolio/previous-work.html" target="_blank" class="pc cw6 rv d1">
           <div class="pt tmi"><div class="pt-lbl">Previous <em>Work</em></div></div>
-          <div class="pb">
-            <div class="pn">07</div>
-            <div class="ptit">Previous <em>Work</em></div>
-            <div class="pdesc">Herberger Institute · Lint Away · Full Plates · De Novo Bakes · Rattle — identity + packaging archive</div>
-            <div class="ptg"><span class="ptag">Various</span><span class="ptag">Identity + Packaging</span></div>
-          </div>
+          <div class="pb"><div class="pn">07</div><div class="ptit">Previous <em>Work</em></div><div class="pdesc">Herberger Institute · Lint Away · Full Plates · De Novo Bakes · Rattle — identity + packaging archive</div><div class="ptg"><span class="ptag">Various</span><span class="ptag">Identity + Packaging</span></div></div>
           <span class="parr">→</span>
         </a>
-
-      </div><!-- /pg -->
+      </div>
     </div>
   </section>
 
-  <!-- GRADIENT BRIDGE: work → about -->
-  <div class="gb gb-tall gb-bg-bg2"></div>
+  <div class="gb gb-tall" style="background:linear-gradient(to bottom,var(--bg),var(--bg2));transition:background .35s"></div>
 
-  <!-- ABOUT — id="about" + id="writing" preserved from original nav -->
   <section class="about-s" id="about">
-    <div id="writing" style="position:absolute;top:-80px"></div><!-- anchor for #writing nav link -->
+    <div id="writing" style="position:absolute;top:-80px"></div>
     <div class="sw">
       <div class="ag">
         <div class="rv">
@@ -750,10 +492,8 @@ footer{
     </div>
   </section>
 
-  <!-- GRADIENT BRIDGE: about → contact -->
-  <div class="gb gb-tall gb-bg2-bg-r" style="background:linear-gradient(to bottom,var(--bg2),var(--bg))"></div>
+  <div class="gb gb-tall" style="background:linear-gradient(to bottom,var(--bg2),var(--bg));transition:background .35s"></div>
 
-  <!-- CONTACT -->
   <section class="contact-s" id="contact">
     <div class="sw">
       <p class="cs-lbl">Let's connect</p>
@@ -780,12 +520,10 @@ footer{
     </ul>
   </footer>
 
-</div><!-- /main -->
+</div>
 
 <script>
-/* ═══════════════════════════════════════
-   HERO CANVAS — Circuit + Lissajous + Fluid
-═══════════════════════════════════════ */
+/* HERO CANVAS */
 (function(){
   const cv=document.getElementById('hero-canvas');
   const cx=cv.getContext('2d');
@@ -800,18 +538,56 @@ footer{
   function resize(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight;initN()}
   function drawLis(lc){const hw=W/2,hh=H/2,rx=W*.38,ry=H*.38;const[r,g,b]=lc.col;cx.beginPath();for(let i=0;i<=360;i++){const th=(i/360)*Math.PI*2;const x=hw+rx*Math.sin(lc.ax*th+lc.px);const y=hh+ry*Math.sin(lc.ay*th+lc.py);i===0?cx.moveTo(x,y):cx.lineTo(x,y)}cx.strokeStyle=`rgba(${r},${g},${b},${lc.al})`;cx.lineWidth=.7;cx.stroke();lc.px+=lc.sp;lc.py+=lc.sp*1.3}
   function drawCirc(){nodes.forEach(n=>{n.phs+=n.ps;const pa=.3+.25*Math.sin(n.phs);const[r,g,b]=n.col;n.conn.forEach(j=>{const m=nodes[j];const d=Math.hypot(n.x-m.x,n.y-m.y);const ea=(.045+.035*Math.sin(n.phs))*(1-d/(W*.18));cx.beginPath();const mx=(n.x+m.x)/2;cx.moveTo(n.x,n.y);cx.lineTo(mx,n.y);cx.lineTo(mx,m.y);cx.lineTo(m.x,m.y);cx.strokeStyle=`rgba(${r},${g},${b},${ea})`;cx.lineWidth=.5;cx.stroke()});cx.beginPath();cx.arc(n.x,n.y,n.r,0,Math.PI*2);cx.fillStyle=`rgba(${r},${g},${b},${pa})`;cx.fill();const pr=n.r+4+3*Math.sin(n.phs);cx.beginPath();cx.arc(n.x,n.y,pr,0,Math.PI*2);cx.strokeStyle=`rgba(${r},${g},${b},${pa*.22})`;cx.lineWidth=.6;cx.stroke()})}
-  function frame(){t+=.004;cx.fillStyle='rgba(7,7,14,.05)';cx.fillRect(0,0,W,H);curves.forEach(drawLis);drawCirc();parts.forEach((p,i)=>{const a=n2(p.x/240,p.y/240,t)*Math.PI*2.6;p.vx=p.vx*.9+Math.cos(a)*p.spd*.1;p.vy=p.vy*.9+Math.sin(a)*p.spd*.1;p.x+=p.vx;p.y+=p.vy;p.age++;const l=p.age/p.life;const al=l<.12?(l/.12)*p.a:l>.78?((1-l)/.22)*p.a:p.a;const[r,g,b]=p.col;cx.beginPath();cx.arc(p.x,p.y,p.sz,0,Math.PI*2);cx.fillStyle=`rgba(${r},${g},${b},${al})`;cx.fill();if(p.age>=p.life||p.x<-60||p.x>W+60||p.y<-60||p.y>H+60)parts[i]=sp()});const vg=cx.createRadialGradient(W/2,H/2,H*.15,W/2,H/2,H*.85);vg.addColorStop(0,'rgba(7,7,14,0)');vg.addColorStop(1,'rgba(7,7,14,.6)');cx.fillStyle=vg;cx.fillRect(0,0,W,H);requestAnimationFrame(frame)}
+  function frame(){
+    t+=.004;
+    // bg color aware — darker in light mode so art pops
+    const isDark=document.documentElement.getAttribute('data-theme')!=='light';
+    const bg=isDark?'rgba(7,7,14,.05)':'rgba(245,242,237,.06)';
+    cx.fillStyle=bg;cx.fillRect(0,0,W,H);
+    curves.forEach(drawLis);drawCirc();
+    parts.forEach((p,i)=>{const a=n2(p.x/240,p.y/240,t)*Math.PI*2.6;p.vx=p.vx*.9+Math.cos(a)*p.spd*.1;p.vy=p.vy*.9+Math.sin(a)*p.spd*.1;p.x+=p.vx;p.y+=p.vy;p.age++;const l=p.age/p.life;const al=l<.12?(l/.12)*p.a:l>.78?((1-l)/.22)*p.a:p.a;const[r,g,b]=p.col;cx.beginPath();cx.arc(p.x,p.y,p.sz,0,Math.PI*2);cx.fillStyle=`rgba(${r},${g},${b},${al})`;cx.fill();if(p.age>=p.life||p.x<-60||p.x>W+60||p.y<-60||p.y>H+60)parts[i]=sp()});
+    const bgR=isDark?7:245,bgG=isDark?7:242,bgB=isDark?14:237;
+    const vg=cx.createRadialGradient(W/2,H/2,H*.15,W/2,H/2,H*.85);
+    vg.addColorStop(0,`rgba(${bgR},${bgG},${bgB},0)`);
+    vg.addColorStop(1,`rgba(${bgR},${bgG},${bgB},.6)`);
+    cx.fillStyle=vg;cx.fillRect(0,0,W,H);
+    requestAnimationFrame(frame);
+  }
   for(let i=0;i<NP;i++)parts.push(sp());
   window.addEventListener('resize',resize);
   resize();cx.fillStyle='#07070e';cx.fillRect(0,0,W,H);
   frame();
 })();
 
-/* ═══════════════════════════════════════
-   GRADIENT CURSOR — desktop only
-   Skipped entirely on touch/mobile devices
-   (matchMedia hover:hover = has a mouse)
-═══════════════════════════════════════ */
+/* THEME TOGGLE */
+(function(){
+  const html=document.documentElement;
+  const tog=document.getElementById('themeToggle');
+  const btnDark=document.getElementById('tog-dark');
+  const btnLight=document.getElementById('tog-light');
+
+  function setTheme(theme){
+    html.setAttribute('data-theme',theme);
+    localStorage.setItem('portfolio-theme',theme);
+    if(theme==='light'){
+      btnDark.classList.remove('active');
+      btnLight.classList.add('active');
+    } else {
+      btnLight.classList.remove('active');
+      btnDark.classList.add('active');
+    }
+  }
+
+  // Restore saved preference
+  const saved=localStorage.getItem('portfolio-theme');
+  if(saved) setTheme(saved);
+
+  // Click either label
+  btnDark.addEventListener('click',()=>setTheme('dark'));
+  btnLight.addEventListener('click',()=>setTheme('light'));
+})();
+
+/* GRADIENT CURSOR — desktop only */
 if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
   (function(){
     const dot=document.getElementById('cur');
@@ -826,63 +602,29 @@ if(window.matchMedia('(hover:hover) and (pointer:fine)').matches){
   })();
 }
 
-/* ═══════════════════════════════════════
-   NAV scrolled state
-═══════════════════════════════════════ */
-window.addEventListener('scroll',()=>{
-  document.getElementById('nav').classList.toggle('scrolled',window.scrollY>80);
-},{passive:true});
+/* NAV */
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>80)},{passive:true});
 
-/* ═══════════════════════════════════════
-   SCROLL HINT — hide on first scroll
-═══════════════════════════════════════ */
-window.addEventListener('scroll',function hide(){
-  document.getElementById('scroll-hint').classList.add('hidden');
-  window.removeEventListener('scroll',hide);
-},{passive:true,once:true});
+/* SCROLL HINT */
+window.addEventListener('scroll',function hide(){document.getElementById('scroll-hint').classList.add('hidden');window.removeEventListener('scroll',hide)},{passive:true,once:true});
 
-/* ═══════════════════════════════════════
-   STICKY PANELS
-═══════════════════════════════════════ */
+/* STICKY PANELS */
 (function(){
-  const pins=[
-    {wrap:document.getElementById('pin1'),panel:document.getElementById('p-id')},
-    {wrap:document.getElementById('pin2'),panel:document.getElementById('p-cap')},
-  ];
-  function upd(){
-    const sy=window.scrollY,vh=window.innerHeight;
-    pins.forEach(({wrap,panel})=>{
-      const wt=wrap.offsetTop,wb=wt+wrap.offsetHeight;
-      const inV=sy+vh>wt+vh*.25&&sy<wb-vh*.1;
-      const past=sy>=wb-vh;
-      if(inV&&!past){panel.classList.remove('out');panel.classList.add('active')}
-      else if(past){panel.classList.add('out');panel.classList.remove('active')}
-      else{panel.classList.remove('active','out')}
-    });
-  }
-  window.addEventListener('scroll',upd,{passive:true});
-  window.addEventListener('resize',upd);
-  upd();
+  const pins=[{wrap:document.getElementById('pin1'),panel:document.getElementById('p-id')},{wrap:document.getElementById('pin2'),panel:document.getElementById('p-cap')}];
+  function upd(){const sy=window.scrollY,vh=window.innerHeight;pins.forEach(({wrap,panel})=>{const wt=wrap.offsetTop,wb=wt+wrap.offsetHeight;const inV=sy+vh>wt+vh*.25&&sy<wb-vh*.1;const past=sy>=wb-vh;if(inV&&!past){panel.classList.remove('out');panel.classList.add('active')}else if(past){panel.classList.add('out');panel.classList.remove('active')}else{panel.classList.remove('active','out')}})}
+  window.addEventListener('scroll',upd,{passive:true});window.addEventListener('resize',upd);upd();
 })();
 
-/* ═══════════════════════════════════════
-   SCROLL REVEAL
-═══════════════════════════════════════ */
+/* SCROLL REVEAL */
 (function(){
-  const obs=new IntersectionObserver(e=>{
-    e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('vis');obs.unobserve(en.target)}})
-  },{threshold:.08});
+  const obs=new IntersectionObserver(e=>{e.forEach(en=>{if(en.isIntersecting){en.target.classList.add('vis');obs.unobserve(en.target)}})},{threshold:.08});
   document.querySelectorAll('.rv').forEach(el=>obs.observe(el));
 })();
 
-/* ═══════════════════════════════════════
-   CLARITY BAR
-═══════════════════════════════════════ */
+/* CLARITY BAR */
 (function(){
   const f=document.getElementById('dbf');if(!f)return;
-  const obs=new IntersectionObserver(e=>{
-    if(e[0].isIntersecting){let n=0;const t=setInterval(()=>{f.style.width=(++n)+'%';if(n>=41)clearInterval(t)},28);obs.disconnect()}
-  },{threshold:.3});
+  const obs=new IntersectionObserver(e=>{if(e[0].isIntersecting){let n=0;const t=setInterval(()=>{f.style.width=(++n)+'%';if(n>=41)clearInterval(t)},28);obs.disconnect()}},{threshold:.3});
   obs.observe(f);
 })();
 </script>
