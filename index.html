@@ -277,6 +277,22 @@ html[data-theme="light"] .drag-knob svg{stroke:#fff}
 .pc:hover .parr{transform:translate(3px,-3px);color:var(--or)}
 
 /* ── ABOUT ── */
+.writing-s{padding:7rem 0;background:var(--bg);position:relative;overflow:hidden;transition:background .35s}
+@media(max-width:768px){.writing-s{padding:4.5rem 0}}
+.pub{border:1px solid var(--bd2);border-radius:4px;background:var(--bg2);padding:2.5rem;transition:border-color .3s,background .35s}
+@media(max-width:768px){.pub{padding:1.5rem}}
+.pub:hover{border-color:var(--bd3)}
+.pub-meta{display:flex;gap:.9rem;flex-wrap:wrap;align-items:center;margin-bottom:1.5rem}
+.pub-venue{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ic);border:1px solid var(--bd2);padding:.3rem .7rem;border-radius:2px}
+.pub-stat{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--tx3)}
+.pub-title{font-family:var(--serif);font-weight:300;font-size:clamp(1.55rem,3.4vw,2.5rem);line-height:1.16;letter-spacing:-.02em;color:var(--tx);margin-bottom:.9rem}
+.pub-title em{font-style:italic;color:var(--or)}
+.pub-sub{font-family:var(--mono);font-size:.72rem;letter-spacing:.08em;color:var(--tx3);margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid var(--bd)}
+.pub-body{max-width:66ch}
+.pub-body p{font-size:.96rem;color:var(--tx2);line-height:2.05;margin-bottom:1.15rem}
+.pub-body strong{color:var(--tx);font-weight:500}
+.pub-foot{display:flex;flex-wrap:wrap;gap:1.25rem;align-items:center;margin-top:2rem;padding-top:1.75rem;border-top:1px solid var(--bd)}
+.pub-note{font-family:var(--mono);font-size:.68rem;line-height:1.85;color:var(--tx3);max-width:54ch}
 .about-s{padding:7rem 0;background:var(--bg2);position:relative;overflow:hidden;transition:background .35s}
 @media(max-width:768px){.about-s{padding:4.5rem 0}}
 .about-s::before{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:var(--glow-ic);filter:blur(100px);top:-100px;left:-100px;pointer-events:none}
@@ -355,7 +371,7 @@ footer{padding:1.75rem 3rem;border-top:1px solid var(--bd);background:var(--bg);
   <div class="h-vig"></div>
   <div class="h-fade"></div>
   <div class="h-inner">
-    <p class="h-eyebrow">Media Arts &amp; Engineering · Brand · Strategy · AI</p>
+    <p class="h-eyebrow">Media Arts &amp; Sciences · Design · Research · AI</p>
     <h1 class="h-title">Concept<span class="l2">before <em>canvas.</em></span></h1>
     <p class="h-sub">I design at the intersection of concept and system — turning complex ideas into brands, strategies, and tools that communicate with clarity and intention.</p>
     <div class="h-tags">
@@ -386,9 +402,10 @@ footer{padding:1.75rem 3rem;border-top:1px solid var(--bd);background:var(--bg);
         </div>
       </div>
       <div class="id-right">
-        <p>I'm Shambhavi — a brand designer and strategist with a Media Arts &amp; Engineering (Design) degree and a habit of starting with "why" before touching a typeface.</p>
+        <p>I'm Shambhavi — a designer, builder and researcher with a Media Arts and Sciences (Design) degree from The GAME School at ASU, and a habit of starting with "why" before touching a typeface.</p>
         <p>My work spans brand identity, product design, packaging, instructional systems, and organizational strategy. Most recently I've been building at the intersection of AI and design — translating complex systems into tools that actually think.</p>
-        <p>At the AWS AI Cloud Innovation Center at ASU, I translate complex technical architecture into accessible visual narratives for public-sector audiences.</p>
+        <p>At the AI Cloud Innovation Center at ASU I spent a year translating complex AI and AWS architectures into infographics, workflows and execution materials legible without an engineering background — and facilitating the alignment sessions where technical and non-technical stakeholders had to reach shared goals.</p>
+        <p>Since July 2026 I've run <strong>VisiWise Optimization LLC</strong>, giving small businesses the technical capacity they rarely hold in-house — web development, SEO, analytics and personalized SaaS.</p>
       </div>
     </div>
   </section>
@@ -499,19 +516,46 @@ footer{padding:1.75rem 3rem;border-top:1px solid var(--bd);background:var(--bg);
     </div>
   </section>
 
+  <section class="writing-s" id="writing">
+    <div class="sw">
+      <div class="sec-hd">
+        <h2 class="sec-title">Writing &amp; <em>Research</em></h2>
+        <span class="sec-ct">01 &nbsp;PUBLICATION</span>
+      </div>
+      <article class="pub">
+        <div class="pub-meta">
+          <span class="pub-venue">NordiCHI &rsquo;26</span>
+          <span class="pub-stat">Accepted &middot; August 2026</span>
+        </div>
+        <h3 class="pub-title">Fractal Intelligence and the Pooling Effect: <em>Decentering AI Design Toward Solarpunk Futures</em></h3>
+        <p class="pub-sub">Position paper &middot; sole-authored &middot; ACM Adjunct Proceedings</p>
+        <div class="pub-body">
+          <p>AI design usually places AI at the centre of the human&ndash;nature&ndash;technology relationship. This paper inverts the diagram &mdash; decentering AI, treating it as one factor among several orbiting the human &mdash; and from that vantage develops two original concepts.</p>
+          <p><strong>Fractal intelligence</strong> is the claim that AI does not merely imitate nature but structurally inherits it: intelligence whose architecture reproduces the recursive organizational principles observable from dendrite to network to ecosystem. The lineage is not metaphorical but architectural &mdash; McCulloch and Pitts formalized the neuron&rsquo;s threshold logic in 1943, and every layered network since carries that inheritance. A metaphor borrows an image; an architecture inherits a mechanism.</p>
+          <p><strong>The pooling effect</strong> accounts for how simultaneous concentrations of attention and capital render a technology culturally load-bearing, misusable, and capable of overriding commons-based rights &mdash; read here against the Nordic tradition of <em>allemansr&auml;tt</em>.</p>
+        </div>
+        <div class="pub-foot">
+          <a href="Singh_NordiCHI26_PositionPaper.pdf" target="_blank" class="alink prim">Read the paper (PDF) &rarr;</a>
+          <span class="pub-note">Accepted to <em>Jokaisenoikeudet in the Age of Artificial Intelligence: Participatory Co-Design and Solarpunk Narratives in HCI</em> &mdash; a workshop at the 14th Nordic Conference on Human-Computer Interaction. Vaasa, Finland, October 2026.</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <div class="gb gb-tall" style="background:linear-gradient(to bottom,var(--bg),var(--bg2));transition:background .35s"></div>
 
   <section class="about-s" id="about">
-    <div id="writing" style="position:absolute;top:-80px"></div>
     <div class="sw">
       <div class="ag">
         <div class="rv">
           <div class="aname">Shambhavi<em>Singh</em></div>
-          <div class="arole">Brand Designer &amp; Strategist</div>
+          <div class="arole">Designer · Researcher · Founder</div>
           <div class="ameta">
             <span><span class="amd"></span>Tempe, AZ · Open to relocation</span>
-            <span><span class="amd"></span>AWS AI Cloud Innovation Center</span>
-            <span><span class="amd"></span>B.A. Media Arts &amp; Engineering (Design), ASU</span>
+            <span><span class="amd"></span>Founder &amp; CEO, VisiWise Optimization LLC</span>
+            <span><span class="amd"></span>Previously ASU AI Cloud Innovation Center (2025–26)</span>
+            <span><span class="amd"></span>B.A. Media Arts and Sciences (Design), The GAME School at ASU</span>
+            <span><span class="amd"></span>NordiCHI &rsquo;26 — accepted, ACM Adjunct Proceedings</span>
             <span><span class="amd"></span>Hackathon Mentor — Kiro Spark Challenge</span>
             <span><span class="amd"></span>Open to full-time roles</span>
           </div>
@@ -523,10 +567,10 @@ footer{padding:1.75rem 3rem;border-top:1px solid var(--bd);background:var(--bg);
         </div>
         <div class="arght rv d1">
           <p class="apull">I start every project with a question: what does this actually need to communicate, and to whom?</p>
-          <p>My work spans brand identity, packaging, digital product design, editorial systems, instructional design, and organizational strategy. At the AWS AI Cloud Innovation Center at ASU, I translate complex technical architecture into accessible visual narratives for public-sector audiences.</p>
+          <p>My work spans brand identity, packaging, digital product design, editorial systems, instructional design, and organizational strategy. For a year at the AI Cloud Innovation Center at ASU I translated complex AI and AWS architectures into visual narratives legible to public-sector audiences without an engineering background.</p>
           <p>Most recently I've been building AI-native tools — designing systems that don't just look intelligent but actually think. The Belief Debate Engine uses multi-agent architecture and structured belief graphs to research both sides of any question with calibrated uncertainty.</p>
           <p>Outside of client work, I build from curiosity: Buff Curl began as a personal product gap, (un)structure began as a philosophical framework, and Stapled began as a question about why finding zines is so hard when finding books is so easy.</p>
-          <p>I mentor at the Principled Innovation Academy hackathon at ASU — the teams I worked with went on to win. I write about design, systems, and strategy on LinkedIn and Substack. Currently open to full-time roles in brand, visual, strategic, and AI-fluent design.</p>
+          <p>My research on <strong>fractal intelligence</strong> — the argument that AI&rsquo;s architecture inherits nature&rsquo;s recursive structure rather than merely imitating it — was accepted to NordiCHI &rsquo;26 and appears in the ACM Adjunct Proceedings this October. I mentor at the Principled Innovation Academy hackathon at ASU — the teams I worked with went on to win. I write about design, systems, and strategy on LinkedIn and Substack. Currently open to full-time roles in brand, visual, strategic, and AI-fluent design.</p>
         </div>
       </div>
     </div>
