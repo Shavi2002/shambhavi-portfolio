@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MaintainX in AI Answers</title>
+<meta name="description" content="A 30-prompt baseline of how ChatGPT describes and cites MaintainX, with three fixes. Independent research by Shambhavi Singh, November 2026.">
+<meta name="author" content="Shambhavi Singh">
+<meta name="robots" content="noindex">
+<style>
+:root{
+  --page:#f9f9f7; --surface:#fcfcfb; --ink:#0b0b0b; --ink-2:#52514e; --muted:#6f6e69;
+  --rule:#e1e0d9; --axis:#c3c2b7; --s1:#2a78d6; --s2:#eb6834; --code:#f1f0ec; --link:#1a5fb4;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --page:#0d0d0d; --surface:#1a1a19; --ink:#f0efec; --ink-2:#c3c2b7; --muted:#a3a29b;
+    --rule:#2c2c2a; --axis:#383835; --s1:#3987e5; --s2:#d95926; --code:#242422; --link:#7fb0f0;
+  }
+}
+:root[data-theme="dark"]{
+  --page:#0d0d0d; --surface:#1a1a19; --ink:#f0efec; --ink-2:#c3c2b7; --muted:#a3a29b;
+  --rule:#2c2c2a; --axis:#383835; --s1:#3987e5; --s2:#d95926; --code:#242422; --link:#7fb0f0;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:var(--ink);font:16px/1.6 Charter,"Bitstream Charter","Iowan Old Style",Georgia,serif}
+main{max-width:760px;margin:0 auto;padding:40px 16px 64px}
+h1{font-size:2rem;line-height:1.2;margin:0 0 8px}
+h2{font-size:1.3rem;margin:40px 0 8px;padding-top:8px;border-top:1px solid var(--rule)}
+h3{font-size:1.05rem;margin:24px 0 4px}
+p{margin:0 0 14px}
+.byline{color:var(--ink-2);font-size:.95rem;margin-bottom:24px}
+.lead{font-size:1.12rem}
+a{color:var(--link)}
+.sans{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0 8px}
+.kpi{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:12px 14px}
+.kpi b{display:block;font-size:1.7rem;line-height:1.1}
+.kpi span{color:var(--ink-2);font-size:.85rem}
+@media (max-width:560px){.kpis{grid-template-columns:1fr}}
+.chart{background:var(--surface);border:1px solid var(--rule);border-radius:8px;padding:16px;margin:16px 0}
+.chart-title{font-weight:600;margin-bottom:2px}
+.chart-sub{color:var(--ink-2);font-size:.85rem;margin-bottom:12px}
+.legend{display:flex;gap:16px;font-size:.85rem;color:var(--ink-2);margin-bottom:10px}
+.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:middle}
+.row{display:grid;grid-template-columns:120px 1fr;gap:10px;align-items:center;padding:6px 0;border-top:1px solid var(--rule)}
+.row:first-of-type{border-top:0}
+.rlabel{font-size:.9rem}
+.rlabel small{display:block;color:var(--muted);font-size:.75rem}
+.bars{display:flex;flex-direction:column;gap:4px}
+.bar{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--ink-2)}
+.track{position:relative;flex:1;height:10px;border-left:1px solid var(--axis)}
+.fill{height:10px;border-radius:0 4px 4px 0;min-width:2px}
+.fill.n{background:var(--s1)} .fill.r{background:var(--s2)}
+.val{width:58px;text-align:right;font-variant-numeric:tabular-nums}
+.bar:hover .fill{outline:2px solid var(--ink);outline-offset:1px}
+table{width:100%;border-collapse:collapse;font-size:.9rem;margin:12px 0 18px}
+th,td{text-align:left;vertical-align:top;padding:8px 8px;border-bottom:1px solid var(--rule)}
+th{color:var(--ink-2);font-weight:600;font-size:.82rem}
+.tablewrap{overflow-x:auto}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.82rem}
+code{background:var(--code);padding:1px 4px;border-radius:4px}
+pre{background:var(--code);padding:12px 14px;border-radius:8px;overflow-x:auto;line-height:1.45;white-space:pre-wrap;word-break:break-word}
+blockquote{margin:10px 0 16px;padding:4px 14px;border-left:3px solid var(--axis);color:var(--ink-2)}
+.note{color:var(--ink-2);font-size:.9rem}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--rule);color:var(--ink-2);font-size:.9rem}
+@media print{body{background:#fff;font-size:13px} main{padding:0;max-width:none} h1{font-size:1.6rem} h2{margin:22px 0 6px;break-after:avoid} h3{margin:14px 0 2px;break-after:avoid} .kpi,pre,blockquote,tr,.row{break-inside:avoid} .row{padding:4px 0} .chart{padding:12px}}
+</style>
+</head>
+<body>
+<main>
+
+<h1>How ChatGPT describes MaintainX: a 30-prompt baseline</h1>
+<div class="byline sans">Shambhavi Singh · November 3, 2026 · Independent research; not affiliated with MaintainX</div>
+
+<p class="lead">ChatGPT knows MaintainX well: it named MaintainX in 24 of 30 buyer questions and recommended it in 14. But MaintainX fades as questions get specific. On industry, feature and problem questions, ChatGPT often cites competitors' pages, even where MaintainX has already published a page on the same topic.</p>
+
+<div class="kpis sans">
+  <div class="kpi"><b>24 of 30</b><span>answers named MaintainX</span></div>
+  <div class="kpi"><b>14 of 30</b><span>answers recommended MaintainX</span></div>
+  <div class="kpi"><b>8 of 30</b><span>answers cited a MaintainX page as a source</span></div>
+</div>
+
+<h2>Where MaintainX shows up, by type of question</h2>
+<p>MaintainX wins the broad questions (“best CMMS,” head-to-head comparisons) and loses ground as the buyer gets specific.</p>
+
+<div class="chart sans" role="img" aria-label="MaintainX named and recommended by question type">
+  <div class="chart-title">MaintainX is named in every category question but recommended in 1 of 5 industry questions and none of 5 problem questions</div>
+  <div class="chart-sub">ChatGPT answers, count of prompts in each group</div>
+  <div class="legend"><span><i class="sw" style="background:var(--s1)"></i>Named</span><span><i class="sw" style="background:var(--s2)"></i>Recommended</span></div>
+
+  <div class="row"><div class="rlabel">Category<small>“best CMMS…” (1–6)</small></div><div class="bars">
+    <div class="bar" title="Category: named in 6 of 6"><div class="track"><div class="fill n" style="width:100%"></div></div><span class="val">6 of 6</span></div>
+    <div class="bar" title="Category: recommended in 6 of 6"><div class="track"><div class="fill r" style="width:100%"></div></div><span class="val">6 of 6</span></div></div></div>
+
+  <div class="row"><div class="rlabel">Comparison<small>vs. named rivals (12–16)</small></div><div class="bars">
+    <div class="bar" title="Comparison: named in 5 of 5"><div class="track"><div class="fill n" style="width:100%"></div></div><span class="val">5 of 5</span></div>
+    <div class="bar" title="Comparison: recommended in 4 of 5"><div class="track"><div class="fill r" style="width:80%"></div></div><span class="val">4 of 5</span></div></div></div>
+
+  <div class="row"><div class="rlabel">Industry<small>food, fleet, hotels… (7–11)</small></div><div class="bars">
+    <div class="bar" title="Industry: named in 4 of 5"><div class="track"><div class="fill n" style="width:80%"></div></div><span class="val">4 of 5</span></div>
+    <div class="bar" title="Industry: recommended in 1 of 5"><div class="track"><div class="fill r" style="width:20%"></div></div><span class="val">1 of 5</span></div></div></div>
+
+  <div class="row"><div class="rlabel">Problem<small>downtime, OEE… (17–21)</small></div><div class="bars">
+    <div class="bar" title="Problem: named in 2 of 5"><div class="track"><div class="fill n" style="width:40%"></div></div><span class="val">2 of 5</span></div>
+    <div class="bar" title="Problem: recommended in 0 of 5"><div class="track"><div class="fill r" style="width:0%;min-width:0"></div></div><span class="val">0 of 5</span></div></div></div>
+
+  <div class="row"><div class="rlabel">Feature<small>IoT, parts, offline (22–24)</small></div><div class="bars">
+    <div class="bar" title="Feature: named in 1 of 3"><div class="track"><div class="fill n" style="width:33.3%"></div></div><span class="val">1 of 3</span></div>
+    <div class="bar" title="Feature: recommended in 1 of 3"><div class="track"><div class="fill r" style="width:33.3%"></div></div><span class="val">1 of 3</span></div></div></div>
+  <p class="note" style="margin:10px 0 0">The six questions about MaintainX itself (25–30) are left out of this chart: it is named in all of them by definition.</p>
+</div>
+
+<h2>Finding 1: MaintainX already has the pages, but competitors get cited</h2>
+<p>In these answers, MaintainX has a live page that matches the question. ChatGPT cited someone else.</p>
+<div class="tablewrap"><table class="sans">
+<tr><th>Prompt</th><th>MaintainX's matching page</th><th>What ChatGPT cited instead</th></tr>
+<tr><td>Best maintenance software for hotels</td><td><code>/blog/best-maintenance-software-for-hotels</code></td><td>HotelTechReport. MaintainX listed 7th of 8.</td></tr>
+<tr><td>Maintenance software for restaurant chains</td><td><code>/blog/best-restaurant-software-for-maintenance-management</code></td><td>Limble's site, cited for 4 of the 6 vendors, including MaintainX's own entry</td></tr>
+<tr><td>Best CMMS for food and beverage, audit compliance</td><td><code>/blog/best-maintenance-software-for-food-and-beverage-manufacturing</code></td><td>eMaint's, SOMAX's and UpKeep's own pages, plus FDA. MaintainX left off the shortlist.</td></tr>
+<tr><td>Fleet maintenance software, 200 vehicles</td><td><code>/industries/fleet-management</code></td><td>Fleet-only vendors. MaintainX not mentioned.</td></tr>
+<tr><td>How to reduce unplanned downtime</td><td>At least 10 downtime posts, e.g. <code>/blog/downtime-in-manufacturing</code></td><td>Oxmaint and IBM (maker of Maximo), both maintenance software vendors</td></tr>
+<tr><td>How to calculate OEE</td><td><code>/blog/complete-guide-to-overall-equipment-effectiveness-oee</code></td><td>OEE.com</td></tr>
+</table></div>
+<p>The content gap is not the problem. The question is why these pages are not being picked as sources, which points to structure, freshness and markup (see Fixes 2 and 3).</p>
+
+<h2>Finding 2: ChatGPT does not know what MaintainX's features can do</h2>
+<p>On the three feature questions, MaintainX was named once. The one exception shows what works.</p>
+<h3>Condition-based maintenance and IoT: MaintainX not mentioned</h3>
+<p>ChatGPT named six vendors and praised Limble because it “integrates with platforms such as Augury and AssetWatch.” MaintainX has live integration pages for both (<code>/integrations/augury</code>, <code>/integrations/assetwatch</code>) and a <code>/use-cases/condition-based-maintenance</code> page. Limble's own site was the most-cited source. The same gap appears in the Limble vs. MaintainX comparison, which scores MaintainX lower on industrial integrations.</p>
+<h3>Parts inventory and purchase orders: MaintainX not mentioned</h3>
+<p>ChatGPT named five vendors, including MaintainNow and MaintainOS. MaintainX's <code>/use-cases/parts-inventory-management</code> page says it lets teams “generate purchase orders automatically” and manage “inventory, vendors, and purchase orders in the same system.”</p>
+<h3>AI-written work orders: the feature is invisible</h3>
+<p>Asked how teams can use AI to write procedures and work orders, ChatGPT recommended building your own AI assistant and named MaintainX only as a system to connect it to. MaintainX's own llms.txt describes CoPilot as “an AI assistant that allows users to generate work orders, create procedures, and access equipment manuals using natural language prompts.”</p>
+<h3>The exception: offline mobile use</h3>
+<p>For “CMMS that works offline on a phone,” ChatGPT recommended MaintainX as a “strong offline candidate” and cited a MaintainX Help Center article. Fiix, MaintainX and Limble were each cited through their help-center documentation. Plain, task-level documentation is what earned the citation.</p>
+
+<h2>Finding 3: ownership is right only where Autodesk's pages are cited</h2>
+<p>Asked directly, ChatGPT correctly says Autodesk completed its acquisition of MaintainX on Aug. 3, 2026, citing Autodesk's announcement. But in the enterprise-fit answer, where a buyer weighs the long-term roadmap, it still describes the deal as pending:</p>
+<blockquote>“Autodesk announced a proposed $3.6 billion acquisition of MaintainX in May 2026, with closing subject to regulatory and customary conditions at the time of the announcement.”</blockquote>
+<p>MaintainX's own machine-readable files have not caught up: its llms.txt says <code>Type: Private</code> and still lists “Bard” among AI assistants, and the homepage Organization schema (<code>@id …/#organization</code>) has no <code>parentOrganization</code>. Pricing, by contrast, was correct in every answer that gave it.</p>
+
+<h2>Three fixes</h2>
+<h3>1. Update the entity facts</h3>
+<p>In llms.txt:</p>
+<pre>Type: Subsidiary of Autodesk, Inc. (part of Autodesk Operations Solutions since August 2026)
+Parent company: Autodesk, Inc. (https://www.autodesk.com/)
+...intended for AI assistants such as ChatGPT, Claude, Perplexity, Gemini...</pre>
+<p>In the homepage Organization node, one added property:</p>
+<pre>"parentOrganization": {
+  "@type": "Organization",
+  "name": "Autodesk, Inc.",
+  "url": "https://www.autodesk.com/"
+}</pre>
+
+<h3>2. Give feature pages the shape that earned the offline citation</h3>
+<p>For condition-based maintenance, the Augury and AssetWatch integrations, parts and purchasing, and CoPilot: add short, self-contained question-and-answer blocks (“Does MaintainX integrate with Augury?”), a visible “last updated” date with matching <code>dateModified</code>, and <code>SoftwareApplication</code> markup. The six comparison pages already use question headings but carry no structured data and no update date. (Google limits FAQ rich results to a few site types, so the value here is machine readability and freshness, not a search feature.)</p>
+
+<h3>3. Refresh the three uncited buyer's guides, then re-test</h3>
+<p>Hotels, restaurants, and food and beverage: date them, open each with a one-paragraph direct answer, and add a comparison table that names MaintainX's fit plainly. Then re-run the same prompts after 30 days and compare named, recommended and cited counts against this baseline.</p>
+
+<h2>Method and limits</h2>
+<ul>
+<li>30 prompts in six groups (category, industry, comparison, problem, feature, MaintainX itself), each run once in a fresh chat on ChatGPT with web search on, Oct. 31 to Nov. 1, 2026, on a new account.</li>
+<li>Memory was on for the first pass. The eight problem and feature prompts that don't name MaintainX were re-run in temporary chats with memory off; those results are the ones reported.</li>
+<li>“Named” means MaintainX appears anywhere in the answer. “Recommended” means the answer suggests it for the use case or puts it on its final shortlist. “Cited” means a getmaintainx.com page appears as a source, not just an “official website” link.</li>
+<li>Every claim about MaintainX's site was checked against getmaintainx.com on Nov. 1 to 3, 2026. Answers vary between runs, so treat single prompts as examples and the groups as the pattern.</li>
+<li>Next: the same 30 prompts on Perplexity and Google AI Mode.</li>
+</ul>
+
+<footer class="sans">
+Shambhavi Singh · SEO and web developer · <a href="https://shambhavisingh.co">shambhavisingh.co</a> · <a href="https://linkedin.com/in/shambhavi-singh2002">LinkedIn</a> · <a href="mailto:shambhavisingh251102@gmail.com">shambhavisingh251102@gmail.com</a><br>
+MaintainX, Autodesk and other product names belong to their owners. This is independent research and is not affiliated with or endorsed by MaintainX.
+</footer>
+</main>
+</body>
+</html>
